@@ -1,1269 +1,2394 @@
 {
-    "package": "UberAPI",
-    "tagline": "Uber API Wrapper",
-    "description": "The mission of the Uber API is to make it easy for developers to unlock the power of our logistical network that runs across cities.",
-    "image": "https://scontent.cdninstagram.com/t51.2885-19/s150x150/12552460_710389715763561_1067626151_a.jpg",
-    "repo": "https://github.com/RapidSoftwareSolutions/Marketplace-UberAPI-package",
+    "package": "Paypal",
+    "tagline": "Paypal API",
+    "description": "PayPal offers online payment solutions.",
+    "image": "https://www.paypalobjects.com/webstatic/mktg/logo-center/PP_Acceptance_Marks_for_LogoCenter_266x142.png",
+    "repo": "test",
     "accounts": {
-        "domain": "uber.com",
-        "credentials": [
-            "accessToken"
-        ]
+        "domain": "paypal.com",
+        "credentials": ["clientId", "secret"]
     },
     "blocks": [{
-            "name":"requestDelivery",
-            "args":[
-                {
-                    "name": "accessToken",
+            "name": "getAccessToken",
+            "description": "Use the OAuth request to get an access token for use with your payments calls.",
+            "args": [{
+                    "name": "clientId",
                     "type": "credentials",
-                    "info": "The access token obtained from Uber API."
-                },
-                {
-                    "name": "itemsTitle",
-                    "type": "String",
-                    "info": "The title of the item. Limited to 128 characters."
-                },
-                {
-                    "name": "itemsQuantity",
-                    "type": "String",
-                    "info": "The number of this item."
-                },
-                {
-                    "name": "itemsPrice",
-                    "type": "String",
-                    "info": "The price of the item."
-                },
-                {
-                    "name": "itemsCurrencyCode",
-                    "type": "String",
-                    "info": "The currency code of the item price. The currency code follows the ISO 4217 standard."
-                },
-                {
-                    "name": "pickupLocationAddress",
-                    "type": "String",
-                    "info": "The top address line of the delivery pickup location."
-                },
-                {
-                    "name": "pickupLocationCity",
-                    "type": "String",
-                    "info": "The city of the delivery pickup location."
-                },
-                {
-                    "name": "pickupLocationState",
-                    "type": "String",
-                    "info": "The state of the delivery pickup location such as \"CA\"."
-                },
-                {
-                    "name": "pickupLocationPostalCode",
-                    "type": "String",
-                    "info": "The postal code of the delivery pickup location."
-                },
-                {
-                    "name": "pickupLocationCountry",
-                    "type": "String",
-                    "info": "The country of the pickup location such as \"US\"."
-                },
-                {
-                    "name": "pickupContactFirstName",
-                    "type": "String",
-                    "info": "The first name of the contact. This field is optional if pickup.contact.company_name is provided. Limited to 128 characters."
-                },
-                {
-                    "name": "pickupContactLastName",
-                    "type": "String",
-                    "info": "The last name of the contact. This field is optional if pickup.contact.company_name is provided. Limited to 128 characters."
-                },
-                {
-                    "name": "pickupContactEmail",
-                    "type": "String",
-                    "info": "The email of the contact."
-                },
-                {
-                    "name": "pickupContactPhoneNumber",
-                    "type": "String",
-                    "info": "The phone number of the contact. Phone number should start with + followed by the country code and then the local number (e.g., +18005555555)."
-                },
-                {
-                    "name": "dropoffLocationAddress",
-                    "type": "String",
-                    "info": "The top address line of the delivery drop-off location."
-                },
-                {
-                    "name": "dropoffLocationAddress2",
-                    "type": "String",
-                    "info": "The second address line of the delivery drop-off location such as the apartment number. Limited to 128 characters."
-                },
-                {
-                    "name": "dropoffLocationCity",
-                    "type": "String",
-                    "info": "The city of the delivery drop-off location."
-                },
-                {
-                    "name": "dropoffLocationState",
-                    "type": "String",
-                    "info": "The state of the delivery drop-off location such as \"CA\"."
-                },
-                {
-                    "name": "dropoffLocationPostalCode",
-                    "type": "String",
-                    "info": "The postal code of the delivery drop-off location."
-                },
-                {
-                    "name": "dropoffLocationCountry",
-                    "type": "String",
-                    "info": "The country of the delivery pickup location such as \"US\"."
-                },
-                {
-                    "name": "dropoffContactFirstName",
-                    "type": "String",
-                    "info": "The first name of the contact. Limited to 128 characters."
-                },
-                {
-                    "name": "dropoffContactLastName",
-                    "type": "String",
-                    "info": "The last name of the contact. Limited to 128 characters."
-                },
-                {
-                    "name": "dropoffContactEmail",
-                    "type": "String",
-                    "info": "The email of the contact."
-                },
-                {
-                    "name": "dropoffContactPhoneNumber",
-                    "type": "String",
-                    "info": "The phone number of the contact."
-                },
-                {
-                    "name": "dropoffContactPhoneSmsEnabled",
-                    "type": "String",
-                    "info": "If the phone has SMS capabilities. True or false."
-                },
-                {
-                    "name": "quoteId",
-                    "type": "String",
-                    "info": "Optional: The ID of the quoted price of the delivery. This field is optional. If missing, the fee for the delivery will be determined at the time of request."
-                },
-                {
-                    "name": "orderReferenceId",
-                    "type": "String",
-                    "info": "Optional: The merchant-supplied order reference identifier. This field is optional. Limited to 256 characters."
-                },
-                {
-                    "name": "itemsWidth",
-                    "type": "String",
-                    "info": "Optional: The width of the item in inches."
-                },
-                {
-                    "name": "itemsHeight",
-                    "type": "String",
-                    "info": "Optional: The height of the item in inches."
-                },
-                {
-                    "name": "itemsLength",
-                    "type": "String",
-                    "info": "Optional: The length of the item in inches."
-                },
-                {
-                    "name": "itemsWeight",
-                    "type": "String",
-                    "info": "Optional: The weight of the item in pounds."
-                },
-                {
-                    "name": "itemsIsFragile",
-                    "type": "String",
-                    "info": "Optional: If the item is fragile. True or false. Default to false."
-                },
-                {
-                    "name": "pickupLocationAddress2",
-                    "type": "String",
-                    "info": "Optional: The second address line of the delivery pickup location such as the apartment number. Limited to 128 characters."
-                },
-                {
-                    "name": "pickupLocationLatitude",
-                    "type": "String",
-                    "info": "Optional: Latitude of the pickup location. If UberRUSH cannot geocode the given address, the latitude and longitude coordinates will be used if provided."
-                },
-                {
-                    "name": "pickupLocationLongitude",
-                    "type": "String",
-                    "info": "Optional: Longitude of the pickup location. If UberRUSH cannot geocode the given address, the latitude and longitude coordinates will be used if provided."
-                },
-                {
-                    "name": "pickupContactCompanyName",
-                    "type": "String",
-                    "info": "Optional: The company name of the contact. Limited to 128 characters."
-                },
-                {
-                    "name": "pickupContactPhoneSmsEnabled",
-                    "type": "String",
-                    "info": "Optional: If the phone has SMS capabilities. True or false."
-                },
-                {
-                    "name": "pickupSpecialInstructions",
-                    "type": "String",
-                    "info": "Optional: Special instructions for the pickup. Limited to 256 characters."
-                },
-                {
-                    "name": "dropoffLocationLatitude",
-                    "type": "String",
-                    "info": "Optional: Latitude of the dropoff location. If UberRUSH cannot geocode the given address, the latitude and longitude coordinates will be used if provided."
-                },
-                {
-                    "name": "dropoffLocationLongitude",
-                    "type": "String",
-                    "info": "Optional: Longitude of the dropoff location. If UberRUSH cannot geocode the given address, the latitude and longitude coordinates will be used if provided."
-                },
-                {
-                    "name": "dropoffContactSendEmailNotifications",
-                    "type": "String",
-                    "info": "Optional: If Uber should send email delivery notifications. True or false. Default to true."
-                },
-                {
-                    "name": "dropoffContactSendSmsNotifications",
-                    "type": "String",
-                    "info": "Optional: If Uber should send SMS delivery notifications. True or false. Default to true."
-                },
-                {
-                    "name": "dropoffSpecialInstructions",
-                    "type": "String",
-                    "info": "Optional: Special instructions for the drop-off. Limited to 256 characters."
-                },
-                {
-                    "name": "dropoffSignatureRequired",
-                    "type": "String",
-                    "info": "Optional: If signature is required for drop-off. True or false. Default to false."
-                },
-                {
-                    "name": "includesAlcohol",
-                    "type": "String",
-                    "info": "Optional: Indicates if the delivery includes alcohol. True or false. This feature is only available to whitelisted businesses."
-                }
-            ],
-            "callbacks":[
-                {
-                    "name":"error",
-                    "info": "Error"
-                },
-                {
-                    "name":"success",
-                    "info": "Success => channels: Array <string>"
-                }
-            ]
-        },
-        {
-            "name":"getDelivery",
-            "args":[
-                {
-                    "name": "accessToken",
+                    "info": "Required: Client id."
+                }, {
+                    "name": "secret",
                     "type": "credentials",
-                    "info": "The access token key obtained from Uber API."
-                },
-                {
-                    "name": "deliveryId",
+                    "info": "Required: secret"
+                }, {
+                    "name": "grantType",
                     "type": "String",
-                    "info": "Unique identifier representing a Delivery."
-                }
-            ],
-            "callbacks":[
-                {
-                    "name":"error",
-                    "info": "Error"
-                },
-                {
-                    "name":"success",
-                    "info": "Success => channels: Array <string>"
-                }
-            ]
-        },
-        {
-            "name":"cancelDelivery",
-            "args":[
-                {
+                    "info": "Required: Token grant type. Must be set to client_credentials."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "createPayment",
+            "description": "Use the payment resource for direct credit card payments, stored credit card payments, or PayPal account payments.",
+            "args": [{
                     "name": "accessToken",
-                    "type": "credentials",
-                    "info": "The access token key obtained from Uber API."
-                },
-                {
-                    "name": "deliveryId",
                     "type": "String",
-                    "info": "Unique identifier representing a Delivery."
-                }
-            ],
-            "callbacks":[
-                {
-                    "name":"error",
-                    "info": "Error"
-                },
-                {
-                    "name":"success",
-                    "info": "Success => channels: Array <string>"
-                }
-            ]
-        },
-        {
-            "name":"getDeliveries",
-            "args":[
-                {
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "intent",
+                    "type": "String",
+                    "info": "Required: Payment intent. Must be set to sale for immediate payment, authorize to authorize a payment for capture later, or order to create an order. Allowed values: sale, authorize, order."
+                }, {
+                    "name": "payer",
+                    "type": "JSON",
+                    "info": "Required: Source of the funds for this payment represented by a PayPal account or a direct credit card."
+                }, {
+                    "name": "transactions",
+                    "type": "JSON",
+                    "info": "Required: Transaction details, if updating a payment. Note that this instance of the transactions object accepts only the amount object."
+                }, {
+                    "name": "experienceProfileId",
+                    "type": "String",
+                    "info": "Optional: PayPal generated identifier for the merchant\u0027s payment experience profile."
+                }, {
+                    "name": "noteToPayer",
+                    "type": "String",
+                    "info": "Optional: free-form field for the use of clients to pass in a message to the payer."
+                }, {
+                    "name": "redirectUrls",
+                    "type": "JSON",
+                    "info": "Optional: Set of redirect URLs you provide only for PayPal-based payments."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "executePayment",
+            "description": "Executes a PayPal payment that the payer has approved. You can optionally pass in one or more transactions to update transaction information when you execute the payment.",
+            "args": [{
                     "name": "accessToken",
-                    "type": "credentials",
-                    "info": "The access token key obtained from Uber API."
-                },
-                {
-                    "name": "offset",
                     "type": "String",
-                    "info": "Offset the list of returned results by this amount."
-                },
-                {
-                    "name": "limit",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "paymentId",
                     "type": "String",
-                    "info": "Number of items to retrieve. Maximum is 50."
-                },
-                {
+                    "info": "Required: The ID of the payment to execute."
+                }, {
+                    "name": "payerId",
+                    "type": "String",
+                    "info": "Required: The ID of the payer, passed in the return_url by PayPal."
+                }, {
+                    "name": "transactions",
+                    "type": "String",
+                    "info": "Optional: Transactional details if updating a payment. Note that this instance of the transactions object accepts only the amount object."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "getPayment",
+            "description": "Shows details for a payment, by ID, that is yet completed. For example, a payment that was created, approved, or failed.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "paymentId",
+                    "type": "String",
+                    "info": "Required: The ID of the payment to execute."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "updatePayment",
+            "description": "Partially updates a payment, by ID. You cannot update a payment after the payment is executed.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "paymentId",
+                    "type": "String",
+                    "info": "Required: The ID of the payment to execute."
+                }, {
+                    "name": "items",
+                    "type": "JSON",
+                    "info": "Required: A JSON patch object that you can use to apply partial updates to resources."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "unverified"
+                }, {
+                    "name": "success",
+                    "info": "verified"
+                }]
+        }, {
+            "name": "getPaymentList",
+            "description": "Lists payments that were created by the create payment call and are in any state. The list shows the payments that are made to the merchant who makes the call.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "count",
+                    "type": "String",
+                    "info": "Optional: The number of items to list in the response. Default: 10."
+                }, {
+                    "name": "startId",
+                    "type": "String",
+                    "info": "Optional: The ID of the starting resource in the response. When results are paged, you can use the next_id value as the start_id to continue with the next set of results."
+                }, {
+                    "name": "startIndex",
+                    "type": "String",
+                    "info": "Optional: The start index of the resources to return. Typically used to jump to a specific position in the resource history based on its cart. Example for starting at the second item in a list of results: ?start_index=2"
+                }, {
+                    "name": "startTime",
+                    "type": "String",
+                    "info": "Optional: The date and time when the resource was created. Indicates the start of a range of results. Example: start_time=2013-03-06T11:00:00Z Format: date-time."
+                }, {
+                    "name": "endTime",
+                    "type": "String",
+                    "info": "Optional: The date and time when the resource was created. Indicates the end of a range of results. Format: date-time."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "getSale",
+            "description": "Shows details for a sale transaction, by ID.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "saleId",
+                    "type": "String",
+                    "info": "Required: The ID of the sale for which to show details."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "refundSale",
+            "description": "Refunds a completed payment.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "saleId",
+                    "type": "String",
+                    "info": "Required: The ID of the sale for which to show details."
+                }, {
+                    "name": "amount",
+                    "type": "JSON",
+                    "info": "Optional: Refund details including both the refunded amount to payer and refunded fee to payee. If you do not provide an amount, you must still provide an empty JSON payload in the body to indicate a full refund."
+                }, {
+                    "name": "refundSource",
+                    "type": "String",
+                    "info": "Optional: Type of PayPal funding source (balance or eCheck) that can be used for auto refund. Allowed values: INSTANT_FUNDING_SOURCE, ECHECK, UNRESTRICTED. Default: UNRESTRICTED."
+                }, {
+                    "name": "invoiceNumber",
+                    "type": "String",
+                    "info": "Optional: The invoice number that is used to track this payment. Character length and limitations: 127 single-byte alphanumeric characters. Maximum length: 127."
+                }, {
+                    "name": "refundAdvice",
+                    "type": "Bool",
+                    "info": "Optional: Flag to indicate that the buyer was already given store credit for a given transaction."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "getRefund",
+            "description": "Shows details for a refund, by ID. ",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "refundId",
+                    "type": "String",
+                    "info": "Required: The ID of the refund for which to show details."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "getAuthorization",
+            "decription": "Shows details for an authorization, by ID.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "authorizationId",
+                    "type": "String",
+                    "info": "Required: The ID of the authorization for which to show details."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "captureAuthorization",
+            "description": "Use this resource to capture and process a previously created authorization.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "authorizationId",
+                    "type": "String",
+                    "info": "Required: The ID of the authorization for which to show details."
+                }, {
+                    "name": "amount",
+                    "type": "JSON",
+                    "info": "Optional: The amount to capture. If the amount matches the orginally authorized amount, the state of the authorization changes to captured. If not, the state of the authorization changes to partially_captured."
+                }, {
+                    "name": "isFinalCapture",
+                    "type": "Bool",
+                    "info": "Optional: Indicates whether to release all remaining funds that the authorization holds in the funding instrument. Default is false. Default: false."
+                }, {
+                    "name": "invoiceNumber",
+                    "type": "String",
+                    "info": "Optional: The invoice number to track this payment. Maximum length: 127."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "voidAuthorization",
+            "description": "Voids a previously authorized payment.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "authorizationId",
+                    "type": "String",
+                    "info": "Required: The ID of the authorization for which to show details."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "reauthorizePayment",
+            "description": "Reauthorizes a PayPal account payment. We recommend that you reauthorize a payment after the initial three-day honor period to ensure that funds are still available.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "authorizationId",
+                    "type": "String",
+                    "info": "Required: The ID of the authorization for which to show details."
+                }, {
+                    "name": "amount",
+                    "type": "JSON",
+                    "info": "Required: Amount being reauthorized."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "getCapture",
+            "description": "Shows details for a captured payment, by ID.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "captureId",
+                    "type": "String",
+                    "info": "Required: The ID of the captured payment for which to show details."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "refundCapture",
+            "description": "Refunds a captured payment, by ID.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "captureId",
+                    "type": "String",
+                    "info": "Required: The ID of the captured payment for which to show details."
+                }, {
+                    "name": "amount",
+                    "type": "JSON",
+                    "info": "Optional: The amount to be refunded to the original payer by the payee."
+                }, {
+                    "name": "description",
+                    "type": "String",
+                    "info": "Optional: Description of what is being refunded for. Character length and limitations: 255 single-byte alphanumeric characters."
+                }, {
+                    "name": "refundSource",
+                    "type": "String",
+                    "info": "Optional: Type of PayPal funding source (balance or eCheck) that can be used for auto refund. Allowed values: INSTANT_FUNDING_SOURCE, ECHECK, UNRESTRICTED. Default: UNRESTRICTED."
+                }, {
+                    "name": "reason",
+                    "type": "String",
+                    "info": "Optional: Reason description for the Sale transaction being refunded."
+                }, {
+                    "name": "invoiceNumber",
+                    "type": "String",
+                    "info": "Optional: The invoice number that is used to track this payment. Character length and limitations: 127 single-byte alphanumeric characters."
+                }, {
+                    "name": "refundAdvice",
+                    "type": "String",
+                    "info": "Optional: Flag to indicate that the buyer was already given store credit for a given transaction."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "getOrder",
+            "description": "Shows details for an order, by ID.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "orderId",
+                    "type": "String",
+                    "info": "Required: The ID of the order for which to show details."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "authorizeOrder",
+            "description": "Authorizes an order, by ID.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "orderId",
+                    "type": "String",
+                    "info": "Required: The ID of the order for which to show details."
+                }, {
+                    "name": "amount",
+                    "type": "JSON",
+                    "info": "Required: Amount being collected."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "captureOrder",
+            "description": "Captures a payment on an order. ",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "orderId",
+                    "type": "String",
+                    "info": "Required: The ID of the order for which to show details."
+                }, {
+                    "name": "amount",
+                    "type": "JSON",
+                    "info": "Optional: The amount to capture. If the amount matches the orginally authorized amount, the state of the authorization changes to captured. If not, the state of the authorization changes to partially_captured."
+                }, {
+                    "name": "isFinalCapture",
+                    "type": "Bool",
+                    "info": "Optional: Indicates whether to release all remaining funds that the authorization holds in the funding instrument. Default is false. Default: false."
+                }, {
+                    "name": "invoiceNumber",
+                    "type": "String",
+                    "info": "Optional: The invoice number to track this payment."
+                }, {
+                    "name": "transactionFee",
+                    "type": "JSON",
+                    "info": "Optional: The transaction fee for this payment."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "unverified"
+                }, {
+                    "name": "success",
+                    "info": "verified"
+                }]
+        }, {
+            "name": "voidOrder",
+            "description": "Voids an order, by ID.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "orderId",
+                    "type": "String",
+                    "info": "Required: The ID of the order to void."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "createPlan",
+            "description": "You can create an empty billing plan and add a trial period and/or regular billing. Alternatively, you can create a fully loaded plan that includes both a trial period and regular billing.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "name",
+                    "type": "String",
+                    "info": "Required: The billing plan name."
+                }, {
+                    "name": "description",
+                    "type": "String",
+                    "info": "Required: The billing plan description."
+                }, {
+                    "name": "type",
+                    "type": "String",
+                    "info": "Required: The billing plan type. Allowed values: FIXED, INFINITE."
+                }, {
+                    "name": "paymentDefinitions",
+                    "type": "JSON",
+                    "info": "Required: Resource that represents payment definition scheduling information."
+                }, {
+                    "name": "merchantPreferences",
+                    "type": "JSON",
+                    "info": "Optional: Resource that represents the merchant preferences for a plan, such as max failed attempts, set up fee, and so on."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "updatePlan",
+            "description": "You can update the information for an existing billing plan. The state of a plan must be active before a billing agreement is created.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "planId",
+                    "type": "String",
+                    "info": "Required: The ID of the billing plan to update."
+                }, {
+                    "name": "items",
+                    "type": "JSON",
+                    "info": "Optional: A JSON patch object used for applying partial updates to resources."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "getPlan",
+            "description": "Use this call to get details about a specific billing plan.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "planId",
+                    "type": "String",
+                    "info": "Required: The ID of the billing plan to update."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "getPlanList",
+            "description": "Use this call to get a list of all billing plans based on their current state and optional query string parameters.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "page",
+                    "type": "String",
+                    "info": "Optional: The page to return. Default is 0."
+                }, {
                     "name": "status",
                     "type": "String",
-                    "info": "A status value to filter for. List of status strings can be found https://developer.uber.com/docs/rush/statuses. Additionally supports a value of active that will return all ongoing deliveries. A delivery is considered active if the status field value is either en_route_to_pickup, at_pickup, en_route_to_dropoff or at_dropoff."
-                }
-            ],
-            "callbacks":[
-                {
-                    "name":"error",
-                    "info": "Error"
-                },
-                {
-                    "name":"success",
-                    "info": "Success => channels: Array <string>"
-                }
-            ]
-        },
-        {
-            "name":"getQuote",
-            "args":[
-                {
+                    "info": "Optional: The state. Default is CREATED. Possible values: created, active, inactive."
+                }, {
+                    "name": "pageSize",
+                    "type": "String",
+                    "info": "Optional: The maximum number of results to return at one time. A valid value is a non-negative, non-zero integer. Default is 10."
+                }, {
+                    "name": "totalRequired",
+                    "type": "String",
+                    "info": "Optional: The total number of items and pages to return in the response."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "createAgreement",
+            "description": "Creates a billing agreement for the buyer.",
+            "args": [{
                     "name": "accessToken",
-                    "type": "credentials",
-                    "info": "The access token obtained from Uber API."
-                },
-                {
-                    "name": "pickupLocationAddress",
                     "type": "String",
-                    "info": "The top address line of the delivery pickup location."
-                },
-                {
-                    "name": "pickupLocationCity",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "name",
                     "type": "String",
-                    "info": "The city of the delivery pickup location."
-                },
-                {
-                    "name": "pickupLocationState",
+                    "info": "Required: Name of the agreement. Maximum length: 128."
+                }, {
+                    "name": "description",
                     "type": "String",
-                    "info": "The state of the delivery pickup location such as \"CA\"."
-                },
-                {
-                    "name": "pickupLocationPostalCode",
+                    "info": "Required: Description of the agreement. Maximum length: 128."
+                }, {
+                    "name": "startDate",
                     "type": "String",
-                    "info": "The postal code of the delivery pickup location."
-                },
-                {
-                    "name": "pickupLocationCountry",
-                    "type": "String",
-                    "info": "The country of the pickup location such as \"US\"."
-                },
-                {
-                    "name": "dropoffLocationAddress",
-                    "type": "String",
-                    "info": "The top address line of the delivery drop-off location."
-                },
-                {
-                    "name": "dropoffLocationAddress2",
-                    "type": "String",
-                    "info": "The second address line of the delivery drop-off location such as the apartment number. Limited to 128 characters."
-                },
-                {
-                    "name": "dropoffLocationCity",
-                    "type": "String",
-                    "info": "The city of the delivery drop-off location."
-                },
-                {
-                    "name": "dropoffLocationState",
-                    "type": "String",
-                    "info": "The state of the delivery drop-off location such as \"CA\"."
-                },
-                {
-                    "name": "dropoffLocationPostalCode",
-                    "type": "String",
-                    "info": "The postal code of the delivery drop-off location."
-                },
-                {
-                    "name": "dropoffLocationCountry",
-                    "type": "String",
-                    "info": "The country of the delivery pickup location such as \"US\"."
-                },
-                {
-                    "name": "pickupLocationAddress2",
-                    "type": "String",
-                    "info": "Optional: The second address line of the delivery pickup location such as the apartment number. Limited to 128 characters."
-                },
-                {
-                    "name": "pickupLocationLatitude",
-                    "type": "String",
-                    "info": "Optional: Latitude of the pickup location. If UberRUSH cannot geocode the given address, the latitude and longitude coordinates will be used if provided."
-                },
-                {
-                    "name": "pickupLocationLongitude",
-                    "type": "String",
-                    "info": "Optional: Longitude of the pickup location. If UberRUSH cannot geocode the given address, the latitude and longitude coordinates will be used if provided."
-                },
-                {
-                    "name": "dropoffLocationLatitude",
-                    "type": "String",
-                    "info": "Optional: Latitude of the dropoff location. If UberRUSH cannot geocode the given address, the latitude and longitude coordinates will be used if provided."
-                },
-                {
-                    "name": "dropoffLocationLongitude",
-                    "type": "String",
-                    "info": "Optional: Longitude of the dropoff location. If UberRUSH cannot geocode the given address, the latitude and longitude coordinates will be used if provided."
-                }
-            ],
-            "callbacks":[
-                {
-                    "name":"error",
-                    "info": "Error"
-                },
-                {
-                    "name":"success",
-                    "info": "Success => channels: Array <string>"
-                }
-            ]
-        },
-        {
-            "name":"getUser",
-            "args":[
-                {
+                    "info": "Required: Start date of the agreement. Date format yyyy-MM-dd z, as defined in ISO8601. Format: YYYY-MM-DDTHH:MM:SSTimeZone."
+                }, {
+                    "name": "payer",
+                    "type": "JSON",
+                    "info": "Required: A resource representing a Payer that funds a payment."
+                }, {
+                    "name": "plan",
+                    "type": "JSON",
+                    "info": "Required: Billing plan resource that will be used to create a billing agreement."
+                }, {
+                    "name": "agreementDetails",
+                    "type": "JSON",
+                    "info": "Optional: A resource representing the agreement details."
+                }, {
+                    "name": "shippingAddress",
+                    "type": "JSON",
+                    "info": "Optional: Base Address object used as billing address in a payment or extended for Shipping Address."
+                }, {
+                    "name": "overrideChargeModels",
+                    "type": "JSON",
+                    "info": "Optional: A resource representing an override_charge_model to be used during creation of the agreement."
+                }, {
+                    "name": "overrideMerchantPreferences",
+                    "type": "JSON",
+                    "info": "Optional: Resource representing merchant preferences like max failed attempts,set up fee and others for a plan."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "executeAgreement",
+            "description": "Executes an agreement after the buyer approves it.",
+            "args": [{
                     "name": "accessToken",
-                    "type": "credentials",
-                    "info": "The access token obtained from Uber API."
-                }
-            ],
-            "callbacks":[
-                {
-                    "name":"error",
-                    "info": "Error"
-                },
-                {
-                    "name":"success",
-                    "info": "Success => channels: Array <string>"
-                }
-            ]
-        },
-        {
-            "name":"getUserActivity",
-            "args":[
-                {
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "paymentToken",
+                    "type": "String",
+                    "info": "Required: Identifier of the agreement resource to execute."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "updateAgreement",
+            "description": "Updates an agreement, by ID.",
+            "args": [{
                     "name": "accessToken",
-                    "type": "credentials",
-                    "info": "The access token obtained from Uber API."
-                },
-                {
-                    "name": "offset",
                     "type": "String",
-                    "info": "Optional: Offset the list of returned results by this amount. Default is zero."
-                },
-                {
-                    "name": "limit",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "agreementId",
                     "type": "String",
-                    "info": "Optional: Number of items to retrieve. Default is 5, maximum is 50."
-                }
-            ],
-            "callbacks":[
-                {
-                    "name":"error",
-                    "info": "Error"
-                },
-                {
-                    "name":"success",
-                    "info": "Success => channels: Array <string>"
-                }
-            ]
-        },
-        {
-            "name":"getProductDetails",
-            "args":[
-                {
+                    "info": "Required: Identifier of the agreement resource to update."
+                }, {
+                    "name": "items",
+                    "type": "JSON",
+                    "info": "Required: A JSON patch object used for applying partial updates to resources."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "getAgreement",
+            "description": "Shows details for an agreement, by ID.",
+            "args": [{
                     "name": "accessToken",
-                    "type": "credentials",
-                    "info": "The access token obtained from Uber API."
-                },
-                {
-                    "name": "productId",
                     "type": "String",
-                    "info": "Unique identifier representing a specific product for a given latitude & longitude. For example, uberX in San Francisco will have a different product_id than uberX in Los Angeles."
-                }
-            ],
-            "callbacks":[
-                {
-                    "name":"error",
-                    "info": "Error"
-                },
-                {
-                    "name":"success",
-                    "info": "Success => channels: Array <string>"
-                }
-            ]
-        },
-        {
-            "name":"getCurrentRide",
-            "args":[
-                {
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "agreementId",
+                    "type": "String",
+                    "info": "Required: Identifier of the agreement resource to retrieve."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "suspendAgreement",
+            "description": "Suspends an agreement, by ID.",
+            "args": [{
                     "name": "accessToken",
-                    "type": "credentials",
-                    "info": "The access token obtained from Uber API."
-                }
-            ],
-            "callbacks":[
-                {
-                    "name":"error",
-                    "info": "Error"
-                },
-                {
-                    "name":"success",
-                    "info": "Success => channels: Array <string>"
-                }
-            ]
-        },
-        {
-            "name":"getRide",
-            "args":[
-                {
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "agreementId",
+                    "type": "String",
+                    "info": "Required: Identifier of the agreement resource to suspend."
+                }, {
+                    "name": "note",
+                    "type": "String",
+                    "info": "Required: Reason for changing the state of the agreement. Maximum length: 128."
+                }, {
+                    "name": "amount",
+                    "type": "JSON",
+                    "info": "Optional: Base object for all financial value related fields (balance, payment due, etc.)"
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "reactivateAgreement",
+            "description": "Reactivates an agreement, by ID.",
+            "args": [{
                     "name": "accessToken",
-                    "type": "credentials",
-                    "info": "The access token obtained from Uber API."
-                },
-                {
-                    "name": "requestId",
                     "type": "String",
-                    "info": "Unique identifier representing a Request."
-                }
-            ],
-            "callbacks":[
-                {
-                    "name":"error",
-                    "info": "Error"
-                },
-                {
-                    "name":"success",
-                    "info": "Success => channels: Array <string>"
-                }
-            ]
-        },
-        {
-            "name":"getProductsByLocation",
-            "args":[
-                {
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "agreementId",
+                    "type": "String",
+                    "info": "Required: Identifier of the agreement resource to re-activate."
+                }, {
+                    "name": "note",
+                    "type": "String",
+                    "info": "Required: Reason for changing the state of the agreement. Maximum length: 128."
+                }, {
+                    "name": "amount",
+                    "type": "JSON",
+                    "info": "Optional: Base object for all financial value related fields (balance, payment due, etc.)"
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "cancelAgreement",
+            "description": "Cancels an agreement, by ID.",
+            "args": [{
                     "name": "accessToken",
-                    "type": "credentials",
-                    "info": "The access token obtained from Uber API."
-                },
-                {
-                    "name": "latitude",
                     "type": "String",
-                    "info": "Latitude component of location."
-                },
-                {
-                    "name": "longitude",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "agreementId",
                     "type": "String",
-                    "info": "Longitude component of location."
-                }
-            ],
-            "callbacks":[
-                {
-                    "name":"error",
-                    "info": "Error"
-                },
-                {
-                    "name":"success",
-                    "info": "Success => channels: Array <string>"
-                }
-            ]
-        },
-        {
-            "name":"getProductsPrices",
-            "args":[
-                {
+                    "info": "Required: Identifier of the agreement resource to cancel."
+                }, {
+                    "name": "note",
+                    "type": "String",
+                    "info": "Required: Reason for changing the state of the agreement. Maximum length: 128."
+                }, {
+                    "name": "amount",
+                    "type": "JSON",
+                    "info": "Optional: Base object for all financial value related fields (balance, payment due, etc.)"
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "getTransactionsForBillingAgreement",
+            "description": "Lists transactions for a billing agreement.",
+            "args": [{
                     "name": "accessToken",
-                    "type": "credentials",
-                    "info": "The access token obtained from Uber API."
-                },
-                {
-                    "name": "startLatitude",
                     "type": "String",
-                    "info": "Latitude component of start location."
-                },
-                {
-                    "name": "startLongitude",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "agreementId",
                     "type": "String",
-                    "info": "Longitude component of start location."
-                },
-                {
-                    "name": "endLatitude",
+                    "info": "Required: Identifier of the agreement resource to cancel."
+                }, {
+                    "name": "startDate",
                     "type": "String",
-                    "info": "Latitude component of end location."
-                },
-                {
-                    "name": "endLongitude",
+                    "info": "Required: The start date of the range of transactions to list."
+                }, {
+                    "name": "endDate",
                     "type": "String",
-                    "info": "Longitude component of end location."
-                },
-                {
-                    "name": "seatCount",
-                    "type": "String",
-                    "info": "Optional: The number of seats required for uberPOOL. Default and maximum value is 2."
-                }
-            ],
-            "callbacks":[
-                {
-                    "name":"error",
-                    "info": "Error"
-                },
-                {
-                    "name":"success",
-                    "info": "Success => channels: Array <string>"
-                }
-            ]
-        },
-        {
-            "name":"getProductsTimeEstimates",
-            "args":[
-                {
+                    "info": "Required: The end date of the range of transactions to list."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "setAgreementBalance",
+            "description": "Sets the outstanding amount of an agreement, by ID.",
+            "args": [{
                     "name": "accessToken",
-                    "type": "credentials",
-                    "info": "The access token obtained from Uber API."
-                },
-                {
-                    "name": "startLatitude",
                     "type": "String",
-                    "info": "Latitude component."
-                },
-                {
-                    "name": "startLongitude",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "agreementId",
                     "type": "String",
-                    "info": "Longitude component."
-                },
-                {
-                    "name": "productId",
+                    "info": "Required: Identifier of the agreement resource to cancel."
+                }, {
+                    "name": "currency",
                     "type": "String",
-                    "info": "Optional: Unique identifier representing a specific product for a given latitude & longitude."
-                }
-            ],
-            "callbacks":[
-                {
-                    "name":"error",
-                    "info": "Error"
-                },
-                {
-                    "name":"success",
-                    "info": "Success => channels: Array <string>"
-                }
-            ]
-        },
-        {
-            "name":"getUserAddress",
-            "args":[
-                {
+                    "info": "Required: 3 letter currency code as defined by ISO 4217."
+                }, {
+                    "name": "value",
+                    "type": "String",
+                    "info": "Required: amount up to N digit after the decimals separator as defined in ISO 4217 for the appropriate currency code"
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "billAgreementBalance",
+            "description": "Bills the outstanding amount of an agreement, by ID.",
+            "args": [{
                     "name": "accessToken",
-                    "type": "credentials",
-                    "info": "The access token obtained from Uber API."
-                },
-                {
-                    "name": "placeName",
                     "type": "String",
-                    "info": "The name of the place to retrieve. Only home and work are acceptable."
-                }
-            ],
-            "callbacks":[
-                {
-                    "name":"error",
-                    "info": "Error"
-                },
-                {
-                    "name":"success",
-                    "info": "Success => channels: Array <string>"
-                }
-            ]
-        },
-        {
-            "name":"updateUserAddress",
-            "args":[
-                {
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "agreementId",
+                    "type": "String",
+                    "info": "Required: Identifier of the agreement resource to cancel."
+                }, {
+                    "name": "note",
+                    "type": "String",
+                    "info": "Required: Reason for changing the state of the agreement. Maximum length: 128."
+                }, {
+                    "name": "amount",
+                    "type": "JSON",
+                    "info": "Required: Base object for all financial value related fields (balance, payment due, etc.)"
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "createPayout",
+            "description": "You can make payouts to one or more PayPal accounts.",
+            "args": [{
                     "name": "accessToken",
-                    "type": "credentials",
-                    "info": "The access token obtained from Uber API."
-                },
-                {
-                    "name": "placeName",
                     "type": "String",
-                    "info": "The name of the place to retrieve. Only home and work are acceptable."
-                },
-                {
-                    "name": "address",
-                    "type": "String",
-                    "info": "The address of the place that should be tied to the given placeName."
-                }
-            ],
-            "callbacks":[
-                {
-                    "name":"error",
-                    "info": "Error"
-                },
-                {
-                    "name":"success",
-                    "info": "Success => channels: Array <string>"
-                }
-            ]
-        },
-        {
-            "name":"getUserPaymentMethods",
-            "args":[
-                {
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "senderBatchHeader",
+                    "type": "JSON",
+                    "info": "Required: The sender-provided batch header for a batch payout request."
+                }, {
+                    "name": "items",
+                    "type": "JSON",
+                    "info": "Required: A sender-created definition of a payout to a single recipient. Maximum length: 5000."
+                }, {
+                    "name": "syncMode",
+                    "type": "JSON",
+                    "info": "Optional: Set to true to return an immediate and synchronous response. Default is false, which returns an asynchronous response in the background."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "getPayout",
+            "description": "Periodically shows the latest status of a batch payout along with the transaction status and other data for individual items.",
+            "args": [{
                     "name": "accessToken",
-                    "type": "credentials",
-                    "info": "The access token obtained from Uber API."
-                }
-            ],
-            "callbacks":[
-                {
-                    "name":"error",
-                    "info": "Error"
-                },
-                {
-                    "name":"success",
-                    "info": "Success => channels: Array <string>"
-                }
-            ]
-        },
-        {
-            "name":"createReminder",
-            "args":[
-                {
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "payoutBatchId",
+                    "type": "String",
+                    "info": "Required: The ID of the batch payout for which to show status."
+                }, {
+                    "name": "fields",
+                    "type": "String",
+                    "info": "Optional: Shows details for only specified fields."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "getPayoutItem",
+            "description": "Shows the details for a payout item. Use this call to review the current status of a previously unclaimed, or pending, payout item.",
+            "args": [{
                     "name": "accessToken",
-                    "type": "credentials",
-                    "info": "The access token obtained from Uber API. This endpoint only supports server_token."
-                },
-                {
-                    "name": "reminderTime",
                     "type": "String",
-                    "info": "Unix UTC timestamp of when the reminder will occur."
-                },
-                {
-                    "name": "phoneNumber",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "payoutItemId",
                     "type": "String",
-                    "info": "Phone number of the individual to remind. Must be in the E.164 format."
-                },
-                {
-                    "name": "eventTime",
-                    "type": "String",
-                    "info": "Unix UTC timestamp of the event time."
-                },
-                {
-                    "name": "eventName",
-                    "type": "String",
-                    "info": "Optional: Formatted name of the event, which appears in the reminder notification. Alphanumeric up to 50 characters. Defaults to “Your event” if no name is provided."
-                },
-                {
-                    "name": "eventLocation",
-                    "type": "String",
-                    "info": "Optional: Location of the event, which appears in the Uber app destination field. This does not need to be the entire address string since we rely on the event lat/long to set the destination pin, i.e., “Coit Tower” is sufficient instead of \"Coit Tower, 1 Telegraph Hill Blvd, San Francisco, CA 94133\"."
-                },
-                {
-                    "name": "eventLatitude",
-                    "type": "String",
-                    "info": "Optional: Latitude of the event location. Required to set destination pin."
-                },
-                {
-                    "name": "eventLongitude",
-                    "type": "String",
-                    "info": "Optional: Longitude of the event location. Required to set destination pin."
-                },
-                {
-                    "name": "eventProductId",
-                    "type": "String",
-                    "info": "Optional: Product ID of the Uber product to request. This overrides the product selected by the latitude / longitude pair. Required to set destination pin."
-                },
-                {
-                    "name": "tripBrandingLinkText",
-                    "type": "String",
-                    "info": "Optional: Call-to-action text for the deeplink to your app. Used for trip branding and personalization."
-                },
-                {
-                    "name": "tripBrandingPartnerDeeplink",
-                    "type": "String",
-                    "info": "Optional: Deeplink URL to a page in your app where your users can view relevant information and perform actions that will enhance the post-trip experience. Used for trip branding and personalization."
-                }
-            ],
-            "callbacks":[
-                {
-                    "name":"error",
-                    "info": "Error"
-                },
-                {
-                    "name":"success",
-                    "info": "Success => channels: Array <string>"
-                }
-            ]
-        },
-        {
-            "name":"getReminder",
-            "args":[
-                {
+                    "info": "Required: The ID of the payout item for which to show details."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "cancelPayoutItem",
+            "description": "Cancels an unclaimed transaction. If no one claims the unclaimed item within 30 days, the funds are automatically returned to the sender. Use this call to cancel the unclaimed item before the automatic 30-day refund.",
+            "args": [{
                     "name": "accessToken",
-                    "type": "credentials",
-                    "info": "The access token obtained from Uber API. This endpoint only supports server_token."
-                },
-                {
-                    "name": "reminderId",
                     "type": "String",
-                    "info": "The reminder ID."
-                }
-            ],
-            "callbacks":[
-                {
-                    "name":"error",
-                    "info": "Error"
-                },
-                {
-                    "name":"success",
-                    "info": "Success => channels: Array <string>"
-                }
-            ]
-        },
-        {
-            "name":"updateReminder",
-            "args":[
-                {
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "payoutItemId",
+                    "type": "String",
+                    "info": "Required: The ID of the payout item for which to show details."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "createCreditCard",
+            "description": "Stores credit card details with PayPal.",
+            "args": [{
                     "name": "accessToken",
-                    "type": "credentials",
-                    "info": "The access token obtained from Uber API. This endpoint only supports server_token."
-                },
-                {
-                    "name": "reminderId",
                     "type": "String",
-                    "info": "The reminder ID."
-                },
-                {
-                    "name": "reminderTime",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "number",
                     "type": "String",
-                    "info": "Unix UTC timestamp of when the reminder will occur."
-                },
-                {
-                    "name": "phoneNumber",
+                    "info": "Required: Credit card number. Valid value is numeric characters with no spaces or punctuation. The string must conform with modulo and length required by each credit card type."
+                }, {
+                    "name": "type",
                     "type": "String",
-                    "info": "Phone number of the individual to remind. Must be in the E.164 format."
-                },
-                {
-                    "name": "eventTime",
+                    "info": "Required: Credit card type. Allowed values: visa, mastercard, amex, discover, maestro."
+                }, {
+                    "name": "expireMonth",
                     "type": "String",
-                    "info": "Unix UTC timestamp of the event time."
-                },
-                {
-                    "name": "eventName",
+                    "info": "Required: Expiration month with no leading zero."
+                }, {
+                    "name": "expireYear",
                     "type": "String",
-                    "info": "Optional: Formatted name of the event, which appears in the reminder notification. Alphanumeric up to 50 characters. Defaults to “Your event” if no name is provided."
-                },
-                {
-                    "name": "eventLocation",
+                    "info": "Required: The 4-digit card expiry year."
+                }, {
+                    "name": "cvv2",
                     "type": "String",
-                    "info": "Optional: Location of the event, which appears in the Uber app destination field. This does not need to be the entire address string since we rely on the event lat/long to set the destination pin, i.e., “Coit Tower” is sufficient instead of \"Coit Tower, 1 Telegraph Hill Blvd, San Francisco, CA 94133\"."
-                },
-                {
-                    "name": "eventLatitude",
+                    "info": "Optional: The 3 to 4 digit card validation code."
+                }, {
+                    "name": "firstName",
                     "type": "String",
-                    "info": "Optional: Latitude of the event location. Required to set destination pin."
-                },
-                {
-                    "name": "eventLongitude",
+                    "info": "Optional: The first name of the card holder. Maximum length is 25 characters."
+                }, {
+                    "name": "lastName",
                     "type": "String",
-                    "info": "Optional: Longitude of the event location. Required to set destination pin."
-                },
-                {
-                    "name": "eventProductId",
-                    "type": "String",
-                    "info": "Optional: Product ID of the Uber product to request. This overrides the product selected by the latitude / longitude pair. Required to set destination pin."
-                },
-                {
-                    "name": "tripBrandingLinkText",
-                    "type": "String",
-                    "info": "Optional: Call-to-action text for the deeplink to your app. Used for trip branding and personalization."
-                },
-                {
-                    "name": "tripBrandingPartnerDeeplink",
-                    "type": "String",
-                    "info": "Optional: Deeplink URL to a page in your app where your users can view relevant information and perform actions that will enhance the post-trip experience. Used for trip branding and personalization."
-                }
-            ],
-            "callbacks":[
-                {
-                    "name":"error",
-                    "info": "Error"
-                },
-                {
-                    "name":"success",
-                    "info": "Success => channels: Array <string>"
-                }
-            ]
-        },
-        {
-            "name":"requestRide",
-            "args":[
-                {
+                    "info": "Optional: The last name of the card holder."
+                }, {
+                    "name": "billingAddress",
+                    "type": "JSON",
+                    "info": "Optional: Base Address object used as billing address in a payment or extended for Shipping Address."
+                }, {
+                    "name": "externalCustomerId",
+                    "type": "JSON",
+                    "info": "Optional: Externally provided ID of the customer for which to list credit card resources."
+                }, {
+                    "name": "merchantId",
+                    "type": "JSON",
+                    "info": "Optional: ID of the merchant for which to list credit card resources."
+                }, {
+                    "name": "payerId",
+                    "type": "JSON",
+                    "info": "Optional:  unique ID that you can assign and track when you store a credit card or use a stored credit card."
+                }, {
+                    "name": "externalCardId",
+                    "type": "JSON",
+                    "info": "Optional:  Externally provided ID of the card for which to list credit card resources."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "deleteCreditCard",
+            "description": "Deletes details of a stored credit card. Include the credit card ID in the request URI.",
+            "args": [{
                     "name": "accessToken",
-                    "type": "credentials",
-                    "info": "The access token obtained from Uber API."
-                },
-                {
-                    "name": "startLatitude",
                     "type": "String",
-                    "info": "The beginning or “pickup” latitude. Either this or startPlaceId must be specified."
-                },
-                {
-                    "name": "startLongitude",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "creditCardId",
                     "type": "String",
-                    "info": "The beginning or “pickup” longitude. Either this or startPlaceId must be specified."
-                },
-                {
-                    "name": "endLatitude",
-                    "type": "String",
-                    "info": "The final or destination latitude. Either this or endPlaceId may be specified. If requesting POOL, this parameter is required."
-                },
-                {
-                    "name": "endLongitude",
-                    "type": "String",
-                    "info": "The final or destination longitude. Either this or endPlaceId may be specified. If requesting POOL, this parameter is required."
-                },
-                {
-                    "name": "startPlace_id",
-                    "type": "String",
-                    "info": "Optional: The beginning or “pickup” place ID. This is the name of an Uber saved place. Only “home” or “work” is acceptable. Either this or startLatitude and startLongitude must be specified."
-                },
-                {
-                    "name": "endPlace_id",
-                    "type": "String",
-                    "info": "Optional: The final or destination place ID. This is the name of an Uber saved place. Only “home” or “work” is acceptable. Either this or endLatitude and endLongitude may be specified."
-                },
-                {
-                    "name": "startNickname",
-                    "type": "String",
-                    "info": "Optional: The beginning or “pickup” nickname label."
-                },
-                {
-                    "name": "endNickname",
-                    "type": "String",
-                    "info": "Optional: The final or destination nickname label."
-                },
-                {
-                    "name": "startAddress",
-                    "type": "String",
-                    "info": "Optional: The beginning or “pickup” address."
-                },
-                {
-                    "name": "endAddress",
-                    "type": "String",
-                    "info": "Optional: The final or destination address."
-                },
-                {
-                    "name": "productId",
-                    "type": "String",
-                    "info": "Optional: The unique ID of the product being requested. If none is provided, it will default to the cheapest product for the given location."
-                },
-                {
-                    "name": "surgeConfirmationId",
-                    "type": "String",
-                    "info": "Optional: The unique identifier of the surge session for a user. Required when returned from a 409 Conflict response on previous POST attempt."
-                },
-                {
-                    "name": "paymentMethodId",
-                    "type": "String",
-                    "info": "Optional: The unique identifier of the payment method selected by a user. If set, the trip will be requested using this payment method. If not set, the trip will be requested using the user’s last used payment method."
-                },
-                {
-                    "name": "seatCount",
-                    "type": "String",
-                    "info": "Optional: The number of seats required for uberPOOL. Default and maximum value is 2."
-                },
-                {
-                    "name": "fareId",
-                    "type": "String",
-                    "info": "Optional: The key for the upfront price of an uberPOOL ride. Required if we want to use a previously retrieved price estimate for POOL. If it is missed, we will automatically issue a new upfront price for the ride request."
-                },
-                {
-                    "name": "expenseCode",
-                    "type": "String",
-                    "info": "Optional: An alphanumeric identifier for expense reporting policies. This value will appear in the trip receipt and any configured expense-reporting integrations like Uber For Business or Business Profiles."
-                },
-                {
-                    "name": "expenseMemo",
-                    "type": "String",
-                    "info": "Optional: A free text field to describe the purpose of the trip for expense reporting. This value will appear in the trip receipt and any configured expense-reporting integrations like Uber For Business or Business Profiles."
-                }
-            ],
-            "callbacks":[
-                {
-                    "name":"error",
-                    "info": "Error"
-                },
-                {
-                    "name":"success",
-                    "info": "Success => channels: Array <string>"
-                }
-            ]
-        },
-        {
-            "name":"updateCurrentRide",
-            "args":[
-                {
+                    "info": "Required: The ID of the credit card resource for which to show data."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "getCreditCard",
+            "description": "Shows details for a stored credit card.",
+            "args": [{
                     "name": "accessToken",
-                    "type": "credentials",
-                    "info": "The access token obtained from Uber API."
-                },
-                {
-                    "name": "endLatitude",
                     "type": "String",
-                    "info": "Optional: The final or destination latitude. Either this or endPlaceId must be specified."
-                },
-                {
-                    "name": "endLongitude",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "creditCardId",
                     "type": "String",
-                    "info": "Optional: The final or destination longitude. Either this or endPlaceId must be specified."
-                },
-                {
-                    "name": "endAddress",
-                    "type": "String",
-                    "info": "Optional: The final or destination address."
-                },
-                {
-                    "name": "endNickname",
-                    "type": "String",
-                    "info": "Optional: The final or destination nickname label."
-                },
-                {
-                    "name": "endPlaceId",
-                    "type": "String",
-                    "info": "Optional: The final or destination place ID. This is the name of an Uber saved place. Only “home” or “work” is accepted. Either this or endLatitude and endLongitude must be specified."
-                }
-            ],
-            "callbacks":[
-                {
-                    "name":"error",
-                    "info": "Error"
-                },
-                {
-                    "name":"success",
-                    "info": "Success => channels: Array <string>"
-                }
-            ]
-        },
-        {
-            "name":"cancelCurrentRide",
-            "args":[
-                {
+                    "info": "Required: The ID of the credit card resource for which to show data."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "getCreditCardList",
+            "description": "Lists stored credit cards.",
+            "args": [{
                     "name": "accessToken",
-                    "type": "credentials",
-                    "info": "The access token obtained from Uber API."
-                }
-            ],
-            "callbacks":[
-                {
-                    "name":"error",
-                    "info": "Error"
-                },
-                {
-                    "name":"success",
-                    "info": "Success => channels: Array <string>"
-                }
-            ]
-        },
-        {
-            "name":"getRideEstimate",
-            "args":[
-                {
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "pageSize",
+                    "type": "String",
+                    "info": "Optional: The number of resources to list, starting with the specified page. Default: 10." 
+                }, {
+                    "name": "page",
+                    "type": "String",
+                    "info": "Optional: The number of pages to get. Default: 1."
+                }, {
+                    "name": "startTime",
+                    "type": "String",
+                    "info": "Optional: The date and time when the resource was created in ISO8601 date-time format that indicates the start of a range of results. For example, 2013-11-05T13:15:30Z."
+                }, {
+                    "name": "endTime",
+                    "type": "String",
+                    "info": "Optional: The date and time when the resource was created in ISO8601 date-time format that indicates the end of a range of results. For example, 2014-11-05T13:15:30Z."
+                }, {
+                    "name": "sortOrder",
+                    "type": "String",
+                    "info": "Optional: Sorts the response in ascending or descending order. Value is asc for ascending order or desc for descending order. Default: desc."
+                }, {
+                    "name": "sortBy",
+                    "type": "String",
+                    "info": "Optional: Sorts the response by create_time or update_time. Default: create_time."
+                }, {
+                    "name": "merchantId",
+                    "type": "String",
+                    "info": "Optional: A user-provided, optional field that functions as a unique identifier for the merchant holding the card. Note that this has no relation to PayPal merchant ID."
+                }, {
+                    "name": "externalCardId",
+                    "type": "String",
+                    "info": "Optional: A unique identifier of the bank account resource. Generated and provided by the facilitator to use to restrict the usage of the bank account to the specific merchant."
+                }, {
+                    "name": "externalCustomerId",
+                    "type": "String",
+                    "info": "Optional: Externally provided customer identifier to filter the search results in list operations."
+                }, {
+                    "name": "totalRequired",
+                    "type": "String",
+                    "info": "Optional: Indicates whether the response returns the total_items and total_pages values. Default is true. Set to false to omit these values from the response."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "updateCreditCard",
+            "description": "Updates a stored credit card, by ID.",
+            "args": [{
                     "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "creditCardId",
+                    "type": "String",
+                    "info": "Required: The ID of the credit card resource to update."
+                }, {
+                    "name": "items",
+                    "type": "JSON",
+                    "info": "Required: A JSON patch object used for applying partial updates to resources."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "createTokenFromAurhorizationCode",
+            "description": "Updates a stored credit card, by ID.",
+            "args": [{
+                    "name": "clientId",
                     "type": "credentials",
-                    "info": "The access token obtained from Uber API."
-                },
-                {
-                    "name": "productId",
+                    "info": "Required: Client id."
+                }, {
+                    "name": "secret",
+                    "type": "credentials",
+                    "info": "Required: secret"
+                }, {
+                    "name": "grantType",
                     "type": "String",
-                    "info": "Optional: The unique ID of the product being requested. If none is provided, it will default to the cheapest product for the given location."
-                },
-                {
-                    "name": "startLatitude",
+                    "info": "Required: Token grant type. Value must be set to authorization_code."
+                }, {
+                    "name": "code",
                     "type": "String",
-                    "info": "Optional: The beginning or \"pickup\" latitude. Either this or startPlaceId must be specified."
-                },
-                {
-                    "name": "startLongitude",
+                    "info": "Required: Authorization code previously received from the authorization server."
+                }, {
+                    "name": "redirectUri",
                     "type": "String",
-                    "info": "Optional: The beginning or \"pickup\" longitude. Either this or startPlaceId must be specified."
-                },
-                {
-                    "name": "startPlaceId",
+                    "info": "Required: AApplication return URL where the authorization code is sent."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "createTokenFromRefreshToken",
+            "description": "Create an access token from a refresh token.",
+            "args": [{
+                    "name": "clientId",
+                    "type": "credentials",
+                    "info": "Required: Client id."
+                }, {
+                    "name": "secret",
+                    "type": "credentials",
+                    "info": "Required: secret"
+                }, {
+                    "name": "grantType",
                     "type": "String",
-                    "info": "Optional: The beginning or “pickup” place ID. This is the name of an Uber saved place. Only “home” or “work” is acceptable. Either this or startLatitude and startLongitude must be specified."
-                },
-                {
-                    "name": "endLatitude",
+                    "info": "Required: Token grant type. Value must be set to authorization_code."
+                }, {
+                    "name": "refreshToken",
                     "type": "String",
-                    "info": "Optional: The final or destination latitude. If not included, only the pickup ETA and details of surge pricing will be included."
-                },
-                {
-                    "name": "endLongitude",
+                    "info": "Required: Refresh token previously received along with the access token that is to be refreshed."
+                }, {
+                    "name": "scope",
                     "type": "String",
-                    "info": "Optional: The final or destination longitude. If not included, only the pickup ETA and details of surge pricing will be included."
-                },
-                {
-                    "name": "endPlaceId",
-                    "type": "String",
-                    "info": "Optional: The final or destination place ID. This is the name of an Uber saved place. Only “home” or “work” is acceptable. Either this or endLatitude and endLongitude may be specified."
-                },
-                {
-                    "name": "seatCount",
-                    "type": "String",
-                    "info": "Optional: The number of seats required for uberPOOL. Default and maximum value is 2."
-                }
-            ],
-            "callbacks":[
-                {
-                    "name":"error",
-                    "info": "Error"
-                },
-                {
-                    "name":"success",
-                    "info": "Success => channels: Array <string>"
-                }
-            ]
-        },
-        {
-            "name":"updateRide",
-            "args":[
-                {
+                    "info": "Optional: Resource URL endpoints that the client wants the token to be scoped for. The value of the scope parameter is expressed as a list of space-delimited, case-sensitive strings."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "getUser",
+            "description": "Use this call to retrieve user profile attributes.",
+            "args": [{
                     "name": "accessToken",
-                    "type": "credentials",
-                    "info": "The access token obtained from Uber API."
-                },
-                {
-                    "name": "requesttId",
                     "type": "String",
-                    "info": "Unique identifier representing a Request."
-                },
-                {
-                    "name": "endLatitude",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "schema",
                     "type": "String",
-                    "info": "Optional: The final or destination latitude. Either this or endPlaceId must be specified."
-                },
-                {
-                    "name": "endLongitude",
-                    "type": "String",
-                    "info": "Optional: The final or destination latitude. Either this or endPlaceId must be specified."
-                },
-                {
-                    "name": "endAddress",
-                    "type": "String",
-                    "info": "Optional: The final or destination address."
-                },
-                {
-                    "name": "endNickname",
-                    "type": "String",
-                    "info": "Optional: The final or destination nickname label."
-                },
-                {
-                    "name": "endPlaceId",
-                    "type": "String",
-                    "info": "Optional: The final or destination place ID. This is the name of an Uber saved place. Only “home” or “work” is accepted. Either this or endLatitude and end_Longitude must be specified."
-                }
-            ],
-            "callbacks":[
-                {
-                    "name":"error",
-                    "info": "Error"
-                },
-                {
-                    "name":"success",
-                    "info": "Success => channels: Array <string>"
-                }
-            ]
-        },
-        {
-            "name":"cancelRide",
-            "args":[
-                {
+                    "info": "Required: the schema that is used to return as per openidconnect protocol. Possible values: openid."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "createInvoice",
+            "description": "Creates a draft invoice.",
+            "args": [{
                     "name": "accessToken",
-                    "type": "credentials",
-                    "info": "The access token obtained from Uber API."
-                },
-                {
-                    "name": "requesttId",
                     "type": "String",
-                    "info": "Unique identifier representing a Request."
-                }
-            ],
-            "callbacks":[
-                {
-                    "name":"error",
-                    "info": "Error"
-                },
-                {
-                    "name":"success",
-                    "info": "Success => channels: Array <string>"
-                }
-            ]
-        },
-        {
-            "name":"getRideMap",
-            "args":[
-                {
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "merchantInfo",
+                    "type": "JSON",
+                    "info": "Required: Merchant business information that appears on the invoice."
+                }, {
+                    "name": "number",
+                    "type": "String",
+                    "info": "Optional: The unique invoice number. If you omit this number, it is auto-incremented from the previous invoice number. Maximum length: 25."
+                }, {
+                    "name": "templateId",
+                    "type": "String",
+                    "info": "Optional: The ID of the template from which to create the invoice. Useful for copy functionality."
+                }, {
+                    "name": "billingInfo",
+                    "type": "JSON",
+                    "info": "Optional: Billing information for the invoice recipient."
+                }, {
+                    "name": "ccInfo",
+                    "type": "JSON",
+                    "info": "Optional: Participant information."
+                }, {
+                    "name": "shippingInfo",
+                    "type": "JSON",
+                    "info": "Optional: Shipping information for the invoice recipient."
+                }, {
+                    "name": "items",
+                    "type": "JSON",
+                    "info": "Optional: Line item information."
+                }, {
+                    "name": "invoiceDate",
+                    "type": "String",
+                    "info": "Optional: The date when the invoice was enabled. The date format is yyyy-MM-dd z."
+                }, {
+                    "name": "paymentTerm",
+                    "type": "JSON",
+                    "info": "Optional: The payment term of the invoice. If you specify term_type, you cannot specify due_date, and vice versa."
+                }, {
+                    "name": "reference",
+                    "type": "String",
+                    "info": "Optional: Reference data, such as PO number, to add to the invoice. Maximum length: 60."
+                }, {
+                    "name": "discount",
+                    "type": "JSON",
+                    "info": "Optional: The cost as a percent or an amount value. For example, to specify 10%, enter 10. Alternatively, to specify an amount of 5, enter 5."
+                }, {
+                    "name": "shippingCost",
+                    "type": "JSON",
+                    "info": "Optional: Shipping cost, as a percent or an amount value."
+                }, {
+                    "name": "custom",
+                    "type": "JSON",
+                    "info": "Optional: The custom amount to apply to an invoice. If you include a label, you must include a custom amount."
+                }, {
+                    "name": "allowPartialPayment",
+                    "type": "String",
+                    "info": "Optional: Indicates whether the invoice allows a partial payment. If false, invoice must be paid in full. If true, the invoice allows partial payments. Default is false."
+                }, {
+                    "name": "minimumAmountDue",
+                    "type": "JSON",
+                    "info": "Optional: Base object for all financial value related fields (balance, payment due, etc.)"
+                }, {
+                    "name": "taxCalculatedAfterDiscount",
+                    "type": "String",
+                    "info": "Optional: Indicates whether the tax is calculated before or after a discount. If false, the tax is calculated before a discount. If true, the tax is calculated after a discount. Default is false."
+                }, {
+                    "name": "taxInclusive",
+                    "type": "String",
+                    "info": "Optional: Indicates whether the unit price includes tax. Default is false."
+                }, {
+                    "name": "terms",
+                    "type": "String",
+                    "info": "Optional: The general terms of the invoice. Maximum length: 4000."
+                }, {
+                    "name": "note",
+                    "type": "String",
+                    "info": "Optional: A note to the payer. Maximum length: 4000."
+                }, {
+                    "name": "merchantMemo",
+                    "type": "String",
+                    "info": "Optional: A private bookkeeping memo for the merchant. Maximum length: 150."
+                }, {
+                    "name": "logoUrl",
+                    "type": "String",
+                    "info": "Optional: The full URL to an external logo image. Maximum length: 4000."
+                }, {
+                    "name": "attachments",
+                    "type": "JSON",
+                    "info": "Optional: The array of files attached to an invoice or template."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "sendInvoice",
+            "description": "Sends an invoice, by ID, to a customer.",
+            "args": [{
                     "name": "accessToken",
-                    "type": "credentials",
-                    "info": "The access token obtained from Uber API."
-                },
-                {
-                    "name": "requesttId",
                     "type": "String",
-                    "info": "Unique identifier representing a Request."
-                }
-            ],
-            "callbacks":[
-                {
-                    "name":"error",
-                    "info": "Error"
-                },
-                {
-                    "name":"success",
-                    "info": "Success => channels: Array <string>"
-                }
-            ]
-        },
-        {
-            "name":"getReceipt",
-            "args":[
-                {
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "invoiceId",
+                    "type": "String",
+                    "info": "Required: The ID of the invoice to send."
+                }, {
+                    "name": "notifyMerchant",
+                    "type": "String",
+                    "info": "Optional: Indicates whether to send the invoice update notification to the merchant. Default is true."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "updateInvoice",
+            "description": "Updates an invoice, by ID.",
+            "args": [{
                     "name": "accessToken",
-                    "type": "credentials",
-                    "info": "The access token obtained from Uber API."
-                },
-                {
-                    "name": "requesttId",
                     "type": "String",
-                    "info": "Unique identifier representing a Request."
-                }
-            ],
-            "callbacks":[
-                {
-                    "name":"error",
-                    "info": "Error"
-                },
-                {
-                    "name":"success",
-                    "info": "Success => channels: Array <string>"
-                }
-            ]
-        }
-    ]
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "invoiceId",
+                    "type": "String",
+                    "info": "Required: The ID of the invoice to update."
+                }, {
+                    "name": "merchantInfo",
+                    "type": "JSON",
+                    "info": "Required: Merchant business information that appears on the invoice."
+                }, {
+                    "name": "notifyMerchant",
+                    "type": "String",
+                    "info": "Optional: Indicates whether to send the invoice update notification to the merchant. Default is true."
+                }, {
+                    "name": "number",
+                    "type": "String",
+                    "info": "Optional: The unique invoice number. If you omit this number, it is auto-incremented from the previous invoice number. Maximum length: 25."
+                }, {
+                    "name": "templateId",
+                    "type": "String",
+                    "info": "Optional: The ID of the template from which to create the invoice. Useful for copy functionality."
+                }, {
+                    "name": "billingInfo",
+                    "type": "JSON",
+                    "info": "Optional: Billing information for the invoice recipient."
+                }, {
+                    "name": "ccInfo",
+                    "type": "JSON",
+                    "info": "Optional: Participant information."
+                }, {
+                    "name": "shippingInfo",
+                    "type": "JSON",
+                    "info": "Optional: Shipping information for the invoice recipient."
+                }, {
+                    "name": "items",
+                    "type": "JSON",
+                    "info": "Optional: Line item information."
+                }, {
+                    "name": "invoiceDate",
+                    "type": "String",
+                    "info": "Optional: The date when the invoice was enabled. The date format is yyyy-MM-dd z."
+                }, {
+                    "name": "paymentTerm",
+                    "type": "JSON",
+                    "info": "Optional: The payment term of the invoice. If you specify term_type, you cannot specify due_date, and vice versa."
+                }, {
+                    "name": "reference",
+                    "type": "String",
+                    "info": "Optional: Reference data, such as PO number, to add to the invoice. Maximum length: 60."
+                }, {
+                    "name": "discount",
+                    "type": "JSON",
+                    "info": "Optional: The cost as a percent or an amount value. For example, to specify 10%, enter 10. Alternatively, to specify an amount of 5, enter 5."
+                }, {
+                    "name": "shippingCost",
+                    "type": "JSON",
+                    "info": "Optional: Shipping cost, as a percent or an amount value."
+                }, {
+                    "name": "custom",
+                    "type": "JSON",
+                    "info": "Optional: The custom amount to apply to an invoice. If you include a label, you must include a custom amount."
+                }, {
+                    "name": "allowPartialPayment",
+                    "type": "String",
+                    "info": "Optional: Indicates whether the invoice allows a partial payment. If false, invoice must be paid in full. If true, the invoice allows partial payments. Default is false."
+                }, {
+                    "name": "minimumAmountDue",
+                    "type": "JSON",
+                    "info": "Optional: Base object for all financial value related fields (balance, payment due, etc.)"
+                }, {
+                    "name": "taxCalculatedAfterDiscount",
+                    "type": "String",
+                    "info": "Optional: Indicates whether the tax is calculated before or after a discount. If false, the tax is calculated before a discount. If true, the tax is calculated after a discount. Default is false."
+                }, {
+                    "name": "taxInclusive",
+                    "type": "String",
+                    "info": "Optional: Indicates whether the unit price includes tax. Default is false."
+                }, {
+                    "name": "terms",
+                    "type": "String",
+                    "info": "Optional: The general terms of the invoice. Maximum length: 4000."
+                }, {
+                    "name": "note",
+                    "type": "String",
+                    "info": "Optional: A note to the payer. Maximum length: 4000."
+                }, {
+                    "name": "merchantMemo",
+                    "type": "String",
+                    "info": "Optional: A private bookkeeping memo for the merchant. Maximum length: 150."
+                }, {
+                    "name": "logoUrl",
+                    "type": "String",
+                    "info": "Optional: The full URL to an external logo image. Maximum length: 4000."
+                }, {
+                    "name": "attachments",
+                    "type": "JSON",
+                    "info": "Optional: The array of files attached to an invoice or template."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "getInvoice",
+            "description": "Shows details for an invoice, by ID.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "invoiceId",
+                    "type": "String",
+                    "info": "Required: The ID of the invoice to update."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "getInvoiceList",
+            "description": "Lists invoices that belong to the merchant who makes the call.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "page",
+                    "type": "String",
+                    "info": "Optional: A zero-relative index of the list of merchant invoices. Default: 1."
+                }, {
+                    "name": "pageSize",
+                    "type": "String",
+                    "info": "Optional: The number of invoices to list beginning with the specified page. Default: 10."
+                }, {
+                    "name": "totalCountRequired",
+                    "type": "String",
+                    "info": "Optional: Indicates whether the total count appears in the response. Default is false."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "generateInvoiceNumber",
+            "description": "Generates the next invoice number that is available to the user.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "searchInvoice",
+            "description": "Lists invoices that match search criteria.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "email",
+                    "type": "String",
+                    "info": "Optional: The initial letters of the email address."
+                }, {
+                    "name": "recipientFirstName",
+                    "type": "String",
+                    "info": "Optional: The initial letters of the recipient first name."
+                }, {
+                    "name": "recipientLastName",
+                    "type": "String",
+                    "info": "Optional: The initial letters of the recipient last name."
+                }, {
+                    "name": "recipientBusinessName",
+                    "type": "String",
+                    "info": "Optional: The initial letters of the recipient business name."
+                }, {
+                    "name": "number",
+                    "type": "String",
+                    "info": "Optional: The invoice number."
+                }, {
+                    "name": "status",
+                    "type": "String",
+                    "info": "Optional: The invoice status. Allowed values: DRAFT, SENT, PAID, MARKED_AS_PAID, CANCELLED, REFUNDED, PARTIALLY_REFUNDED, MARKED_AS_REFUNDED."
+                }, {
+                    "name": "lowerTotalAmount",
+                    "type": "JSON",
+                    "info": "Optional: Base object for all financial value related fields (balance, payment due, etc.)"
+                }, {
+                    "name": "upperTotalAmount",
+                    "type": "JSON",
+                    "info": "Optional: Base object for all financial value related fields (balance, payment due, etc.)"
+                }, {
+                    "name": "startInvoiceDate",
+                    "type": "String",
+                    "info": "Optional: The start date for the invoice. Date format is yyyy-MM-dd z."
+                }, {
+                    "name": "endInvoiceDate",
+                    "type": "String",
+                    "info": "Optional: The end date for the invoice. Date format is yyyy-MM-dd z."
+                }, {
+                    "name": "startDueDate",
+                    "type": "String",
+                    "info": "Optional: The start due date for the invoice. Date format is yyyy-MM-dd z."
+                }, {
+                    "name": "endDueDate",
+                    "type": "String",
+                    "info": "Optional: The end due date for the invoice. Date format is yyyy-MM-dd z."
+                }, {
+                    "name": "startPaymentDate",
+                    "type": "String",
+                    "info": "Optional: The start payment date for the invoice. Date format is yyyy-MM-dd z."
+                }, {
+                    "name": "endPaymentDate",
+                    "type": "String",
+                    "info": "Optional: The end payment date for the invoice. Date format is yyyy-MM-dd z."
+                }, {
+                    "name": "startCreationDate",
+                    "type": "String",
+                    "info": "Optional: The start creation date for the invoice. Date format is yyyy-MM-dd z."
+                }, {
+                    "name": "endCreationDate",
+                    "type": "String",
+                    "info": "Optional: The end creation date for the invoice. Date format is yyyy-MM-dd z."
+                }, {
+                    "name": "page",
+                    "type": "String",
+                    "info": "Optional: The offset for the search results."
+                }, {
+                    "name": "pageSize",
+                    "type": "String",
+                    "info": "Optional: The page size for the search results."
+                }, {
+                    "name": "totalCountRequired",
+                    "type": "String",
+                    "info": "Optional: Indicates whether the total count appears in the response. Default is false."
+                }, {
+                    "name": "archived",
+                    "type": "String",
+                    "info": "Optional: Indicates whether to list merchant-archived invoices in the response. If true, response lists only merchant-archived invoices. If false, response lists only unarchived invoices. If null, response lists all invoices."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "sendInvoiceReminder",
+            "description": "Sends a reminder to the payer that a payment is due for an invoice, by ID.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "invoiceId",
+                    "type": "String",
+                    "info": "Required: The ID of the invoice."
+                }, {
+                    "name": "subject",
+                    "type": "String",
+                    "info": "Required: The subject of the notification."
+                }, {
+                    "name": "note",
+                    "type": "String",
+                    "info": "Required: A note to the payer."
+                }, {
+                    "name": "sendToMerchant",
+                    "type": "String",
+                    "info": "Required: Indicates whether to send a copy of the email to the merchant. True or false."
+                }, {
+                    "name": "ccEmails",
+                    "type": "JSON",
+                    "info": "Optional: An array of one or more Cc: emails. "
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "deleteInvoice",
+            "description": "Deletes a draft invoice, by ID. Note that this call works for invoices in the draft state only.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "invoiceId",
+                    "type": "String",
+                    "info": "Required: The ID of the invoice."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "getQRCode",
+            "description": "Generates a QR code for an invoice, by ID.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "invoiceId",
+                    "type": "String",
+                    "info": "Required: The ID of the invoice."
+                }, {
+                    "name": "width",
+                    "type": "String",
+                    "info": "Optional: The width, in pixels, of the QR code image. Valid value is from 150 to 500. Default is 500."
+                }, {
+                    "name": "height",
+                    "type": "String",
+                    "info": "Optional: The height, in pixels, of the QR code image. Valid value is from 150 to 500. Default is 500."
+                }, {
+                    "name": "action",
+                    "type": "String",
+                    "info": "Optional: The type of URL for which to generate a QR code. Default is pay and is the only supported value."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "getTemplate",
+            "description": "Shows details for a template, by ID.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "templateId",
+                    "type": "String",
+                    "info": "Required: The ID of the template for which to show details."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "getTemplateList",
+            "description": "Lists all merchant-created templates. The list shows the emails, addresses, and phone numbers from the merchant profile.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "fields",
+                    "type": "String",
+                    "info": "Optional: The fields to return in the response. Value is all or none. Specify none to return only the template name, ID, and default attributes. Default: all."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "createWebProfile",
+            "description": "Creates a web experience profile.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "name",
+                    "type": "String",
+                    "info": "Required: Name of the web experience profile. Unique among only the profiles for a given merchant."
+                }, {
+                    "name": "flowConfig",
+                    "type": "JSON",
+                    "info": "Optional: Parameters for flow configuration."
+                }, {
+                    "name": "inputFields",
+                    "type": "JSON",
+                    "info": "Optional: Parameters for input fields customization."
+                }, {
+                    "name": "presentation",
+                    "type": "JSON",
+                    "info": "Optional: Parameters for style and presentation."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "getWebProfile",
+            "description": "Shows details for a web experience profile, by ID.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "profileId",
+                    "type": "String",
+                    "info": "Required: ID of the profile to retrieve."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "getProfileWebList",
+            "description": "Lists web experience profiles for a merchant.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "updateWebProfile",
+            "description": "Updates a web experience profile, by ID.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "profileId",
+                    "type": "String",
+                    "info": "Required: ID of the profile to update."
+                }, {
+                    "name": "name",
+                    "type": "String",
+                    "info": "Required: Name of the web experience profile. Unique among only the profiles for a given merchant."
+                }, {
+                    "name": "flowConfig",
+                    "type": "JSON",
+                    "info": "Optional: Parameters for flow configuration."
+                }, {
+                    "name": "inputFields",
+                    "type": "JSON",
+                    "info": "Optional: Parameters for input fields customization."
+                }, {
+                    "name": "presentation",
+                    "type": "JSON",
+                    "info": "Optional: Parameters for style and presentation."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "deleteWebProfile",
+            "description": "Deletes a web experience profile, by ID.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "profileId",
+                    "type": "String",
+                    "info": "Required: ID of the profile to update."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "createWebhook",
+            "description": "Subscribes your webhook listener to events.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "url",
+                    "type": "String",
+                    "info": "Required: The URL that is configured to listen on localhost for incoming POST notification messages that contain event information."
+                }, {
+                    "name": "eventTypes",
+                    "type": "JSON",
+                    "info": "Required: A list of events."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "getWebhook",
+            "description": "Shows details for a webhook, by ID.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "webhookId",
+                    "type": "String",
+                    "info": "Required: aThe ID of the webhook for which to show details."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "getWebhookList",
+            "description": "Lists all webhooks.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "anchorType",
+                    "type": "String",
+                    "info": "Optional: Filters the response by an entity type, anchor_id. Value is APPLICATION or ACCOUNT. Default is APPLICATION."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "updateWebhook",
+            "description": "Updates a webhook, by ID. Supports only the replace operation.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "webhookId",
+                    "type": "String",
+                    "info": "Required: The ID of the webhook to update."
+                }, {
+                    "name": "items",
+                    "type": "JSON",
+                    "info": "Required: A JSON patch object that you can use to apply partial updates to resources."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "deleteWebhook",
+            "description": "Deletes a webhook, by ID.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "webhookId",
+                    "type": "String",
+                    "info": "Required: The ID of the webhook to update."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "getEventNotifications",
+            "description": "Shows details for an event notification, by ID.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "eventId",
+                    "type": "String",
+                    "info": "Required: The ID of the webhook event notification for which to show details."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "getEventNotificationsList",
+            "description": "Lists webhook event notifications. You can specify one or more optional query parameters to filter the response.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "pageSize",
+                    "type": "String",
+                    "info": "Optional: The number of webhook event notifications to return in the response. Default: 10."
+                }, {
+                    "name": "startTime",
+                    "type": "String",
+                    "info": "Optional: Filters the webhook event notifications in the response to those created on or after this date and time and on or before the endTime value."
+                }, {
+                    "name": "endTime",
+                    "type": "String",
+                    "info": "Optional: Filters the webhook event notifications in the response to those created on or after the startTime and on or before this date and time."
+                }, {
+                    "name": "transactionId",
+                    "type": "String",
+                    "info": "Optional: Filters the response to a single transaction, by ID."
+                }, {
+                    "name": "eventType",
+                    "type": "String",
+                    "info": "Optional: Filters the response to a single event."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "resendEventNotification",
+            "description": "Resends an event notification, by event ID.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "eventId",
+                    "type": "String",
+                    "info": "Required: The ID of the webhook event notification to resend."
+                }, {
+                    "name": "webhookIds",
+                    "type": "String",
+                    "info": "Required: A list of webhook account IDs."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "getEventList",
+            "description": "Lists events to which an app can subscribe. ",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "getWebhookEventSubscriptionList",
+            "description": "Lists the event subscriptions for a webhook, by ID.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "webhookId",
+                    "type": "String",
+                    "info": "Required: The ID of the webhook for which to list subscriptions."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "simulateWebhookEvent",
+            "description": "Simulates a webhook event by using a sample payload.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "eventType",
+                    "type": "String",
+                    "info": "Required: The event name. Specify one of the subscribed events. For each request, provide only one event."
+                }, {
+                    "name": "webhookId",
+                    "type": "String",
+                    "info": "Optional: The ID of the webhook. If omitted, the URL is required."
+                }, {
+                    "name": "url",
+                    "type": "String",
+                    "info": "Optional: The URL for the webhook endpoint. If omitted, the webhook ID is required."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "cancelSentInvoice",
+            "description": "Cancels a sent invoice, by ID, and, optionally, sends a notification about the cancellation to the payer, merchant, and Cc: emails.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "invoiceId",
+                    "type": "String",
+                    "info": "Required: The ID of the invoice to cancel."
+                }, {
+                    "name": "subject",
+                    "type": "String",
+                    "info": "Optional: The subject of the notification."
+                }, {
+                    "name": "note",
+                    "type": "String",
+                    "info": "Optional: A note to the payer."
+                }, {
+                    "name": "sendToMerchant",
+                    "type": "String",
+                    "info": "Optional: Indicates whether to send the notification to the merchant."
+                }, {
+                    "name": "sendToPayer",
+                    "type": "String",
+                    "info": "Optional: Indicates whether to send the notification to the payer."
+                }, {
+                    "name": "ccEmails",
+                    "type": "String",
+                    "info": "Optional: An array of one or more Cc: emails. If you omit this parameter from the JSON request body, a notification is sent to all Cc: email addresses that are part of the invoice. Otherwise, specify this parameter to limit the email addresses to which a notification is sent."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "markInvoiceAsPaid",
+            "description": "Marks an invoice, by ID, as paid.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "invoiceId",
+                    "type": "String",
+                    "info": "Required: The ID of the invoice to cancel."
+                }, {
+                    "name": "method",
+                    "type": "String",
+                    "info": "Required: The payment mode or method. Required with the EXTERNAL payment type. Value is bank transfer, cash, check, credit card, debit card, PayPal, wire transfer, or other. Allowed values: BANK_TRANSFER, CASH, CHECK, CREDIT_CARD, DEBIT_CARD, PAYPAL, WIRE_TRANSFER, OTHER."
+                }, {
+                    "name": "date",
+                    "type": "String",
+                    "info": "Optional: The date when the invoice was paid. The date format is yyyy-MM-dd z"
+                }, {
+                    "name": "note",
+                    "type": "String",
+                    "info": "Optional: A note associated with the payment."
+                }, {
+                    "name": "amount",
+                    "type": "JSON",
+                    "info": "Optional: Base object for all financial value related fields (balance, payment due, etc.)"
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "markInvoiceAsRefunded",
+            "description": "Marks an invoice, by ID, as refunded.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "invoiceId",
+                    "type": "String",
+                    "info": "Required: The ID of the invoice."
+                }, {
+                    "name": "date",
+                    "type": "String",
+                    "info": "Optional: The date when the invoice was paid. The date format is yyyy-MM-dd z"
+                }, {
+                    "name": "note",
+                    "type": "String",
+                    "info": "Optional: A note associated with the payment."
+                }, {
+                    "name": "amount",
+                    "type": "JSON",
+                    "info": "Optional: Base object for all financial value related fields (balance, payment due, etc.)"
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "deleteExternalPayment",
+            "description": "Deletes an external payment transaction, by ID, from an invoice, by ID.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "invoiceId",
+                    "type": "String",
+                    "info": "Required: The ID of the invoice from which to delete a payment transaction."
+                }, {
+                    "name": "transactionId",
+                    "type": "String",
+                    "info": "Required: The ID of the payment transaction to delete."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "deleteExternalRefund",
+            "description": "Deletes an external refund transaction, by ID, from an invoice, by ID.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "invoiceId",
+                    "type": "String",
+                    "info": "Required: The ID of the invoice from which to delete the refund transaction."
+                }, {
+                    "name": "transactionId",
+                    "type": "String",
+                    "info": "Required: The ID of the refund transaction to delete."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "createTemplate",
+            "description": "Creates an invoice template. When you create an invoice from a template, the invoice is populated with the predefined data that the source template contains.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "name",
+                    "type": "String",
+                    "info": "Required: The template name."
+                }, {
+                    "name": "default",
+                    "type": "String",
+                    "info": "Required: Indicates whether this template is the default merchant template. A merchant can have one default template. True or false"
+                }, {
+                    "name": "templateData",
+                    "type": "JSON",
+                    "info": "Required: Detailed template information."
+                }, {
+                    "name": "settings",
+                    "type": "JSON",
+                    "info": "Required: Template settings."
+                }, {
+                    "name": "unitOfMeasure",
+                    "type": "JSON",
+                    "info": "Required: The unit of measure for the template. Value is quantity, hours, or amount."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "deleteTemplate",
+            "description": "Deletes a template, by ID.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "templateId",
+                    "type": "String",
+                    "info": "Required: The ID of the template to delete."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "verifyWebhookSignature",
+            "description": "Verifies a webhook signature.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "authAlgo",
+                    "type": "String",
+                    "info": "Required: The algorithm that PayPal uses to generate the signature and that you can use to verify the signature. Extract this value from the PAYPAL-AUTH-ALGO response header, which is received with the webhook notification."
+                }, {
+                    "name": "certUrl",
+                    "type": "String",
+                    "info": "Required: The X.509 public key certificate. Download the certificate from this URL and use it to verify the signature. Extract this value from the PAYPAL-CERT-URL response header, which is received with the webhook notification."
+                }, {
+                    "name": "transmissionId",
+                    "type": "String",
+                    "info": "Required: The ID of the HTTP transmission. Contained in the PAYPAL-TRANSMISSION-ID header of the notification message."
+                }, {
+                    "name": "transmissionSig",
+                    "type": "String",
+                    "info": "Required: The PayPal-generated asymmetric signature. Extract this value from the PAYPAL-TRANSMISSION-SIG response header, which is received with the webhook notification."
+                }, {
+                    "name": "transmissionTime",
+                    "type": "String",
+                    "info": "Required: The date and time of the HTTP transmission. Contained in the PAYPAL-TRANSMISSION-TIME header of the notification message."
+                }, {
+                    "name": "webhookId",
+                    "type": "String",
+                    "info": "Required: The ID of the webhook as configured in your Developer Portal account."
+                }, {
+                    "name": "webhookEvent",
+                    "type": "String",
+                    "info": "Required: A webhook event notification."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }, {
+            "name": "updateTemplate",
+            "description": "Updates a template, by ID. In the JSON request body, pass a complete template object. The update method does not support partial updates.",
+            "args": [{
+                    "name": "accessToken",
+                    "type": "String",
+                    "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "templateId",
+                    "type": "String",
+                    "info": "Required: The ID of the template to update."
+                }, {
+                    "name": "name",
+                    "type": "String",
+                    "info": "Required: The template name."
+                }, {
+                    "name": "default",
+                    "type": "String",
+                    "info": "Required: Indicates whether this template is the default merchant template. A merchant can have one default template. True or false"
+                }, {
+                    "name": "templateData",
+                    "type": "JSON",
+                    "info": "Required: Detailed template information."
+                }, {
+                    "name": "settings",
+                    "type": "JSON",
+                    "info": "Required: Template settings."
+                }, {
+                    "name": "unitOfMeasure",
+                    "type": "JSON",
+                    "info": "Required: The unit of measure for the template. Value is quantity, hours, or amount."
+                }],
+            "callbacks": [{
+                    "name": "error",
+                    "info": "error"
+                }, {
+                    "name": "success",
+                    "info": "success"
+                }]
+        }]
 }

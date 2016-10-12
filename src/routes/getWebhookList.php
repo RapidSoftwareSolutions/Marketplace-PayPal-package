@@ -1,6 +1,6 @@
 <?php
 
-$app->post('/api/PayPal/getUser', function ($request, $response, $args) {
+$app->post('/api/PayPal/getWebhookList', function ($request, $response, $args) {
     $settings =  $this->settings;
     
     $data = $request->getBody();
@@ -14,9 +14,6 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
     if(empty($post_data['args']['accessToken'])) {
         $error[] = 'accessToken cannot be empty';
     }
-    if(empty($post_data['args']['schema'])) {
-        $error[] = 'schema cannot be empty';
-    }
     
     if(!empty($error)) {
         $result['callback'] = 'error';
@@ -29,12 +26,15 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
     $headers['Content-Type'] = 'application/json';
     
     if($post_data['args']['sandbox'] == 1) {
-        $query_str = 'https://api.sandbox.paypal.com/v1/identity/openidconnect/userinfo';
+        $query_str = 'https://api.sandbox.paypal.com/v1/notifications/webhooks';
     } else {
-        $query_str = 'https://api.paypal.com/v1/identity/openidconnect/userinfo';
+        $query_str = 'https://api.paypal.com/v1/notifications/webhooks';
     }
     
-    $query['schema'] = $post_data['args']['schema'];
+    $query = [];
+    if(!empty($post_data['args']['anchorType'])) {
+        $query['anchor_type'] = $post_data['args']['anchorType'];
+    }
     
     $client = $this->httpClient;
 

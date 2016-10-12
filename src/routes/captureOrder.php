@@ -1,6 +1,6 @@
 <?php
 
-$app->post('/api/PayPal/getUser', function ($request, $response, $args) {
+$app->post('/api/PayPal/captureOrder', function ($request, $response, $args) {
     $settings =  $this->settings;
     
     $data = $request->getBody();
@@ -14,9 +14,10 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
     if(empty($post_data['args']['accessToken'])) {
         $error[] = 'accessToken cannot be empty';
     }
-    if(empty($post_data['args']['schema'])) {
-        $error[] = 'schema cannot be empty';
+    if(empty($post_data['args']['orderId'])) {
+        $error[] = 'orderId cannot be empty';
     }
+
     
     if(!empty($error)) {
         $result['callback'] = 'error';
@@ -26,24 +27,37 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
 
     
     $headers['Authorization'] = "Bearer " . $post_data['args']['accessToken'];
-    $headers['Content-Type'] = 'application/json';
+    $headers['Content-Type'] = 'application/json'; 
+    
     
     if($post_data['args']['sandbox'] == 1) {
-        $query_str = 'https://api.sandbox.paypal.com/v1/identity/openidconnect/userinfo';
+        $query_str = 'https://api.sandbox.paypal.com/v1/payments/orders/'.$post_data['args']['orderId'].'/capture';
     } else {
-        $query_str = 'https://api.paypal.com/v1/identity/openidconnect/userinfo';
+        $query_str = 'https://api.paypal.com/v1/payments/orders/'.$post_data['args']['orderId'].'/capture';
     }
     
-    $query['schema'] = $post_data['args']['schema'];
+    $body = [];
+    if(!empty($post_data['args']['amount'])) {
+        $body['amount'] = $post_data['args']['amount'];
+    }
+    if(!empty($post_data['args']['isFinalCapture'])) {
+        $body['is_final_capture'] = $post_data['args']['isFinalCapture'];
+    }
+    if(!empty($post_data['args']['invoiceNumber'])) {
+        $body['invoice_number'] = $post_data['args']['invoiceNumber'];
+    }
+    if(!empty($post_data['args']['transactionFee'])) {
+        $body['transaction_fee'] = $post_data['args']['transactionFee'];
+    }
     
     $client = $this->httpClient;
 
     try {
 
-        $resp = $client->get( $query_str, 
+        $resp = $client->post( $query_str, 
             [
                 'headers' => $headers,
-                'query' => $query
+                'json'=> $body
             ]);
         $responseBody = $resp->getBody()->getContents();
         $code = $resp->getStatusCode();

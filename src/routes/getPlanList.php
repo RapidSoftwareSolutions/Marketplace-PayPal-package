@@ -1,6 +1,6 @@
 <?php
 
-$app->post('/api/PayPal/getUser', function ($request, $response, $args) {
+$app->post('/api/PayPal/getPlanList', function ($request, $response, $args) {
     $settings =  $this->settings;
     
     $data = $request->getBody();
@@ -14,9 +14,6 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
     if(empty($post_data['args']['accessToken'])) {
         $error[] = 'accessToken cannot be empty';
     }
-    if(empty($post_data['args']['schema'])) {
-        $error[] = 'schema cannot be empty';
-    }
     
     if(!empty($error)) {
         $result['callback'] = 'error';
@@ -26,15 +23,27 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
 
     
     $headers['Authorization'] = "Bearer " . $post_data['args']['accessToken'];
-    $headers['Content-Type'] = 'application/json';
+    $headers['Content-Type'] = 'application/json'; 
     
     if($post_data['args']['sandbox'] == 1) {
-        $query_str = 'https://api.sandbox.paypal.com/v1/identity/openidconnect/userinfo';
+        $query_str = 'https://api.sandbox.paypal.com/v1/payments/billing-plans';
     } else {
-        $query_str = 'https://api.paypal.com/v1/identity/openidconnect/userinfo';
+        $query_str = 'https://api.paypal.com/v1/payments/billing-plans';
     }
     
-    $query['schema'] = $post_data['args']['schema'];
+    $query = [];
+    if(!empty($post_data['args']['page'])) {
+        $query['page'] = $post_data['args']['page'];
+    }
+    if(!empty($post_data['args']['status'])) {
+        $query['status'] = $post_data['args']['status'];
+    }
+    if(!empty($post_data['args']['pageSize'])) {
+        $query['page_size'] = $post_data['args']['pageSize'];
+    }
+    if(!empty($post_data['args']['totalRequired'])) {
+        $query['total_required'] = $post_data['args']['totalRequired'];
+    }
     
     $client = $this->httpClient;
 
@@ -43,7 +52,8 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
         $resp = $client->get( $query_str, 
             [
                 'headers' => $headers,
-                'query' => $query
+                'query' => $query,
+                'json' => []
             ]);
         $responseBody = $resp->getBody()->getContents();
         $code = $resp->getStatusCode();

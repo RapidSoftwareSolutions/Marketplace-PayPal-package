@@ -1,6 +1,6 @@
 <?php
 
-$app->post('/api/PayPal/getUser', function ($request, $response, $args) {
+$app->post('/api/PayPal/markInvoiceAsPaid', function ($request, $response, $args) {
     $settings =  $this->settings;
     
     $data = $request->getBody();
@@ -14,8 +14,11 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
     if(empty($post_data['args']['accessToken'])) {
         $error[] = 'accessToken cannot be empty';
     }
-    if(empty($post_data['args']['schema'])) {
-        $error[] = 'schema cannot be empty';
+    if(empty($post_data['args']['invoiceId'])) {
+        $error[] = 'invoiceId cannot be empty';
+    }
+    if(empty($post_data['args']['method'])) {
+        $error[] = 'method cannot be empty';
     }
     
     if(!empty($error)) {
@@ -29,21 +32,30 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
     $headers['Content-Type'] = 'application/json';
     
     if($post_data['args']['sandbox'] == 1) {
-        $query_str = 'https://api.sandbox.paypal.com/v1/identity/openidconnect/userinfo';
+        $query_str = 'https://api.sandbox.paypal.com/v1/invoicing/invoices/'.$post_data['args']['invoiceId'].'/record-payment';
     } else {
-        $query_str = 'https://api.paypal.com/v1/identity/openidconnect/userinfo';
+        $query_str = 'https://api.paypal.com/v1/invoicing/invoices/'.$post_data['args']['invoiceId'].'/record-payment';
     }
     
-    $query['schema'] = $post_data['args']['schema'];
+    $body['method'] = $post_data['args']['method'];
+    if(!empty($post_data['args']['date'])) {
+        $body['date'] = $post_data['args']['date'];
+    }
+    if(!empty($post_data['args']['note'])) {
+        $body['note'] = $post_data['args']['note'];
+    }
+    if(!empty($post_data['args']['amount'])) {
+        $body['amount'] = $post_data['args']['amount'];
+    }
     
     $client = $this->httpClient;
 
     try {
 
-        $resp = $client->get( $query_str, 
+        $resp = $client->post( $query_str, 
             [
                 'headers' => $headers,
-                'query' => $query
+                'json' => $body
             ]);
         $responseBody = $resp->getBody()->getContents();
         $code = $resp->getStatusCode();

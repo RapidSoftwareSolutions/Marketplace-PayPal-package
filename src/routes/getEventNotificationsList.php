@@ -1,6 +1,6 @@
 <?php
 
-$app->post('/api/PayPal/getUser', function ($request, $response, $args) {
+$app->post('/api/PayPal/getEventNotificationsList', function ($request, $response, $args) {
     $settings =  $this->settings;
     
     $data = $request->getBody();
@@ -14,9 +14,6 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
     if(empty($post_data['args']['accessToken'])) {
         $error[] = 'accessToken cannot be empty';
     }
-    if(empty($post_data['args']['schema'])) {
-        $error[] = 'schema cannot be empty';
-    }
     
     if(!empty($error)) {
         $result['callback'] = 'error';
@@ -29,12 +26,27 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
     $headers['Content-Type'] = 'application/json';
     
     if($post_data['args']['sandbox'] == 1) {
-        $query_str = 'https://api.sandbox.paypal.com/v1/identity/openidconnect/userinfo';
+        $query_str = 'https://api.sandbox.paypal.com/v1/notifications/webhooks-events';
     } else {
-        $query_str = 'https://api.paypal.com/v1/identity/openidconnect/userinfo';
+        $query_str = 'https://api.paypal.com/v1/notifications/webhooks-events';
     }
     
-    $query['schema'] = $post_data['args']['schema'];
+    $query = [];
+    if(!empty($post_data['args']['pageSize'])) {
+        $query['page_size'] = $post_data['args']['pageSize'];
+    }
+    if(!empty($post_data['args']['startTime'])) {
+        $query['start_time'] = $post_data['args']['startTime'];
+    }
+    if(!empty($post_data['args']['endTime'])) {
+        $query['end_time'] = $post_data['args']['endTime'];
+    }
+    if(!empty($post_data['args']['transactionId'])) {
+        $query['transaction_id'] = $post_data['args']['transactionId'];
+    }
+    if(!empty($post_data['args']['eventType'])) {
+        $query['event_type'] = $post_data['args']['eventType'];
+    }
     
     $client = $this->httpClient;
 
@@ -43,7 +55,7 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
         $resp = $client->get( $query_str, 
             [
                 'headers' => $headers,
-                'query' => $query
+                'query' => $query               
             ]);
         $responseBody = $resp->getBody()->getContents();
         $code = $resp->getStatusCode();

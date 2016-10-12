@@ -1,6 +1,8 @@
 <?php
+use PayPal\Auth\OAuthTokenCredential;
+use PayPal\Rest\ApiContext;
 
-$app->post('/api/PayPal/getUser', function ($request, $response, $args) {
+$app->post('/api/PayPal/getAccessToken', function ($request, $response, $args) {
     $settings =  $this->settings;
     
     $data = $request->getBody();
@@ -11,11 +13,14 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
     }
         
     $error = [];
-    if(empty($post_data['args']['accessToken'])) {
-        $error[] = 'accessToken cannot be empty';
+    if(empty($post_data['args']['clientId'])) {
+        $error[] = 'clientId cannot be empty';
     }
-    if(empty($post_data['args']['schema'])) {
-        $error[] = 'schema cannot be empty';
+    if(empty($post_data['args']['secret'])) {
+        $error[] = 'secret cannot be empty';
+    }
+    if(empty($post_data['args']['grantType'])) {
+        $error[] = 'grantType cannot be empty';
     }
     
     if(!empty($error)) {
@@ -25,31 +30,33 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
     }
 
     
-    $headers['Authorization'] = "Bearer " . $post_data['args']['accessToken'];
-    $headers['Content-Type'] = 'application/json';
-    
+    $headers['Content-Type'] = 'application/x-www-form-urlencoded'; 
+    $auth = [$post_data['args']['clientId'], $post_data['args']['secret']];
+
     if($post_data['args']['sandbox'] == 1) {
-        $query_str = 'https://api.sandbox.paypal.com/v1/identity/openidconnect/userinfo';
+        $query_str = 'https://api.sandbox.paypal.com/v1/oauth2/token';
     } else {
-        $query_str = 'https://api.paypal.com/v1/identity/openidconnect/userinfo';
+        $query_str = 'https://api.paypal.com/v1/oauth2/token';
     }
-    
-    $query['schema'] = $post_data['args']['schema'];
     
     $client = $this->httpClient;
 
     try {
 
-        $resp = $client->get( $query_str, 
+        $resp = $client->post( $query_str, 
             [
                 'headers' => $headers,
-                'query' => $query
+                'auth' => $auth,
+                'form_params' => [
+                    'grant_type' => $post_data['args']['grantType']
+                ],
+                'verify' => false
             ]);
         $responseBody = $resp->getBody()->getContents();
         $code = $resp->getStatusCode();
         $res = json_decode($responseBody);
         
-        if(in_array($code, ['200','201','202','203','204'])) { 
+        if($code == '200') { 
             $result['callback'] = 'success';
             $result['contextWrites']['to'] = json_encode($res);   
         } else {
@@ -60,20 +67,12 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
     } catch (\GuzzleHttp\Exception\ClientException $exception) {
 
         $responseBody = $exception->getResponse()->getBody();
-        $code = $exception->getCode();
         $result['callback'] = 'error';
-        $result['contextWrites']['code'] = $code;
         $result['contextWrites']['to'] = json_encode(json_decode($responseBody));
 
-    } catch (\GuzzleHttp\Exception\RequestException $exception) {
-
-        $responseBody = $exception->getResponse()->getBody();
-        $code = $exception->getCode();
-        $result['callback'] = 'error';
-        $result['contextWrites']['code'] = $code;
-        $result['contextWrites']['to'] = json_encode(json_decode($responseBody));
-
-    }  
+    }
+    
+    
 
     return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($result);
 });

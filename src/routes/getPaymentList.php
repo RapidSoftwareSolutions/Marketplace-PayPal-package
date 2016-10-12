@@ -1,6 +1,6 @@
 <?php
 
-$app->post('/api/PayPal/getUser', function ($request, $response, $args) {
+$app->post('/api/PayPal/getPaymentList', function ($request, $response, $args) {
     $settings =  $this->settings;
     
     $data = $request->getBody();
@@ -14,9 +14,7 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
     if(empty($post_data['args']['accessToken'])) {
         $error[] = 'accessToken cannot be empty';
     }
-    if(empty($post_data['args']['schema'])) {
-        $error[] = 'schema cannot be empty';
-    }
+
     
     if(!empty($error)) {
         $result['callback'] = 'error';
@@ -26,15 +24,31 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
 
     
     $headers['Authorization'] = "Bearer " . $post_data['args']['accessToken'];
-    $headers['Content-Type'] = 'application/json';
+    $headers['Content-Type'] = 'application/json'; 
     
-    if($post_data['args']['sandbox'] == 1) {
-        $query_str = 'https://api.sandbox.paypal.com/v1/identity/openidconnect/userinfo';
-    } else {
-        $query_str = 'https://api.paypal.com/v1/identity/openidconnect/userinfo';
+    $query = [];
+    if(!empty($post_data['args']['count'])) {
+        $query['count'] = $post_data['args']['count'];
+    }
+    if(!empty($post_data['args']['startId'])) {
+        $query['start_id'] = $post_data['args']['startId'];
+    }
+    if(!empty($post_data['args']['startIndex'])) {
+        $query['start_index'] = $post_data['args']['startIndex'];
+    }
+    if(!empty($post_data['args']['startTime'])) {
+        $query['start_time'] = $post_data['args']['startTime'];
+    }
+    if(!empty($post_data['args']['endTime'])) {
+        $query['end_time'] = $post_data['args']['endTime'];
     }
     
-    $query['schema'] = $post_data['args']['schema'];
+    
+    if($post_data['args']['sandbox'] == 1) {
+        $query_str = 'https://api.sandbox.paypal.com/v1/payments/payment';
+    } else {
+        $query_str = 'https://api.paypal.com/v1/payments/payment';
+    }
     
     $client = $this->httpClient;
 
@@ -60,17 +74,7 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
     } catch (\GuzzleHttp\Exception\ClientException $exception) {
 
         $responseBody = $exception->getResponse()->getBody();
-        $code = $exception->getCode();
         $result['callback'] = 'error';
-        $result['contextWrites']['code'] = $code;
-        $result['contextWrites']['to'] = json_encode(json_decode($responseBody));
-
-    } catch (\GuzzleHttp\Exception\RequestException $exception) {
-
-        $responseBody = $exception->getResponse()->getBody();
-        $code = $exception->getCode();
-        $result['callback'] = 'error';
-        $result['contextWrites']['code'] = $code;
         $result['contextWrites']['to'] = json_encode(json_decode($responseBody));
 
     }  

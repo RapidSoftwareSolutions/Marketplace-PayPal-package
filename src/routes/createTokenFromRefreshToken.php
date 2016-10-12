@@ -1,6 +1,6 @@
 <?php
 
-$app->post('/api/PayPal/getUser', function ($request, $response, $args) {
+$app->post('/api/PayPal/createTokenFromRefreshToken', function ($request, $response, $args) {
     $settings =  $this->settings;
     
     $data = $request->getBody();
@@ -11,11 +11,17 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
     }
         
     $error = [];
-    if(empty($post_data['args']['accessToken'])) {
-        $error[] = 'accessToken cannot be empty';
+    if(empty($post_data['args']['clientId'])) {
+        $error[] = 'clientId cannot be empty';
     }
-    if(empty($post_data['args']['schema'])) {
-        $error[] = 'schema cannot be empty';
+    if(empty($post_data['args']['secret'])) {
+        $error[] = 'secret cannot be empty';
+    }
+    if(empty($post_data['args']['grantType'])) {
+        $error[] = 'grantType cannot be empty';
+    }
+    if(empty($post_data['args']['refreshToken'])) {
+        $error[] = 'refreshToken cannot be empty';
     }
     
     if(!empty($error)) {
@@ -25,25 +31,29 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
     }
 
     
-    $headers['Authorization'] = "Bearer " . $post_data['args']['accessToken'];
-    $headers['Content-Type'] = 'application/json';
+    $auth = [$post_data['args']['clientId'], $post_data['args']['secret']];
     
     if($post_data['args']['sandbox'] == 1) {
-        $query_str = 'https://api.sandbox.paypal.com/v1/identity/openidconnect/userinfo';
+        $query_str = 'https://api.sandbox.paypal.com/v1/identity/tokenservice';
     } else {
-        $query_str = 'https://api.paypal.com/v1/identity/openidconnect/userinfo';
+        $query_str = 'https://api.paypal.com/v1/identity/tokenservice';
     }
     
-    $query['schema'] = $post_data['args']['schema'];
+    $query['grant_type'] = $post_data['args']['grantType'];
+    $query['refresh_token'] = $post_data['args']['refreshToken'];
+    if(!empty($post_data['args']['scope'])) {
+        $query['scope'] = $post_data['args']['scope'];
+    }
     
     $client = $this->httpClient;
 
     try {
 
-        $resp = $client->get( $query_str, 
+        $resp = $client->post( $query_str, 
             [
-                'headers' => $headers,
-                'query' => $query
+                'auth' => $auth,
+                'query' => $query,
+                'allow_redirects' => false
             ]);
         $responseBody = $resp->getBody()->getContents();
         $code = $resp->getStatusCode();
@@ -78,3 +88,9 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
     return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($result);
 });
 
+/*curl https://api.sandbox.paypal.com/v1/identity/openidconnect/tokenservice \
+  -u "Ae7QFDaWoKwglHXmgL133-4B1o4J5BfXw0HKL3SNJumVxhDMpL9VOvsZh-oA5Pc_PoexgzkSeO1Q95XI:EAym3vWLEpSciyTuwCtQjRG8ByrhgWqyCx0piYrjcRooJPW-tRnya8Twpryb9OV4v074uSIimTm9MYlB" \
+  -d grant_type=authorization_code \
+  -d code=Authorization-Code"
+
+ */

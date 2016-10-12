@@ -1,6 +1,6 @@
 <?php
 
-$app->post('/api/PayPal/getUser', function ($request, $response, $args) {
+$app->post('/api/PayPal/deleteTemplate', function ($request, $response, $args) {
     $settings =  $this->settings;
     
     $data = $request->getBody();
@@ -14,8 +14,8 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
     if(empty($post_data['args']['accessToken'])) {
         $error[] = 'accessToken cannot be empty';
     }
-    if(empty($post_data['args']['schema'])) {
-        $error[] = 'schema cannot be empty';
+    if(empty($post_data['args']['templateId'])) {
+        $error[] = 'templateID cannot be empty';
     }
     
     if(!empty($error)) {
@@ -29,21 +29,18 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
     $headers['Content-Type'] = 'application/json';
     
     if($post_data['args']['sandbox'] == 1) {
-        $query_str = 'https://api.sandbox.paypal.com/v1/identity/openidconnect/userinfo';
+        $query_str = 'https://api.sandbox.paypal.com/v1/invoicing/templates/'.$post_data['args']['templateId'];
     } else {
-        $query_str = 'https://api.paypal.com/v1/identity/openidconnect/userinfo';
+        $query_str = 'https://api.paypal.com/v1/invoicing/invoicing/templates/'.$post_data['args']['templateId'];
     }
-    
-    $query['schema'] = $post_data['args']['schema'];
     
     $client = $this->httpClient;
 
     try {
 
-        $resp = $client->get( $query_str, 
+        $resp = $client->delete( $query_str, 
             [
-                'headers' => $headers,
-                'query' => $query
+                'headers' => $headers
             ]);
         $responseBody = $resp->getBody()->getContents();
         $code = $resp->getStatusCode();

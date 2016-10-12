@@ -1,6 +1,6 @@
 <?php
 
-$app->post('/api/PayPal/getUser', function ($request, $response, $args) {
+$app->post('/api/PayPal/resendEventNotification', function ($request, $response, $args) {
     $settings =  $this->settings;
     
     $data = $request->getBody();
@@ -14,8 +14,11 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
     if(empty($post_data['args']['accessToken'])) {
         $error[] = 'accessToken cannot be empty';
     }
-    if(empty($post_data['args']['schema'])) {
-        $error[] = 'schema cannot be empty';
+    if(empty($post_data['args']['eventId'])) {
+        $error[] = 'eventId cannot be empty';
+    }
+    if(empty($post_data['args']['webhookIds'])) {
+        $error[] = 'webhookIds cannot be empty';
     }
     
     if(!empty($error)) {
@@ -29,21 +32,21 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
     $headers['Content-Type'] = 'application/json';
     
     if($post_data['args']['sandbox'] == 1) {
-        $query_str = 'https://api.sandbox.paypal.com/v1/identity/openidconnect/userinfo';
+        $query_str = 'https://api.sandbox.paypal.com/v1/notifications/webhooks-events/'.$post_data['args']['eventId'].'/resend';
     } else {
-        $query_str = 'https://api.paypal.com/v1/identity/openidconnect/userinfo';
+        $query_str = 'https://api.paypal.com/v1/notifications/webhooks-events/'.$post_data['args']['eventId'].'/resend';
     }
     
-    $query['schema'] = $post_data['args']['schema'];
+    $body['webhook_ids'] = $post_data['args']['webhookIds'];
     
     $client = $this->httpClient;
 
     try {
 
-        $resp = $client->get( $query_str, 
+        $resp = $client->post( $query_str, 
             [
                 'headers' => $headers,
-                'query' => $query
+                'json' => $body               
             ]);
         $responseBody = $resp->getBody()->getContents();
         $code = $resp->getStatusCode();

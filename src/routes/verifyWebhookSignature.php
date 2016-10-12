@@ -1,6 +1,6 @@
 <?php
 
-$app->post('/api/PayPal/getUser', function ($request, $response, $args) {
+$app->post('/api/PayPal/verifyWebhookSignature', function ($request, $response, $args) {
     $settings =  $this->settings;
     
     $data = $request->getBody();
@@ -14,8 +14,26 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
     if(empty($post_data['args']['accessToken'])) {
         $error[] = 'accessToken cannot be empty';
     }
-    if(empty($post_data['args']['schema'])) {
-        $error[] = 'schema cannot be empty';
+    if(empty($post_data['args']['authAlgo'])) {
+        $error[] = 'authAlgo cannot be empty';
+    }
+    if(empty($post_data['args']['certUrl'])) {
+        $error[] = 'certUrl cannot be empty';
+    }
+    if(empty($post_data['args']['transmissionId'])) {
+        $error[] = 'transmissionId cannot be empty';
+    }
+    if(empty($post_data['args']['transmissionSig'])) {
+        $error[] = 'transmissionSig cannot be empty';
+    }
+    if(empty($post_data['args']['transmissionTime'])) {
+        $error[] = 'transmissionTime cannot be empty';
+    }
+    if(empty($post_data['args']['webhookId'])) {
+        $error[] = 'webhookId cannot be empty';
+    }
+    if(empty($post_data['args']['webhookEvent'])) {
+        $error[] = 'webhookEvent cannot be empty';
     }
     
     if(!empty($error)) {
@@ -29,21 +47,27 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
     $headers['Content-Type'] = 'application/json';
     
     if($post_data['args']['sandbox'] == 1) {
-        $query_str = 'https://api.sandbox.paypal.com/v1/identity/openidconnect/userinfo';
+        $query_str = 'https://api.sandbox.paypal.com/v1/notifications/verify-webhook-signature';
     } else {
-        $query_str = 'https://api.paypal.com/v1/identity/openidconnect/userinfo';
+        $query_str = 'https://api.paypal.com/v1/notifications/verify-webhook-signature';
     }
     
-    $query['schema'] = $post_data['args']['schema'];
+    $body['auth_algo'] = $post_data['args']['authAlgo'];
+    $body['cert_url'] = $post_data['args']['certUrl'];
+    $body['transmission_id'] = $post_data['args']['transmissionId'];
+    $body['transmission_sig'] = $post_data['args']['transmissionSig'];
+    $body['transmission_time'] = $post_data['args']['transmissionTime'];
+    $body['webhook_id'] = $post_data['args']['webhookId'];
+    $body['webhook_event'] = $post_data['args']['webhookEvent'];
     
     $client = $this->httpClient;
 
     try {
 
-        $resp = $client->get( $query_str, 
+        $resp = $client->post( $query_str, 
             [
                 'headers' => $headers,
-                'query' => $query
+                'json' => $body
             ]);
         $responseBody = $resp->getBody()->getContents();
         $code = $resp->getStatusCode();

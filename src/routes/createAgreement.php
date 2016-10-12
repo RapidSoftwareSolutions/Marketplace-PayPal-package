@@ -1,6 +1,6 @@
 <?php
 
-$app->post('/api/PayPal/getUser', function ($request, $response, $args) {
+$app->post('/api/PayPal/createAgreement', function ($request, $response, $args) {
     $settings =  $this->settings;
     
     $data = $request->getBody();
@@ -14,8 +14,20 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
     if(empty($post_data['args']['accessToken'])) {
         $error[] = 'accessToken cannot be empty';
     }
-    if(empty($post_data['args']['schema'])) {
-        $error[] = 'schema cannot be empty';
+    if(empty($post_data['args']['name'])) {
+        $error[] = 'name cannot be empty';
+    }
+    if(empty($post_data['args']['description'])) {
+        $error[] = 'description cannot be empty';
+    }
+    if(empty($post_data['args']['startDate'])) {
+        $error[] = 'startDate cannot be empty';
+    }
+    if(empty($post_data['args']['payer'])) {
+        $error[] = 'payer cannot be empty';
+    }
+    if(empty($post_data['args']['plan'])) {
+        $error[] = 'plan cannot be empty';
     }
     
     if(!empty($error)) {
@@ -26,24 +38,41 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
 
     
     $headers['Authorization'] = "Bearer " . $post_data['args']['accessToken'];
-    $headers['Content-Type'] = 'application/json';
+    $headers['Content-Type'] = 'application/json'; 
     
     if($post_data['args']['sandbox'] == 1) {
-        $query_str = 'https://api.sandbox.paypal.com/v1/identity/openidconnect/userinfo';
+        $query_str = 'https://api.sandbox.paypal.com/v1/payments/billing-agreements';
     } else {
-        $query_str = 'https://api.paypal.com/v1/identity/openidconnect/userinfo';
+        $query_str = 'https://api.paypal.com/v1/payments/billing-agreements';
     }
     
-    $query['schema'] = $post_data['args']['schema'];
+    $body['name'] = $post_data['args']['name'];
+    $body['description'] = $post_data['args']['description'];
+    $body['start_date'] = $post_data['args']['startDate'];
+    $body['payer'] = $post_data['args']['payer'];
+    $body['plan'] = $post_data['args']['plan'];
+    
+    if(!empty($post_data['args']['overrideChargeModels'])) {
+        $query['override_charge_models'] = $post_data['args']['overrideChargeModels'];
+    }
+    if(!empty($post_data['args']['agreementDetails'])) {
+        $query['agreement_details'] = $post_data['args']['agreementDetails'];
+    }
+    if(!empty($post_data['args']['shippingAddress'])) {
+        $query['shipping_address'] = $post_data['args']['shippingAddress'];
+    }
+    if(!empty($post_data['args']['overrideMerchantPreferences'])) {
+        $query['override_merchant_preferences'] = $post_data['args']['overrideMerchantPreferences'];
+    }
     
     $client = $this->httpClient;
 
     try {
 
-        $resp = $client->get( $query_str, 
+        $resp = $client->post( $query_str, 
             [
                 'headers' => $headers,
-                'query' => $query
+                'json' => $body
             ]);
         $responseBody = $resp->getBody()->getContents();
         $code = $resp->getStatusCode();

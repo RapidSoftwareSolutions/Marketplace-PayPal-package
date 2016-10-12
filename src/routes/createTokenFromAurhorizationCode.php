@@ -1,6 +1,6 @@
 <?php
 
-$app->post('/api/PayPal/getUser', function ($request, $response, $args) {
+$app->post('/api/PayPal/createTokenFromAurhorizationCode', function ($request, $response, $args) {
     $settings =  $this->settings;
     
     $data = $request->getBody();
@@ -11,11 +11,20 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
     }
         
     $error = [];
-    if(empty($post_data['args']['accessToken'])) {
-        $error[] = 'accessToken cannot be empty';
+    if(empty($post_data['args']['clientId'])) {
+        $error[] = 'clientId cannot be empty';
     }
-    if(empty($post_data['args']['schema'])) {
-        $error[] = 'schema cannot be empty';
+    if(empty($post_data['args']['secret'])) {
+        $error[] = 'secret cannot be empty';
+    }
+    if(empty($post_data['args']['grantType'])) {
+        $error[] = 'grantType cannot be empty';
+    }
+    if(empty($post_data['args']['code'])) {
+        $error[] = 'code cannot be empty';
+    }
+    if(empty($post_data['args']['redirectUri'])) {
+        $error[] = 'redirect_uri cannot be empty';
     }
     
     if(!empty($error)) {
@@ -25,25 +34,29 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
     }
 
     
-    $headers['Authorization'] = "Bearer " . $post_data['args']['accessToken'];
-    $headers['Content-Type'] = 'application/json';
+    $headers['Content-Type'] = 'application/json'; 
+    $auth = [$post_data['args']['clientId'], $post_data['args']['secret']];
     
     if($post_data['args']['sandbox'] == 1) {
-        $query_str = 'https://api.sandbox.paypal.com/v1/identity/openidconnect/userinfo';
+        $query_str = 'https://api.sandbox.paypal.com/v1/identity/tokenservice';
     } else {
-        $query_str = 'https://api.paypal.com/v1/identity/openidconnect/userinfo';
+        $query_str = 'https://api.paypal.com/v1/identity/tokenservice';
     }
     
-    $query['schema'] = $post_data['args']['schema'];
+    $query['grant_type'] = $post_data['args']['grantType'];
+    $query['code'] = $post_data['args']['code'];
+    $query['redirect_uri'] = $post_data['args']['redirectUri'];
     
     $client = $this->httpClient;
 
     try {
 
-        $resp = $client->get( $query_str, 
+        $resp = $client->post( $query_str, 
             [
                 'headers' => $headers,
-                'query' => $query
+                'auth' => $auth,
+                'query' => $query,
+                'allow_redirects' => false
             ]);
         $responseBody = $resp->getBody()->getContents();
         $code = $resp->getStatusCode();

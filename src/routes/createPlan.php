@@ -1,6 +1,6 @@
 <?php
 
-$app->post('/api/PayPal/getUser', function ($request, $response, $args) {
+$app->post('/api/PayPal/createPlan', function ($request, $response, $args) {
     $settings =  $this->settings;
     
     $data = $request->getBody();
@@ -14,9 +14,19 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
     if(empty($post_data['args']['accessToken'])) {
         $error[] = 'accessToken cannot be empty';
     }
-    if(empty($post_data['args']['schema'])) {
-        $error[] = 'schema cannot be empty';
+    if(empty($post_data['args']['name'])) {
+        $error[] = 'name cannot be empty';
     }
+    if(empty($post_data['args']['description'])) {
+        $error[] = 'description cannot be empty';
+    }
+    if(empty($post_data['args']['type'])) {
+        $error[] = 'type cannot be empty';
+    }
+    if(empty($post_data['args']['paymentDefinitions'])) {
+        $error[] = 'paymentDefinitions cannot be empty';
+    }
+
     
     if(!empty($error)) {
         $result['callback'] = 'error';
@@ -26,24 +36,31 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
 
     
     $headers['Authorization'] = "Bearer " . $post_data['args']['accessToken'];
-    $headers['Content-Type'] = 'application/json';
+    $headers['Content-Type'] = 'application/json'; 
     
-    if($post_data['args']['sandbox'] == 1) {
-        $query_str = 'https://api.sandbox.paypal.com/v1/identity/openidconnect/userinfo';
-    } else {
-        $query_str = 'https://api.paypal.com/v1/identity/openidconnect/userinfo';
+    $body['name'] = $post_data['args']['name'];
+    $body['description'] = $post_data['args']['description'];
+    $body['type'] = $post_data['args']['type'];
+    $body['payment_definitions'] = $post_data['args']['paymentDefinitions'];
+    if(!empty($post_data['args']['merchantPreferences'])) {
+        $body['merchant_preferences'] = $post_data['args']['merchantPreferences'];
     }
     
-    $query['schema'] = $post_data['args']['schema'];
+    
+    if($post_data['args']['sandbox'] == 1) {
+        $query_str = 'https://api.sandbox.paypal.com/v1/payments/billing-plans';
+    } else {
+        $query_str = 'https://api.paypal.com/v1/payments/billing-plans';
+    }
     
     $client = $this->httpClient;
 
     try {
 
-        $resp = $client->get( $query_str, 
+        $resp = $client->post( $query_str, 
             [
                 'headers' => $headers,
-                'query' => $query
+                'json'=> $body
             ]);
         $responseBody = $resp->getBody()->getContents();
         $code = $resp->getStatusCode();

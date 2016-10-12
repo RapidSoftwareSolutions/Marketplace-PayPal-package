@@ -1,6 +1,6 @@
 <?php
 
-$app->post('/api/PayPal/getUser', function ($request, $response, $args) {
+$app->post('/api/PayPal/getTransactionsForBillingAgreement', function ($request, $response, $args) {
     $settings =  $this->settings;
     
     $data = $request->getBody();
@@ -14,8 +14,14 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
     if(empty($post_data['args']['accessToken'])) {
         $error[] = 'accessToken cannot be empty';
     }
-    if(empty($post_data['args']['schema'])) {
-        $error[] = 'schema cannot be empty';
+    if(empty($post_data['args']['agreementId'])) {
+        $error[] = 'agreementId cannot be empty';
+    }
+    if(empty($post_data['args']['startDate'])) {
+        $error[] = 'startDate cannot be empty';
+    }
+    if(empty($post_data['args']['endDate'])) {
+        $error[] = 'endDate cannot be empty';
     }
     
     if(!empty($error)) {
@@ -26,15 +32,16 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
 
     
     $headers['Authorization'] = "Bearer " . $post_data['args']['accessToken'];
-    $headers['Content-Type'] = 'application/json';
+    $headers['Content-Type'] = 'application/json'; 
     
     if($post_data['args']['sandbox'] == 1) {
-        $query_str = 'https://api.sandbox.paypal.com/v1/identity/openidconnect/userinfo';
+        $query_str = 'https://api.sandbox.paypal.com/v1/payments/billing-agreements/'.$post_data['args']['agreementId'].'/transactions';
     } else {
-        $query_str = 'https://api.paypal.com/v1/identity/openidconnect/userinfo';
+        $query_str = 'https://api.paypal.com/v1/payments/billing-agreements/'.$post_data['args']['agreementId'].'/transactions';
     }
     
-    $query['schema'] = $post_data['args']['schema'];
+    $query['start_date'] = $post_data['args']['startDate'];
+    $query['end_date'] = $post_data['args']['endDate'];
     
     $client = $this->httpClient;
 

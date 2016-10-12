@@ -1,6 +1,6 @@
 <?php
 
-$app->post('/api/PayPal/getUser', function ($request, $response, $args) {
+$app->post('/api/PayPal/updateTemplate', function ($request, $response, $args) {
     $settings =  $this->settings;
     
     $data = $request->getBody();
@@ -14,8 +14,23 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
     if(empty($post_data['args']['accessToken'])) {
         $error[] = 'accessToken cannot be empty';
     }
-    if(empty($post_data['args']['schema'])) {
-        $error[] = 'schema cannot be empty';
+    if(empty($post_data['args']['templateId'])) {
+        $error[] = 'templateId cannot be empty';
+    }
+    if(empty($post_data['args']['name'])) {
+        $error[] = 'name cannot be empty';
+    }
+    if(empty($post_data['args']['default'])) {
+        $error[] = 'default cannot be empty';
+    }
+    if(empty($post_data['args']['templateData'])) {
+        $error[] = 'templateData cannot be empty';
+    }
+    if(empty($post_data['args']['settings'])) {
+        $error[] = 'settings cannot be empty';
+    }
+    if(empty($post_data['args']['unitOfMeasure'])) {
+        $error[] = 'unitOfMeasure cannot be empty';
     }
     
     if(!empty($error)) {
@@ -29,21 +44,25 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
     $headers['Content-Type'] = 'application/json';
     
     if($post_data['args']['sandbox'] == 1) {
-        $query_str = 'https://api.sandbox.paypal.com/v1/identity/openidconnect/userinfo';
+        $query_str = 'https://api.sandbox.paypal.com/v1/invoicing/templates/'.$post_data['args']['templateId'];
     } else {
-        $query_str = 'https://api.paypal.com/v1/identity/openidconnect/userinfo';
+        $query_str = 'https://api.paypal.com/v1/invoicing/invoicing/templates/'.$post_data['args']['templateId'];
     }
     
-    $query['schema'] = $post_data['args']['schema'];
+    $body['name'] = $post_data['args']['name'];
+    $body['default'] = $post_data['args']['default'];
+    $body['template_data'] = $post_data['args']['templateData'];
+    $body['settings'] = $post_data['args']['settings'];
+    $body['unit_of_measure'] = $post_data['args']['unitOfMeasure'];
     
     $client = $this->httpClient;
 
     try {
 
-        $resp = $client->get( $query_str, 
+        $resp = $client->put( $query_str, 
             [
                 'headers' => $headers,
-                'query' => $query
+                'json' => $body
             ]);
         $responseBody = $resp->getBody()->getContents();
         $code = $resp->getStatusCode();

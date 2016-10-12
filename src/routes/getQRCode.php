@@ -1,6 +1,6 @@
 <?php
 
-$app->post('/api/PayPal/getUser', function ($request, $response, $args) {
+$app->post('/api/PayPal/getQRCode', function ($request, $response, $args) {
     $settings =  $this->settings;
     
     $data = $request->getBody();
@@ -14,8 +14,8 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
     if(empty($post_data['args']['accessToken'])) {
         $error[] = 'accessToken cannot be empty';
     }
-    if(empty($post_data['args']['schema'])) {
-        $error[] = 'schema cannot be empty';
+    if(empty($post_data['args']['invoiceId'])) {
+        $error[] = 'invoiceId cannot be empty';
     }
     
     if(!empty($error)) {
@@ -29,12 +29,21 @@ $app->post('/api/PayPal/getUser', function ($request, $response, $args) {
     $headers['Content-Type'] = 'application/json';
     
     if($post_data['args']['sandbox'] == 1) {
-        $query_str = 'https://api.sandbox.paypal.com/v1/identity/openidconnect/userinfo';
+        $query_str = 'https://api.sandbox.paypal.com/v1/invoicing/invoices/'.$post_data['args']['invoiceId'].'/qr-code';
     } else {
-        $query_str = 'https://api.paypal.com/v1/identity/openidconnect/userinfo';
+        $query_str = 'https://api.paypal.com/v1/invoicing/invoices/'.$post_data['args']['invoiceId'].'/qr-code';
     }
     
-    $query['schema'] = $post_data['args']['schema'];
+    $query = [];
+    if(!empty($post_data['args']['width'])) {
+        $query['width'] = $post_data['args']['width'];
+    }
+    if(!empty($post_data['args']['height'])) {
+        $query['height'] = $post_data['args']['height'];
+    }
+    if(!empty($post_data['args']['action'])) {
+        $query['action'] = $post_data['args']['action'];
+    }
     
     $client = $this->httpClient;
 
