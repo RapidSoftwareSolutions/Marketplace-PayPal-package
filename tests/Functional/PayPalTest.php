@@ -1389,7 +1389,7 @@ class PayPalTest extends BaseTestCase {
 	"args": {
 	  "accessToken": "A101.j5Ex6Ytd6kQSu088NJ9sS9IkrkbnueP_mCH6uxM2M8VljC6tzQ9Oguw_O6S1ZO5T.QNzVJBUB7jRGEbBiUvo7h9lCiF8",
 	  "sandbox": "1",
-	  "profileId": "XP-W2QA-5EEF-JC83-FVYD"
+          "profileId": "XP-W2QA-5EEF-JC83-FVYD"  
 	}
 }';
         $post_data = json_decode($var, true);
@@ -1406,8 +1406,7 @@ class PayPalTest extends BaseTestCase {
         $var = '{
 	"args": {
 	  "accessToken": "A101.j5Ex6Ytd6kQSu088NJ9sS9IkrkbnueP_mCH6uxM2M8VljC6tzQ9Oguw_O6S1ZO5T.QNzVJBUB7jRGEbBiUvo7h9lCiF8",
-	  "sandbox": "1",
-          "profileId": "XP-W2QA-5EEF-JC83-FVYD"
+	  "sandbox": "1"
 	}
 }';
         $post_data = json_decode($var, true);

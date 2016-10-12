@@ -1,6 +1,6 @@
 <?php
 
-$app->post('/api/PayPal/getWebProfileList', function ($request, $response, $args) {
+$app->post('/api/PayPal/getProfileWebList', function ($request, $response, $args) {
     $settings =  $this->settings;
     
     $data = $request->getBody();
