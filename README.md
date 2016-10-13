@@ -4,8 +4,11 @@ PayPal offers online payment solutions.
 * Credentials: clientId, secret
 
 ## How to get credentials: 
-0. Item one 
-1. Item two
+0. Go to [PayPal Developer Area] (https://developer.paypal.com/)
+1. Log In or Sign up
+2. Open your [Dashboard](https://developer.paypal.com/developer/applications/)
+3. Create an app to receive REST API credentials for testing and live transactions.
+4. Retrive your clientId and secret 
 
 ## TOC: 
 * [getAccessToken](#getAccessToken)
@@ -93,7 +96,7 @@ PayPal offers online payment solutions.
  
 <a name="getAccessToken"/>
 ## Paypal.getAccessToken
-Method description
+Use the OAuth request to get an access token for use with your payments calls.
 
 | Field    | Type       | Description
 |----------|------------|----------
@@ -101,28 +104,9 @@ Method description
 | secret   | credentials| Required: secret
 | grantType| String     | Required: Token grant type. Must be set to client_credentials.
 
-#### Request example
-```json
-{	"clientId": "...",
-	"secret": "...",
-	"grantType": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="createPayment"/>
 ## Paypal.createPayment
-Method description
+Use the payment resource for direct credit card payments, stored credit card payments, or PayPal account payments.
 
 | Field              | Type  | Description
 |--------------------|-------|----------
@@ -134,32 +118,9 @@ Method description
 | noteToPayer        | String| Optional: free-form field for the use of clients to pass in a message to the payer.
 | redirectUrls       | JSON  | Optional: Set of redirect URLs you provide only for PayPal-based payments.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"intent": "...",
-	"payer": "...",
-	"transactions": "...",
-	"experienceProfileId": "...",
-	"noteToPayer": "...",
-	"redirectUrls": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="executePayment"/>
 ## Paypal.executePayment
-Method description
+Executes a PayPal payment that the payer has approved. You can optionally pass in one or more transactions to update transaction information when you execute the payment.
 
 | Field       | Type  | Description
 |-------------|-------|----------
@@ -168,56 +129,18 @@ Method description
 | payerId     | String| Required: The ID of the payer, passed in the return_url by PayPal.
 | transactions| String| Optional: Transactional details if updating a payment. Note that this instance of the transactions object accepts only the amount object.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"paymentId": "...",
-	"payerId": "...",
-	"transactions": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="getPayment"/>
 ## Paypal.getPayment
-Method description
+Shows details for a payment, by ID, that is yet completed. For example, a payment that was created, approved, or failed.
 
 | Field      | Type  | Description
 |------------|-------|----------
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | paymentId  | String| Required: The ID of the payment to execute.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"paymentId": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="updatePayment"/>
 ## Paypal.updatePayment
-Method description
+Partially updates a payment, by ID. You cannot update a payment after the payment is executed.
 
 | Field      | Type  | Description
 |------------|-------|----------
@@ -225,28 +148,9 @@ Method description
 | paymentId  | String| Required: The ID of the payment to execute.
 | items      | JSON  | Required: A JSON patch object that you can use to apply partial updates to resources.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"paymentId": "...",
-	"items": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="getPaymentList"/>
 ## Paypal.getPaymentList
-Method description
+Lists payments that were created by the create payment call and are in any state. The list shows the payments that are made to the merchant who makes the call.
 
 | Field      | Type  | Description
 |------------|-------|----------
@@ -257,58 +161,18 @@ Method description
 | startTime  | String| Optional: The date and time when the resource was created. Indicates the start of a range of results. Example: start_time=2013-03-06T11:00:00Z Format: date-time.
 | endTime    | String| Optional: The date and time when the resource was created. Indicates the end of a range of results. Format: date-time.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"count": "...",
-	"startId": "...",
-	"startIndex": "...",
-	"startTime": "...",
-	"endTime": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="getSale"/>
 ## Paypal.getSale
-Method description
+Shows details for a sale transaction, by ID.
 
 | Field      | Type  | Description
 |------------|-------|----------
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | saleId     | String| Required: The ID of the sale for which to show details.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"saleId": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="refundSale"/>
 ## Paypal.refundSale
-Method description
+Refunds a completed payment.
 
 | Field        | Type  | Description
 |--------------|-------|----------
@@ -319,54 +183,14 @@ Method description
 | invoiceNumber| String| Optional: The invoice number that is used to track this payment. Character length and limitations: 127 single-byte alphanumeric characters. Maximum length: 127.
 | refundAdvice | Bool  | Optional: Flag to indicate that the buyer was already given store credit for a given transaction.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"saleId": "...",
-	"amount": "...",
-	"refundSource": "...",
-	"invoiceNumber": "...",
-	"refundAdvice": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="getRefund"/>
 ## Paypal.getRefund
-Method description
+Shows details for a refund, by ID. 
 
 | Field      | Type  | Description
 |------------|-------|----------
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | refundId   | String| Required: The ID of the refund for which to show details.
-
-#### Request example
-```json
-{	"accessToken": "...",
-	"refundId": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
 
 <a name="getAuthorization"/>
 ## Paypal.getAuthorization
@@ -377,27 +201,9 @@ Method description
 | accessToken    | String| Required: accessToken obtained with clientId and secret.
 | authorizationId| String| Required: The ID of the authorization for which to show details.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"authorizationId": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="captureAuthorization"/>
 ## Paypal.captureAuthorization
-Method description
+Use this resource to capture and process a previously created authorization.
 
 | Field          | Type  | Description
 |----------------|-------|----------
@@ -407,57 +213,18 @@ Method description
 | isFinalCapture | Bool  | Optional: Indicates whether to release all remaining funds that the authorization holds in the funding instrument. Default is false. Default: false.
 | invoiceNumber  | String| Optional: The invoice number to track this payment. Maximum length: 127.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"authorizationId": "...",
-	"amount": "...",
-	"isFinalCapture": "...",
-	"invoiceNumber": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="voidAuthorization"/>
 ## Paypal.voidAuthorization
-Method description
+Voids a previously authorized payment.
 
 | Field          | Type  | Description
 |----------------|-------|----------
 | accessToken    | String| Required: accessToken obtained with clientId and secret.
 | authorizationId| String| Required: The ID of the authorization for which to show details.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"authorizationId": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="reauthorizePayment"/>
 ## Paypal.reauthorizePayment
-Method description
+Reauthorizes a PayPal account payment. We recommend that you reauthorize a payment after the initial three-day honor period to ensure that funds are still available.
 
 | Field          | Type  | Description
 |----------------|-------|----------
@@ -465,55 +232,18 @@ Method description
 | authorizationId| String| Required: The ID of the authorization for which to show details.
 | amount         | JSON  | Required: Amount being reauthorized.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"authorizationId": "...",
-	"amount": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="getCapture"/>
 ## Paypal.getCapture
-Method description
+Shows details for a captured payment, by ID.
 
 | Field      | Type  | Description
 |------------|-------|----------
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | captureId  | String| Required: The ID of the captured payment for which to show details.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"captureId": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="refundCapture"/>
 ## Paypal.refundCapture
-Method description
+Refunds a captured payment, by ID.
 
 | Field        | Type  | Description
 |--------------|-------|----------
@@ -526,60 +256,18 @@ Method description
 | invoiceNumber| String| Optional: The invoice number that is used to track this payment. Character length and limitations: 127 single-byte alphanumeric characters.
 | refundAdvice | String| Optional: Flag to indicate that the buyer was already given store credit for a given transaction.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"captureId": "...",
-	"amount": "...",
-	"description": "...",
-	"refundSource": "...",
-	"reason": "...",
-	"invoiceNumber": "...",
-	"refundAdvice": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="getOrder"/>
 ## Paypal.getOrder
-Method description
+Shows details for an order, by ID.
 
 | Field      | Type  | Description
 |------------|-------|----------
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | orderId    | String| Required: The ID of the order for which to show details.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"orderId": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="authorizeOrder"/>
 ## Paypal.authorizeOrder
-Method description
+Authorizes an order, by ID.
 
 | Field      | Type  | Description
 |------------|-------|----------
@@ -587,28 +275,9 @@ Method description
 | orderId    | String| Required: The ID of the order for which to show details.
 | amount     | JSON  | Required: Amount being collected.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"orderId": "...",
-	"amount": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="captureOrder"/>
 ## Paypal.captureOrder
-Method description
+Captures a payment on an order. 
 
 | Field         | Type  | Description
 |---------------|-------|----------
@@ -619,58 +288,18 @@ Method description
 | invoiceNumber | String| Optional: The invoice number to track this payment.
 | transactionFee| JSON  | Optional: The transaction fee for this payment.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"orderId": "...",
-	"amount": "...",
-	"isFinalCapture": "...",
-	"invoiceNumber": "...",
-	"transactionFee": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="voidOrder"/>
 ## Paypal.voidOrder
-Method description
+Voids an order, by ID.
 
 | Field      | Type  | Description
 |------------|-------|----------
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | orderId    | String| Required: The ID of the order to void.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"orderId": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="createPlan"/>
 ## Paypal.createPlan
-Method description
+You can create an empty billing plan and add a trial period and/or regular billing. Alternatively, you can create a fully loaded plan that includes both a trial period and regular billing.
 
 | Field              | Type  | Description
 |--------------------|-------|----------
@@ -681,31 +310,9 @@ Method description
 | paymentDefinitions | JSON  | Required: Resource that represents payment definition scheduling information.
 | merchantPreferences| JSON  | Optional: Resource that represents the merchant preferences for a plan, such as max failed attempts, set up fee, and so on.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"name": "...",
-	"description": "...",
-	"type": "...",
-	"paymentDefinitions": "...",
-	"merchantPreferences": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="updatePlan"/>
 ## Paypal.updatePlan
-Method description
+You can update the information for an existing billing plan. The state of a plan must be active before a billing agreement is created.
 
 | Field      | Type  | Description
 |------------|-------|----------
@@ -713,55 +320,18 @@ Method description
 | planId     | String| Required: The ID of the billing plan to update.
 | items      | JSON  | Optional: A JSON patch object used for applying partial updates to resources.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"planId": "...",
-	"items": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="getPlan"/>
 ## Paypal.getPlan
-Method description
+Use this call to get details about a specific billing plan.
 
 | Field      | Type  | Description
 |------------|-------|----------
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | planId     | String| Required: The ID of the billing plan to update.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"planId": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="getPlanList"/>
 ## Paypal.getPlanList
-Method description
+Use this call to get a list of all billing plans based on their current state and optional query string parameters.
 
 | Field        | Type  | Description
 |--------------|-------|----------
@@ -771,30 +341,9 @@ Method description
 | pageSize     | String| Optional: The maximum number of results to return at one time. A valid value is a non-negative, non-zero integer. Default is 10.
 | totalRequired| String| Optional: The total number of items and pages to return in the response.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"page": "...",
-	"status": "...",
-	"pageSize": "...",
-	"totalRequired": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="createAgreement"/>
 ## Paypal.createAgreement
-Method description
+Creates a billing agreement for the buyer.
 
 | Field                      | Type  | Description
 |----------------------------|-------|----------
@@ -809,62 +358,18 @@ Method description
 | overrideChargeModels       | JSON  | Optional: A resource representing an override_charge_model to be used during creation of the agreement.
 | overrideMerchantPreferences| JSON  | Optional: Resource representing merchant preferences like max failed attempts,set up fee and others for a plan.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"name": "...",
-	"description": "...",
-	"startDate": "...",
-	"payer": "...",
-	"plan": "...",
-	"agreementDetails": "...",
-	"shippingAddress": "...",
-	"overrideChargeModels": "...",
-	"overrideMerchantPreferences": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="executeAgreement"/>
 ## Paypal.executeAgreement
-Method description
+Executes an agreement after the buyer approves it.
 
 | Field       | Type  | Description
 |-------------|-------|----------
 | accessToken | String| Required: accessToken obtained with clientId and secret.
 | paymentToken| String| Required: Identifier of the agreement resource to execute.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"paymentToken": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="updateAgreement"/>
 ## Paypal.updateAgreement
-Method description
+Updates an agreement, by ID.
 
 | Field      | Type  | Description
 |------------|-------|----------
@@ -872,55 +377,18 @@ Method description
 | agreementId| String| Required: Identifier of the agreement resource to update.
 | items      | JSON  | Required: A JSON patch object used for applying partial updates to resources.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"agreementId": "...",
-	"items": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="getAgreement"/>
 ## Paypal.getAgreement
-Method description
+Shows details for an agreement, by ID.
 
 | Field      | Type  | Description
 |------------|-------|----------
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | agreementId| String| Required: Identifier of the agreement resource to retrieve.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"agreementId": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="suspendAgreement"/>
 ## Paypal.suspendAgreement
-Method description
+Suspends an agreement, by ID.
 
 | Field      | Type  | Description
 |------------|-------|----------
@@ -929,29 +397,9 @@ Method description
 | note       | String| Required: Reason for changing the state of the agreement. Maximum length: 128.
 | amount     | JSON  | Optional: Base object for all financial value related fields (balance, payment due, etc.)
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"agreementId": "...",
-	"note": "...",
-	"amount": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="reactivateAgreement"/>
 ## Paypal.reactivateAgreement
-Method description
+Reactivates an agreement, by ID.
 
 | Field      | Type  | Description
 |------------|-------|----------
@@ -960,29 +408,9 @@ Method description
 | note       | String| Required: Reason for changing the state of the agreement. Maximum length: 128.
 | amount     | JSON  | Optional: Base object for all financial value related fields (balance, payment due, etc.)
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"agreementId": "...",
-	"note": "...",
-	"amount": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="cancelAgreement"/>
 ## Paypal.cancelAgreement
-Method description
+Cancels an agreement, by ID.
 
 | Field      | Type  | Description
 |------------|-------|----------
@@ -991,29 +419,9 @@ Method description
 | note       | String| Required: Reason for changing the state of the agreement. Maximum length: 128.
 | amount     | JSON  | Optional: Base object for all financial value related fields (balance, payment due, etc.)
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"agreementId": "...",
-	"note": "...",
-	"amount": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="getTransactionsForBillingAgreement"/>
 ## Paypal.getTransactionsForBillingAgreement
-Method description
+Lists transactions for a billing agreement.
 
 | Field      | Type  | Description
 |------------|-------|----------
@@ -1022,29 +430,9 @@ Method description
 | startDate  | String| Required: The start date of the range of transactions to list.
 | endDate    | String| Required: The end date of the range of transactions to list.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"agreementId": "...",
-	"startDate": "...",
-	"endDate": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="setAgreementBalance"/>
 ## Paypal.setAgreementBalance
-Method description
+Sets the outstanding amount of an agreement, by ID.
 
 | Field      | Type  | Description
 |------------|-------|----------
@@ -1053,29 +441,9 @@ Method description
 | currency   | String| Required: 3 letter currency code as defined by ISO 4217.
 | value      | String| Required: amount up to N digit after the decimals separator as defined in ISO 4217 for the appropriate currency code
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"agreementId": "...",
-	"currency": "...",
-	"value": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="billAgreementBalance"/>
 ## Paypal.billAgreementBalance
-Method description
+Bills the outstanding amount of an agreement, by ID.
 
 | Field      | Type  | Description
 |------------|-------|----------
@@ -1084,29 +452,9 @@ Method description
 | note       | String| Required: Reason for changing the state of the agreement. Maximum length: 128.
 | amount     | JSON  | Required: Base object for all financial value related fields (balance, payment due, etc.)
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"agreementId": "...",
-	"note": "...",
-	"amount": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="createPayout"/>
 ## Paypal.createPayout
-Method description
+You can make payouts to one or more PayPal accounts.
 
 | Field            | Type  | Description
 |------------------|-------|----------
@@ -1115,29 +463,9 @@ Method description
 | items            | JSON  | Required: A sender-created definition of a payout to a single recipient. Maximum length: 5000.
 | syncMode         | JSON  | Optional: Set to true to return an immediate and synchronous response. Default is false, which returns an asynchronous response in the background.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"senderBatchHeader": "...",
-	"items": "...",
-	"syncMode": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="getPayout"/>
 ## Paypal.getPayout
-Method description
+Periodically shows the latest status of a batch payout along with the transaction status and other data for individual items.
 
 | Field        | Type  | Description
 |--------------|-------|----------
@@ -1145,82 +473,27 @@ Method description
 | payoutBatchId| String| Required: The ID of the batch payout for which to show status.
 | fields       | String| Optional: Shows details for only specified fields.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"payoutBatchId": "...",
-	"fields": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="getPayoutItem"/>
 ## Paypal.getPayoutItem
-Method description
+Shows the details for a payout item. Use this call to review the current status of a previously unclaimed, or pending, payout item.
 
 | Field       | Type  | Description
 |-------------|-------|----------
 | accessToken | String| Required: accessToken obtained with clientId and secret.
 | payoutItemId| String| Required: The ID of the payout item for which to show details.
-
-#### Request example
-```json
-{	"accessToken": "...",
-	"payoutItemId": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
 
 <a name="cancelPayoutItem"/>
 ## Paypal.cancelPayoutItem
-Method description
+Cancels an unclaimed transaction. If no one claims the unclaimed item within 30 days, the funds are automatically returned to the sender. Use this call to cancel the unclaimed item before the automatic 30-day refund.
 
 | Field       | Type  | Description
 |-------------|-------|----------
 | accessToken | String| Required: accessToken obtained with clientId and secret.
 | payoutItemId| String| Required: The ID of the payout item for which to show details.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"payoutItemId": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="createCreditCard"/>
 ## Paypal.createCreditCard
-Method description
+Stores credit card details with PayPal.
 
 | Field             | Type  | Description
 |-------------------|-------|----------
@@ -1238,92 +511,27 @@ Method description
 | payerId           | JSON  | Optional:  unique ID that you can assign and track when you store a credit card or use a stored credit card.
 | externalCardId    | JSON  | Optional:  Externally provided ID of the card for which to list credit card resources.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"number": "...",
-	"type": "...",
-	"expireMonth": "...",
-	"expireYear": "...",
-	"cvv2": "...",
-	"firstName": "...",
-	"lastName": "...",
-	"billingAddress": "...",
-	"externalCustomerId": "...",
-	"merchantId": "...",
-	"payerId": "...",
-	"externalCardId": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="deleteCreditCard"/>
 ## Paypal.deleteCreditCard
-Method description
+Deletes details of a stored credit card. Include the credit card ID in the request URI.
 
 | Field       | Type  | Description
 |-------------|-------|----------
 | accessToken | String| Required: accessToken obtained with clientId and secret.
 | creditCardId| String| Required: The ID of the credit card resource for which to show data.
-
-#### Request example
-```json
-{	"accessToken": "...",
-	"creditCardId": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
 
 <a name="getCreditCard"/>
 ## Paypal.getCreditCard
-Method description
+Shows details for a stored credit card.
 
 | Field       | Type  | Description
 |-------------|-------|----------
 | accessToken | String| Required: accessToken obtained with clientId and secret.
 | creditCardId| String| Required: The ID of the credit card resource for which to show data.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"creditCardId": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="getCreditCardList"/>
 ## Paypal.getCreditCardList
-Method description
+Lists stored credit cards.
 
 | Field             | Type  | Description
 |-------------------|-------|----------
@@ -1339,36 +547,9 @@ Method description
 | externalCustomerId| String| Optional: Externally provided customer identifier to filter the search results in list operations.
 | totalRequired     | String| Optional: Indicates whether the response returns the total_items and total_pages values. Default is true. Set to false to omit these values from the response.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"pageSize": "...",
-	"page": "...",
-	"startTime": "...",
-	"endTime": "...",
-	"sortOrder": "...",
-	"sortBy": "...",
-	"merchantId": "...",
-	"externalCardId": "...",
-	"externalCustomerId": "...",
-	"totalRequired": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="updateCreditCard"/>
 ## Paypal.updateCreditCard
-Method description
+Updates a stored credit card, by ID.
 
 | Field       | Type  | Description
 |-------------|-------|----------
@@ -1376,28 +557,9 @@ Method description
 | creditCardId| String| Required: The ID of the credit card resource to update.
 | items       | JSON  | Required: A JSON patch object used for applying partial updates to resources.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"creditCardId": "...",
-	"items": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="createTokenFromAurhorizationCode"/>
 ## Paypal.createTokenFromAurhorizationCode
-Method description
+Updates a stored credit card, by ID.
 
 | Field      | Type       | Description
 |------------|------------|----------
@@ -1407,30 +569,9 @@ Method description
 | code       | String     | Required: Authorization code previously received from the authorization server.
 | redirectUri| String     | Required: AApplication return URL where the authorization code is sent.
 
-#### Request example
-```json
-{	"clientId": "...",
-	"secret": "...",
-	"grantType": "...",
-	"code": "...",
-	"redirectUri": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="createTokenFromRefreshToken"/>
 ## Paypal.createTokenFromRefreshToken
-Method description
+Create an access token from a refresh token.
 
 | Field       | Type       | Description
 |-------------|------------|----------
@@ -1440,57 +581,18 @@ Method description
 | refreshToken| String     | Required: Refresh token previously received along with the access token that is to be refreshed.
 | scope       | String     | Optional: Resource URL endpoints that the client wants the token to be scoped for. The value of the scope parameter is expressed as a list of space-delimited, case-sensitive strings.
 
-#### Request example
-```json
-{	"clientId": "...",
-	"secret": "...",
-	"grantType": "...",
-	"refreshToken": "...",
-	"scope": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="getUser"/>
 ## Paypal.getUser
-Method description
+Use this call to retrieve user profile attributes.
 
 | Field      | Type  | Description
 |------------|-------|----------
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | schema     | String| Required: the schema that is used to return as per openidconnect protocol. Possible values: openid.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"schema": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="createInvoice"/>
 ## Paypal.createInvoice
-Method description
+Creates a draft invoice.
 
 | Field                     | Type  | Description
 |---------------------------|-------|----------
@@ -1518,48 +620,9 @@ Method description
 | logoUrl                   | String| Optional: The full URL to an external logo image. Maximum length: 4000.
 | attachments               | JSON  | Optional: The array of files attached to an invoice or template.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"merchantInfo": "...",
-	"number": "...",
-	"templateId": "...",
-	"billingInfo": "...",
-	"ccInfo": "...",
-	"shippingInfo": "...",
-	"items": "...",
-	"invoiceDate": "...",
-	"paymentTerm": "...",
-	"reference": "...",
-	"discount": "...",
-	"shippingCost": "...",
-	"custom": "...",
-	"allowPartialPayment": "...",
-	"minimumAmountDue": "...",
-	"taxCalculatedAfterDiscount": "...",
-	"taxInclusive": "...",
-	"terms": "...",
-	"note": "...",
-	"merchantMemo": "...",
-	"logoUrl": "...",
-	"attachments": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="sendInvoice"/>
 ## Paypal.sendInvoice
-Method description
+Sends an invoice, by ID, to a customer.
 
 | Field         | Type  | Description
 |---------------|-------|----------
@@ -1567,28 +630,9 @@ Method description
 | invoiceId     | String| Required: The ID of the invoice to send.
 | notifyMerchant| String| Optional: Indicates whether to send the invoice update notification to the merchant. Default is true.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"invoiceId": "...",
-	"notifyMerchant": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="updateInvoice"/>
 ## Paypal.updateInvoice
-Method description
+Updates an invoice, by ID.
 
 | Field                     | Type  | Description
 |---------------------------|-------|----------
@@ -1618,77 +662,18 @@ Method description
 | logoUrl                   | String| Optional: The full URL to an external logo image. Maximum length: 4000.
 | attachments               | JSON  | Optional: The array of files attached to an invoice or template.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"invoiceId": "...",
-	"merchantInfo": "...",
-	"notifyMerchant": "...",
-	"number": "...",
-	"templateId": "...",
-	"billingInfo": "...",
-	"ccInfo": "...",
-	"shippingInfo": "...",
-	"items": "...",
-	"invoiceDate": "...",
-	"paymentTerm": "...",
-	"reference": "...",
-	"discount": "...",
-	"shippingCost": "...",
-	"custom": "...",
-	"allowPartialPayment": "...",
-	"minimumAmountDue": "...",
-	"taxCalculatedAfterDiscount": "...",
-	"taxInclusive": "...",
-	"terms": "...",
-	"note": "...",
-	"merchantMemo": "...",
-	"logoUrl": "...",
-	"attachments": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="getInvoice"/>
 ## Paypal.getInvoice
-Method description
+Shows details for an invoice, by ID.
 
 | Field      | Type  | Description
 |------------|-------|----------
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | invoiceId  | String| Required: The ID of the invoice to update.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"invoiceId": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="getInvoiceList"/>
 ## Paypal.getInvoiceList
-Method description
+Lists invoices that belong to the merchant who makes the call.
 
 | Field             | Type  | Description
 |-------------------|-------|----------
@@ -1697,54 +682,17 @@ Method description
 | pageSize          | String| Optional: The number of invoices to list beginning with the specified page. Default: 10.
 | totalCountRequired| String| Optional: Indicates whether the total count appears in the response. Default is false.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"page": "...",
-	"pageSize": "...",
-	"totalCountRequired": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="generateInvoiceNumber"/>
 ## Paypal.generateInvoiceNumber
-Method description
+Generates the next invoice number that is available to the user.
 
 | Field      | Type  | Description
 |------------|-------|----------
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 
-#### Request example
-```json
-{	"accessToken": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="searchInvoice"/>
 ## Paypal.searchInvoice
-Method description
+Lists invoices that match search criteria.
 
 | Field                | Type  | Description
 |----------------------|-------|----------
@@ -1770,46 +718,9 @@ Method description
 | totalCountRequired   | String| Optional: Indicates whether the total count appears in the response. Default is false.
 | archived             | String| Optional: Indicates whether to list merchant-archived invoices in the response. If true, response lists only merchant-archived invoices. If false, response lists only unarchived invoices. If null, response lists all invoices.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"email": "...",
-	"recipientFirstName": "...",
-	"recipientLastName": "...",
-	"recipientBusinessName": "...",
-	"number": "...",
-	"status": "...",
-	"lowerTotalAmount": "...",
-	"upperTotalAmount": "...",
-	"startInvoiceDate": "...",
-	"endInvoiceDate": "...",
-	"startDueDate": "...",
-	"endDueDate": "...",
-	"startPaymentDate": "...",
-	"endPaymentDate": "...",
-	"startCreationDate": "...",
-	"endCreationDate": "...",
-	"page": "...",
-	"pageSize": "...",
-	"totalCountRequired": "...",
-	"archived": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="sendInvoiceReminder"/>
 ## Paypal.sendInvoiceReminder
-Method description
+Sends a reminder to the payer that a payment is due for an invoice, by ID.
 
 | Field         | Type  | Description
 |---------------|-------|----------
@@ -1820,58 +731,18 @@ Method description
 | sendToMerchant| String| Required: Indicates whether to send a copy of the email to the merchant. True or false.
 | ccEmails      | JSON  | Optional: An array of one or more Cc: emails. 
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"invoiceId": "...",
-	"subject": "...",
-	"note": "...",
-	"sendToMerchant": "...",
-	"ccEmails": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="deleteInvoice"/>
 ## Paypal.deleteInvoice
-Method description
+Deletes a draft invoice, by ID. Note that this call works for invoices in the draft state only.
 
 | Field      | Type  | Description
 |------------|-------|----------
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | invoiceId  | String| Required: The ID of the invoice.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"invoiceId": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="getQRCode"/>
 ## Paypal.getQRCode
-Method description
+Generates a QR code for an invoice, by ID.
 
 | Field      | Type  | Description
 |------------|-------|----------
@@ -1881,84 +752,27 @@ Method description
 | height     | String| Optional: The height, in pixels, of the QR code image. Valid value is from 150 to 500. Default is 500.
 | action     | String| Optional: The type of URL for which to generate a QR code. Default is pay and is the only supported value.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"invoiceId": "...",
-	"width": "...",
-	"height": "...",
-	"action": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="getTemplate"/>
 ## Paypal.getTemplate
-Method description
+Shows details for a template, by ID.
 
 | Field      | Type  | Description
 |------------|-------|----------
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | templateId | String| Required: The ID of the template for which to show details.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"templateId": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="getTemplateList"/>
 ## Paypal.getTemplateList
-Method description
+Lists all merchant-created templates. The list shows the emails, addresses, and phone numbers from the merchant profile.
 
 | Field      | Type  | Description
 |------------|-------|----------
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | fields     | String| Optional: The fields to return in the response. Value is all or none. Specify none to return only the template name, ID, and default attributes. Default: all.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"fields": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="createWebProfile"/>
 ## Paypal.createWebProfile
-Method description
+Creates a web experience profile.
 
 | Field       | Type  | Description
 |-------------|-------|----------
@@ -1968,82 +782,26 @@ Method description
 | inputFields | JSON  | Optional: Parameters for input fields customization.
 | presentation| JSON  | Optional: Parameters for style and presentation.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"name": "...",
-	"flowConfig": "...",
-	"inputFields": "...",
-	"presentation": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="getWebProfile"/>
 ## Paypal.getWebProfile
-Method description
+Shows details for a web experience profile, by ID.
 
 | Field      | Type  | Description
 |------------|-------|----------
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | profileId  | String| Required: ID of the profile to retrieve.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"profileId": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="getProfileWebList"/>
 ## Paypal.getProfileWebList
-Method description
+Lists web experience profiles for a merchant.
 
 | Field      | Type  | Description
 |------------|-------|----------
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 
-#### Request example
-```json
-{	"accessToken": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="updateWebProfile"/>
 ## Paypal.updateWebProfile
-Method description
+Updates a web experience profile, by ID.
 
 | Field       | Type  | Description
 |-------------|-------|----------
@@ -2054,58 +812,18 @@ Method description
 | inputFields | JSON  | Optional: Parameters for input fields customization.
 | presentation| JSON  | Optional: Parameters for style and presentation.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"profileId": "...",
-	"name": "...",
-	"flowConfig": "...",
-	"inputFields": "...",
-	"presentation": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="deleteWebProfile"/>
 ## Paypal.deleteWebProfile
-Method description
+Deletes a web experience profile, by ID.
 
 | Field      | Type  | Description
 |------------|-------|----------
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | profileId  | String| Required: ID of the profile to update.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"profileId": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="createWebhook"/>
 ## Paypal.createWebhook
-Method description
+Subscribes your webhook listener to events.
 
 | Field      | Type  | Description
 |------------|-------|----------
@@ -2113,82 +831,27 @@ Method description
 | url        | String| Required: The URL that is configured to listen on localhost for incoming POST notification messages that contain event information.
 | eventTypes | JSON  | Required: A list of events.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"url": "...",
-	"eventTypes": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="getWebhook"/>
 ## Paypal.getWebhook
-Method description
+Shows details for a webhook, by ID.
 
 | Field      | Type  | Description
 |------------|-------|----------
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | webhookId  | String| Required: aThe ID of the webhook for which to show details.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"webhookId": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="getWebhookList"/>
 ## Paypal.getWebhookList
-Method description
+Lists all webhooks.
 
 | Field      | Type  | Description
 |------------|-------|----------
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | anchorType | String| Optional: Filters the response by an entity type, anchor_id. Value is APPLICATION or ACCOUNT. Default is APPLICATION.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"anchorType": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="updateWebhook"/>
 ## Paypal.updateWebhook
-Method description
+Updates a webhook, by ID. Supports only the replace operation.
 
 | Field      | Type  | Description
 |------------|-------|----------
@@ -2196,82 +859,27 @@ Method description
 | webhookId  | String| Required: The ID of the webhook to update.
 | items      | JSON  | Required: A JSON patch object that you can use to apply partial updates to resources.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"webhookId": "...",
-	"items": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="deleteWebhook"/>
 ## Paypal.deleteWebhook
-Method description
+Deletes a webhook, by ID.
 
 | Field      | Type  | Description
 |------------|-------|----------
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | webhookId  | String| Required: The ID of the webhook to update.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"webhookId": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="getEventNotifications"/>
 ## Paypal.getEventNotifications
-Method description
+Shows details for an event notification, by ID.
 
 | Field      | Type  | Description
 |------------|-------|----------
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | eventId    | String| Required: The ID of the webhook event notification for which to show details.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"eventId": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="getEventNotificationsList"/>
 ## Paypal.getEventNotificationsList
-Method description
+Lists webhook event notifications. You can specify one or more optional query parameters to filter the response.
 
 | Field        | Type  | Description
 |--------------|-------|----------
@@ -2282,31 +890,9 @@ Method description
 | transactionId| String| Optional: Filters the response to a single transaction, by ID.
 | eventType    | String| Optional: Filters the response to a single event.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"pageSize": "...",
-	"startTime": "...",
-	"endTime": "...",
-	"transactionId": "...",
-	"eventType": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="resendEventNotification"/>
 ## Paypal.resendEventNotification
-Method description
+Resends an event notification, by event ID.
 
 | Field      | Type  | Description
 |------------|-------|----------
@@ -2314,80 +900,26 @@ Method description
 | eventId    | String| Required: The ID of the webhook event notification to resend.
 | webhookIds | String| Required: A list of webhook account IDs.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"eventId": "...",
-	"webhookIds": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="getEventList"/>
 ## Paypal.getEventList
-Method description
+Lists events to which an app can subscribe. 
 
 | Field      | Type  | Description
 |------------|-------|----------
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 
-#### Request example
-```json
-{	"accessToken": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="getWebhookEventSubscriptionList"/>
 ## Paypal.getWebhookEventSubscriptionList
-Method description
+Lists the event subscriptions for a webhook, by ID.
 
 | Field      | Type  | Description
 |------------|-------|----------
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | webhookId  | String| Required: The ID of the webhook for which to list subscriptions.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"webhookId": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="simulateWebhookEvent"/>
 ## Paypal.simulateWebhookEvent
-Method description
+Simulates a webhook event by using a sample payload.
 
 | Field      | Type  | Description
 |------------|-------|----------
@@ -2396,29 +928,9 @@ Method description
 | webhookId  | String| Optional: The ID of the webhook. If omitted, the URL is required.
 | url        | String| Optional: The URL for the webhook endpoint. If omitted, the webhook ID is required.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"eventType": "...",
-	"webhookId": "...",
-	"url": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="cancelSentInvoice"/>
 ## Paypal.cancelSentInvoice
-Method description
+Cancels a sent invoice, by ID, and, optionally, sends a notification about the cancellation to the payer, merchant, and Cc: emails.
 
 | Field         | Type  | Description
 |---------------|-------|----------
@@ -2430,32 +942,9 @@ Method description
 | sendToPayer   | String| Optional: Indicates whether to send the notification to the payer.
 | ccEmails      | String| Optional: An array of one or more Cc: emails. If you omit this parameter from the JSON request body, a notification is sent to all Cc: email addresses that are part of the invoice. Otherwise, specify this parameter to limit the email addresses to which a notification is sent.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"invoiceId": "...",
-	"subject": "...",
-	"note": "...",
-	"sendToMerchant": "...",
-	"sendToPayer": "...",
-	"ccEmails": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="markInvoiceAsPaid"/>
 ## Paypal.markInvoiceAsPaid
-Method description
+Marks an invoice, by ID, as paid.
 
 | Field      | Type  | Description
 |------------|-------|----------
@@ -2466,31 +955,9 @@ Method description
 | note       | String| Optional: A note associated with the payment.
 | amount     | JSON  | Optional: Base object for all financial value related fields (balance, payment due, etc.)
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"invoiceId": "...",
-	"method": "...",
-	"date": "...",
-	"note": "...",
-	"amount": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="markInvoiceAsRefunded"/>
 ## Paypal.markInvoiceAsRefunded
-Method description
+Marks an invoice, by ID, as refunded.
 
 | Field      | Type  | Description
 |------------|-------|----------
@@ -2500,30 +967,9 @@ Method description
 | note       | String| Optional: A note associated with the payment.
 | amount     | JSON  | Optional: Base object for all financial value related fields (balance, payment due, etc.)
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"invoiceId": "...",
-	"date": "...",
-	"note": "...",
-	"amount": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="deleteExternalPayment"/>
 ## Paypal.deleteExternalPayment
-Method description
+Deletes an external payment transaction, by ID, from an invoice, by ID.
 
 | Field        | Type  | Description
 |--------------|-------|----------
@@ -2531,28 +977,9 @@ Method description
 | invoiceId    | String| Required: The ID of the invoice from which to delete a payment transaction.
 | transactionId| String| Required: The ID of the payment transaction to delete.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"invoiceId": "...",
-	"transactionId": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="deleteExternalRefund"/>
 ## Paypal.deleteExternalRefund
-Method description
+Deletes an external refund transaction, by ID, from an invoice, by ID.
 
 | Field        | Type  | Description
 |--------------|-------|----------
@@ -2560,28 +987,9 @@ Method description
 | invoiceId    | String| Required: The ID of the invoice from which to delete the refund transaction.
 | transactionId| String| Required: The ID of the refund transaction to delete.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"invoiceId": "...",
-	"transactionId": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="createTemplate"/>
 ## Paypal.createTemplate
-Method description
+Creates an invoice template. When you create an invoice from a template, the invoice is populated with the predefined data that the source template contains.
 
 | Field        | Type  | Description
 |--------------|-------|----------
@@ -2592,58 +1000,18 @@ Method description
 | settings     | JSON  | Required: Template settings.
 | unitOfMeasure| JSON  | Required: The unit of measure for the template. Value is quantity, hours, or amount.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"name": "...",
-	"default": "...",
-	"templateData": "...",
-	"settings": "...",
-	"unitOfMeasure": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="deleteTemplate"/>
 ## Paypal.deleteTemplate
-Method description
+Deletes a template, by ID.
 
 | Field      | Type  | Description
 |------------|-------|----------
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | templateId | String| Required: The ID of the template to delete.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"templateId": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="verifyWebhookSignature"/>
 ## Paypal.verifyWebhookSignature
-Method description
+Verifies a webhook signature.
 
 | Field           | Type  | Description
 |-----------------|-------|----------
@@ -2656,33 +1024,9 @@ Method description
 | webhookId       | String| Required: The ID of the webhook as configured in your Developer Portal account.
 | webhookEvent    | String| Required: A webhook event notification.
 
-#### Request example
-```json
-{	"accessToken": "...",
-	"authAlgo": "...",
-	"certUrl": "...",
-	"transmissionId": "...",
-	"transmissionSig": "...",
-	"transmissionTime": "...",
-	"webhookId": "...",
-	"webhookEvent": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
-
 <a name="updateTemplate"/>
 ## Paypal.updateTemplate
-Method description
+Updates a template, by ID. In the JSON request body, pass a complete template object. The update method does not support partial updates.
 
 | Field        | Type  | Description
 |--------------|-------|----------
@@ -2693,27 +1037,4 @@ Method description
 | templateData | JSON  | Required: Detailed template information.
 | settings     | JSON  | Required: Template settings.
 | unitOfMeasure| JSON  | Required: The unit of measure for the template. Value is quantity, hours, or amount.
-
-#### Request example
-```json
-{	"accessToken": "...",
-	"templateId": "...",
-	"name": "...",
-	"default": "...",
-	"templateData": "...",
-	"settings": "...",
-	"unitOfMeasure": "..."
-}
-```
-#### Response example
-```json
-{
-	"callback":"success",
-	"contextWrites":{
-		"#":{
-			"to":"..."
-		}
-	}
-}
-```
 
