@@ -36,7 +36,7 @@ $app->post('/api/PayPal/reauthorizePayment', function ($request, $response, $arg
     $body['amount'] = $post_data['args']['amount'];
     
     
-    if($post_data['args']['sandbox'] == 1) {
+    if(isset($post_data['args']['sandbox']) && $post_data['args']['sandbox'] == 1) {
         $query_str = 'https://api.sandbox.paypal.com/v1/payments/authorization/'.$post_data['args']['authorizationId'].'/reauthorize';
     } else {
         $query_str = 'https://api.paypal.com/v1/payments/authorization/'.$post_data['args']['authorizationId'].'/reauthorize';
