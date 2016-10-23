@@ -25,7 +25,7 @@ $app->post('/api/PayPal/getPlanList', function ($request, $response, $args) {
     $headers['Authorization'] = "Bearer " . $post_data['args']['accessToken'];
     $headers['Content-Type'] = 'application/json'; 
     
-    if($post_data['args']['sandbox'] == 1) {
+    if(isset($post_data['args']['sandbox']) && $post_data['args']['sandbox'] == 1) {
         $query_str = 'https://api.sandbox.paypal.com/v1/payments/billing-plans';
     } else {
         $query_str = 'https://api.paypal.com/v1/payments/billing-plans';
