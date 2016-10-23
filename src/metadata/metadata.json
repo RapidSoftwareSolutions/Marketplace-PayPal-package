@@ -3,7 +3,7 @@
     "tagline": "Paypal API",
     "description": "PayPal offers online payment solutions.",
     "image": "https://www.paypalobjects.com/webstatic/mktg/logo-center/PP_Acceptance_Marks_for_LogoCenter_266x142.png",
-    "repo": "https://github.com/RapidSoftwareSolutions/MArketplace-PayPal-package",
+    "repo": "https://github.com/RapidSoftwareSolutions/Marketplace-PayPal-package",
     "accounts": {
         "domain": "paypal.com",
         "credentials": ["clientId", "secret"]
