@@ -30,7 +30,7 @@ $app->post('/api/PayPal/getSale', function ($request, $response, $args) {
     $headers['Content-Type'] = 'application/json'; 
     
     
-    if($post_data['args']['sandbox'] == 1) {
+    if(isset($post_data['args']['sandbox']) && $post_data['args']['sandbox'] == 1) {
         $query_str = 'https://api.sandbox.paypal.com/v1/payments/sale/'.$post_data['args']['saleId'];
     } else {
         $query_str = 'https://api.paypal.com/v1/payments/sale/'.$post_data['args']['saleId'];
