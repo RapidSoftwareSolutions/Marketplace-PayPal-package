@@ -33,7 +33,7 @@ $app->post('/api/PayPal/getAccessToken', function ($request, $response, $args) {
     $headers['Content-Type'] = 'application/x-www-form-urlencoded'; 
     $auth = [$post_data['args']['clientId'], $post_data['args']['secret']];
 
-    if($post_data['args']['sandbox'] == 1) {
+    if(isset($post_data['args']['sandbox']) && $post_data['args']['sandbox'] == 1) {
         $query_str = 'https://api.sandbox.paypal.com/v1/oauth2/token';
     } else {
         $query_str = 'https://api.paypal.com/v1/oauth2/token';
