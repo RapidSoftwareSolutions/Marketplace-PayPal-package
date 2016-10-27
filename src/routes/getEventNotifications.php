@@ -4,10 +4,14 @@ $app->post('/api/PayPal/getEventNotifications', function ($request, $response, $
     $settings =  $this->settings;
     
     $data = $request->getBody();
-    $post_data = json_decode($data, true);
-    if(!isset($post_data['args'])) {
-        $data = $request->getParsedBody();
-        $post_data = $data;
+
+    if($data=='') {
+        $post_data = $request->getParsedBody();
+    } else {
+        $toJson = $this->toJson;
+        $data = $toJson->normalizeJson($data); 
+        $data = str_replace('\"', '"', $data);
+        $post_data = json_decode($data, true);
     }
         
     $error = [];
@@ -44,31 +48,32 @@ $app->post('/api/PayPal/getEventNotifications', function ($request, $response, $
             ]);
         $responseBody = $resp->getBody()->getContents();
         $code = $resp->getStatusCode();
-        $res = json_decode($responseBody);
         
         if(in_array($code, ['200','201','202','203','204'])) { 
             $result['callback'] = 'success';
-            $result['contextWrites']['to'] = json_encode($res);   
+            $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
         } else {
             $result['callback'] = 'error';
-            $result['contextWrites']['to'] = json_encode($res);
+            $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
         }
 
     } catch (\GuzzleHttp\Exception\ClientException $exception) {
 
         $responseBody = $exception->getResponse()->getBody();
-        $code = $exception->getCode();
         $result['callback'] = 'error';
-        $result['contextWrites']['code'] = $code;
-        $result['contextWrites']['to'] = json_encode(json_decode($responseBody));
+        $result['contextWrites']['to'] = json_decode($responseBody);
 
-    } catch (\GuzzleHttp\Exception\RequestException $exception) {
+    } catch (GuzzleHttp\Exception\ServerException $exception) {
 
-        $responseBody = $exception->getResponse()->getBody();
-        $code = $exception->getCode();
+        $responseBody = $exception->getResponse()->getBody(true);
         $result['callback'] = 'error';
-        $result['contextWrites']['code'] = $code;
-        $result['contextWrites']['to'] = json_encode(json_decode($responseBody));
+        $result['contextWrites']['to'] = json_decode($responseBody);
+
+    } catch (GuzzleHttp\Exception\BadResponseException $exception) {
+
+        $responseBody = $exception->getResponse()->getBody(true);
+        $result['callback'] = 'error';
+        $result['contextWrites']['to'] = json_decode($responseBody);
 
     }  
 
