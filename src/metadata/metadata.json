@@ -2,7 +2,7 @@
     "package": "Paypal",
     "tagline": "Paypal API",
     "description": "PayPal offers online payment solutions.",
-    "image": "https://www.paypalobjects.com/webstatic/mktg/logo-center/PP_Acceptance_Marks_for_LogoCenter_266x142.png",
+    "image": "http://logo.clearbit.com/paypal.com",
     "repo": "https://github.com/RapidSoftwareSolutions/Marketplace-PayPal-package",
     "accounts": {
         "domain": "paypal.com",
@@ -23,6 +23,10 @@
                     "name": "grantType",
                     "type": "String",
                     "info": "Required: Token grant type. Must be set to client_credentials."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -62,6 +66,10 @@
                     "name": "redirectUrls",
                     "type": "JSON",
                     "info": "Optional: Set of redirect URLs you provide only for PayPal-based payments."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -89,6 +97,10 @@
                     "name": "transactions",
                     "type": "String",
                     "info": "Optional: Transactional details if updating a payment. Note that this instance of the transactions object accepts only the amount object."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -108,6 +120,10 @@
                     "name": "paymentId",
                     "type": "String",
                     "info": "Required: The ID of the payment to execute."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -131,6 +147,10 @@
                     "name": "items",
                     "type": "JSON",
                     "info": "Required: A JSON patch object that you can use to apply partial updates to resources."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -166,6 +186,10 @@
                     "name": "endTime",
                     "type": "String",
                     "info": "Optional: The date and time when the resource was created. Indicates the end of a range of results. Format: date-time."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -185,6 +209,10 @@
                     "name": "saleId",
                     "type": "String",
                     "info": "Required: The ID of the sale for which to show details."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -218,8 +246,12 @@
                     "info": "Optional: The invoice number that is used to track this payment. Character length and limitations: 127 single-byte alphanumeric characters. Maximum length: 127."
                 }, {
                     "name": "refundAdvice",
-                    "type": "Bool",
+                    "type": "String",
                     "info": "Optional: Flag to indicate that the buyer was already given store credit for a given transaction."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -239,6 +271,10 @@
                     "name": "refundId",
                     "type": "String",
                     "info": "Required: The ID of the refund for which to show details."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -258,6 +294,10 @@
                     "name": "authorizationId",
                     "type": "String",
                     "info": "Required: The ID of the authorization for which to show details."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -283,12 +323,16 @@
                     "info": "Optional: The amount to capture. If the amount matches the orginally authorized amount, the state of the authorization changes to captured. If not, the state of the authorization changes to partially_captured."
                 }, {
                     "name": "isFinalCapture",
-                    "type": "Bool",
+                    "type": "String",
                     "info": "Optional: Indicates whether to release all remaining funds that the authorization holds in the funding instrument. Default is false. Default: false."
                 }, {
                     "name": "invoiceNumber",
                     "type": "String",
                     "info": "Optional: The invoice number to track this payment. Maximum length: 127."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -308,6 +352,10 @@
                     "name": "authorizationId",
                     "type": "String",
                     "info": "Required: The ID of the authorization for which to show details."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -331,6 +379,10 @@
                     "name": "amount",
                     "type": "JSON",
                     "info": "Required: Amount being reauthorized."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -350,6 +402,10 @@
                     "name": "captureId",
                     "type": "String",
                     "info": "Required: The ID of the captured payment for which to show details."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -393,6 +449,10 @@
                     "name": "refundAdvice",
                     "type": "String",
                     "info": "Optional: Flag to indicate that the buyer was already given store credit for a given transaction."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -412,6 +472,10 @@
                     "name": "orderId",
                     "type": "String",
                     "info": "Required: The ID of the order for which to show details."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -435,6 +499,10 @@
                     "name": "amount",
                     "type": "JSON",
                     "info": "Required: Amount being collected."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -460,7 +528,7 @@
                     "info": "Optional: The amount to capture. If the amount matches the orginally authorized amount, the state of the authorization changes to captured. If not, the state of the authorization changes to partially_captured."
                 }, {
                     "name": "isFinalCapture",
-                    "type": "Bool",
+                    "type": "String",
                     "info": "Optional: Indicates whether to release all remaining funds that the authorization holds in the funding instrument. Default is false. Default: false."
                 }, {
                     "name": "invoiceNumber",
@@ -470,6 +538,10 @@
                     "name": "transactionFee",
                     "type": "JSON",
                     "info": "Optional: The transaction fee for this payment."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -489,6 +561,10 @@
                     "name": "orderId",
                     "type": "String",
                     "info": "Required: The ID of the order to void."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -524,6 +600,10 @@
                     "name": "merchantPreferences",
                     "type": "JSON",
                     "info": "Optional: Resource that represents the merchant preferences for a plan, such as max failed attempts, set up fee, and so on."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -547,6 +627,10 @@
                     "name": "items",
                     "type": "JSON",
                     "info": "Optional: A JSON patch object used for applying partial updates to resources."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -566,6 +650,10 @@
                     "name": "planId",
                     "type": "String",
                     "info": "Required: The ID of the billing plan to update."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -597,6 +685,10 @@
                     "name": "totalRequired",
                     "type": "String",
                     "info": "Optional: The total number of items and pages to return in the response."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -648,6 +740,10 @@
                     "name": "overrideMerchantPreferences",
                     "type": "JSON",
                     "info": "Optional: Resource representing merchant preferences like max failed attempts,set up fee and others for a plan."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -667,6 +763,10 @@
                     "name": "paymentToken",
                     "type": "String",
                     "info": "Required: Identifier of the agreement resource to execute."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -690,6 +790,10 @@
                     "name": "items",
                     "type": "JSON",
                     "info": "Required: A JSON patch object used for applying partial updates to resources."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -709,6 +813,10 @@
                     "name": "agreementId",
                     "type": "String",
                     "info": "Required: Identifier of the agreement resource to retrieve."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -736,6 +844,10 @@
                     "name": "amount",
                     "type": "JSON",
                     "info": "Optional: Base object for all financial value related fields (balance, payment due, etc.)"
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -763,6 +875,10 @@
                     "name": "amount",
                     "type": "JSON",
                     "info": "Optional: Base object for all financial value related fields (balance, payment due, etc.)"
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -790,6 +906,10 @@
                     "name": "amount",
                     "type": "JSON",
                     "info": "Optional: Base object for all financial value related fields (balance, payment due, etc.)"
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -817,6 +937,10 @@
                     "name": "endDate",
                     "type": "String",
                     "info": "Required: The end date of the range of transactions to list."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -844,6 +968,10 @@
                     "name": "value",
                     "type": "String",
                     "info": "Required: amount up to N digit after the decimals separator as defined in ISO 4217 for the appropriate currency code"
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -871,6 +999,10 @@
                     "name": "amount",
                     "type": "JSON",
                     "info": "Required: Base object for all financial value related fields (balance, payment due, etc.)"
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -898,6 +1030,10 @@
                     "name": "syncMode",
                     "type": "JSON",
                     "info": "Optional: Set to true to return an immediate and synchronous response. Default is false, which returns an asynchronous response in the background."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -921,6 +1057,10 @@
                     "name": "fields",
                     "type": "String",
                     "info": "Optional: Shows details for only specified fields."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -940,6 +1080,10 @@
                     "name": "payoutItemId",
                     "type": "String",
                     "info": "Required: The ID of the payout item for which to show details."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -959,6 +1103,10 @@
                     "name": "payoutItemId",
                     "type": "String",
                     "info": "Required: The ID of the payout item for which to show details."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1022,6 +1170,10 @@
                     "name": "externalCardId",
                     "type": "JSON",
                     "info": "Optional:  Externally provided ID of the card for which to list credit card resources."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1041,6 +1193,10 @@
                     "name": "creditCardId",
                     "type": "String",
                     "info": "Required: The ID of the credit card resource for which to show data."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1060,6 +1216,10 @@
                     "name": "creditCardId",
                     "type": "String",
                     "info": "Required: The ID of the credit card resource for which to show data."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1115,6 +1275,10 @@
                     "name": "totalRequired",
                     "type": "String",
                     "info": "Optional: Indicates whether the response returns the total_items and total_pages values. Default is true. Set to false to omit these values from the response."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1138,6 +1302,10 @@
                     "name": "items",
                     "type": "JSON",
                     "info": "Required: A JSON patch object used for applying partial updates to resources."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1169,6 +1337,10 @@
                     "name": "redirectUri",
                     "type": "String",
                     "info": "Required: AApplication return URL where the authorization code is sent."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1200,6 +1372,10 @@
                     "name": "scope",
                     "type": "String",
                     "info": "Optional: Resource URL endpoints that the client wants the token to be scoped for. The value of the scope parameter is expressed as a list of space-delimited, case-sensitive strings."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1219,6 +1395,10 @@
                     "name": "schema",
                     "type": "String",
                     "info": "Required: the schema that is used to return as per openidconnect protocol. Possible values: openid."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1322,6 +1502,10 @@
                     "name": "attachments",
                     "type": "JSON",
                     "info": "Optional: The array of files attached to an invoice or template."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1345,6 +1529,10 @@
                     "name": "notifyMerchant",
                     "type": "String",
                     "info": "Optional: Indicates whether to send the invoice update notification to the merchant. Default is true."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1456,6 +1644,10 @@
                     "name": "attachments",
                     "type": "JSON",
                     "info": "Optional: The array of files attached to an invoice or template."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1475,6 +1667,10 @@
                     "name": "invoiceId",
                     "type": "String",
                     "info": "Required: The ID of the invoice to update."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1502,6 +1698,10 @@
                     "name": "totalCountRequired",
                     "type": "String",
                     "info": "Optional: Indicates whether the total count appears in the response. Default is false."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1517,6 +1717,10 @@
                     "name": "accessToken",
                     "type": "String",
                     "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1612,6 +1816,10 @@
                     "name": "archived",
                     "type": "String",
                     "info": "Optional: Indicates whether to list merchant-archived invoices in the response. If true, response lists only merchant-archived invoices. If false, response lists only unarchived invoices. If null, response lists all invoices."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1647,6 +1855,10 @@
                     "name": "ccEmails",
                     "type": "JSON",
                     "info": "Optional: An array of one or more Cc: emails. "
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1666,6 +1878,10 @@
                     "name": "invoiceId",
                     "type": "String",
                     "info": "Required: The ID of the invoice."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1697,6 +1913,10 @@
                     "name": "action",
                     "type": "String",
                     "info": "Optional: The type of URL for which to generate a QR code. Default is pay and is the only supported value."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1716,6 +1936,10 @@
                     "name": "templateId",
                     "type": "String",
                     "info": "Required: The ID of the template for which to show details."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1735,6 +1959,10 @@
                     "name": "fields",
                     "type": "String",
                     "info": "Optional: The fields to return in the response. Value is all or none. Specify none to return only the template name, ID, and default attributes. Default: all."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1766,6 +1994,10 @@
                     "name": "presentation",
                     "type": "JSON",
                     "info": "Optional: Parameters for style and presentation."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1785,6 +2017,10 @@
                     "name": "profileId",
                     "type": "String",
                     "info": "Required: ID of the profile to retrieve."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1800,6 +2036,10 @@
                     "name": "accessToken",
                     "type": "String",
                     "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1835,6 +2075,10 @@
                     "name": "presentation",
                     "type": "JSON",
                     "info": "Optional: Parameters for style and presentation."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1854,6 +2098,10 @@
                     "name": "profileId",
                     "type": "String",
                     "info": "Required: ID of the profile to update."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1877,6 +2125,10 @@
                     "name": "eventTypes",
                     "type": "JSON",
                     "info": "Required: A list of events."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1896,6 +2148,10 @@
                     "name": "webhookId",
                     "type": "String",
                     "info": "Required: aThe ID of the webhook for which to show details."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1915,6 +2171,10 @@
                     "name": "anchorType",
                     "type": "String",
                     "info": "Optional: Filters the response by an entity type, anchor_id. Value is APPLICATION or ACCOUNT. Default is APPLICATION."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1938,6 +2198,10 @@
                     "name": "items",
                     "type": "JSON",
                     "info": "Required: A JSON patch object that you can use to apply partial updates to resources."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1957,6 +2221,10 @@
                     "name": "webhookId",
                     "type": "String",
                     "info": "Required: The ID of the webhook to update."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1976,6 +2244,10 @@
                     "name": "eventId",
                     "type": "String",
                     "info": "Required: The ID of the webhook event notification for which to show details."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2011,6 +2283,10 @@
                     "name": "eventType",
                     "type": "String",
                     "info": "Optional: Filters the response to a single event."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2034,6 +2310,10 @@
                     "name": "webhookIds",
                     "type": "String",
                     "info": "Required: A list of webhook account IDs."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2049,6 +2329,10 @@
                     "name": "accessToken",
                     "type": "String",
                     "info": "Required: accessToken obtained with clientId and secret."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2068,6 +2352,10 @@
                     "name": "webhookId",
                     "type": "String",
                     "info": "Required: The ID of the webhook for which to list subscriptions."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2095,6 +2383,10 @@
                     "name": "url",
                     "type": "String",
                     "info": "Optional: The URL for the webhook endpoint. If omitted, the webhook ID is required."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2134,6 +2426,10 @@
                     "name": "ccEmails",
                     "type": "String",
                     "info": "Optional: An array of one or more Cc: emails. If you omit this parameter from the JSON request body, a notification is sent to all Cc: email addresses that are part of the invoice. Otherwise, specify this parameter to limit the email addresses to which a notification is sent."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2169,6 +2465,10 @@
                     "name": "amount",
                     "type": "JSON",
                     "info": "Optional: Base object for all financial value related fields (balance, payment due, etc.)"
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2200,6 +2500,10 @@
                     "name": "amount",
                     "type": "JSON",
                     "info": "Optional: Base object for all financial value related fields (balance, payment due, etc.)"
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2223,6 +2527,10 @@
                     "name": "transactionId",
                     "type": "String",
                     "info": "Required: The ID of the payment transaction to delete."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2246,6 +2554,10 @@
                     "name": "transactionId",
                     "type": "String",
                     "info": "Required: The ID of the refund transaction to delete."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2281,6 +2593,10 @@
                     "name": "unitOfMeasure",
                     "type": "JSON",
                     "info": "Required: The unit of measure for the template. Value is quantity, hours, or amount."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2300,6 +2616,10 @@
                     "name": "templateId",
                     "type": "String",
                     "info": "Required: The ID of the template to delete."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2343,6 +2663,10 @@
                     "name": "webhookEvent",
                     "type": "String",
                     "info": "Required: A webhook event notification."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2382,6 +2706,10 @@
                     "name": "unitOfMeasure",
                     "type": "JSON",
                     "info": "Required: The unit of measure for the template. Value is quantity, hours, or amount."
+                }, {
+                    "name": "sandbox",
+                    "type": "String",
+                    "info": "Optional: Use sandbox to tests. True || False"
                 }],
             "callbacks": [{
                     "name": "error",

@@ -60,7 +60,7 @@ $app->post('/api/PayPal/cancelAgreement', function ($request, $response, $args) 
         
         if(in_array($code, ['200','201','202','203','204'])) { 
             $result['callback'] = 'success';
-            $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
+            $result['contextWrites']['to'] = "canceled";
         } else {
             $result['callback'] = 'error';
             $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);

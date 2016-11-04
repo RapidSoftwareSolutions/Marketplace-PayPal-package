@@ -66,7 +66,7 @@ $app->post('/api/PayPal/markInvoiceAsPaid', function ($request, $response, $args
         
         if(in_array($code, ['200','201','202','203','204'])) { 
             $result['callback'] = 'success';
-            $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
+            $result['contextWrites']['to'] = "marked";
         } else {
             $result['callback'] = 'error';
             $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);

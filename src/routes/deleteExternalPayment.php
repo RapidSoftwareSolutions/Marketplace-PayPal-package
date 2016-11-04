@@ -54,7 +54,7 @@ $app->post('/api/PayPal/deleteExternalPayment', function ($request, $response, $
         
         if(in_array($code, ['200','201','202','203','204'])) { 
             $result['callback'] = 'success';
-            $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
+            $result['contextWrites']['to'] = "deleted";
         } else {
             $result['callback'] = 'error';
             $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);

@@ -60,7 +60,7 @@ $app->post('/api/PayPal/reactivateAgreement', function ($request, $response, $ar
         
         if(in_array($code, ['200','201','202','203','204'])) { 
             $result['callback'] = 'success';
-            $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
+            $result['contextWrites']['to'] = "reactivated";
         } else {
             $result['callback'] = 'error';
             $result['contextWrites']['to'] = is_array($responseBody) ? $responseBody : json_decode($responseBody);
