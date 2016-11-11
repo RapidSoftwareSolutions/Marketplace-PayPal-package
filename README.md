@@ -112,11 +112,83 @@ Use the payment resource for direct credit card payments, stored credit card pay
 |--------------------|-------|----------
 | accessToken        | String| Required: accessToken obtained with clientId and secret.
 | intent             | String| Required: Payment intent. Must be set to sale for immediate payment, authorize to authorize a payment for capture later, or order to create an order. Allowed values: sale, authorize, order.
-| payer              | JSON  | Required: Source of the funds for this payment represented by a PayPal account or a direct credit card.
-| transactions       | JSON  | Required: Transaction details, if updating a payment. Note that this instance of the transactions object accepts only the amount object.
+| payer              | JSON  | Required: Json object. Source of the funds for this payment represented by a PayPal account or a direct credit card.
+| transactions       | JSON  | Required: Array of json objects. Transaction details, if updating a payment. Note that this instance of the transactions object accepts only the amount object.
 | experienceProfileId| String| Optional: PayPal generated identifier for the merchant's payment experience profile.
 | noteToPayer        | String| Optional: free-form field for the use of clients to pass in a message to the payer.
-| redirectUrls       | JSON  | Optional: Set of redirect URLs you provide only for PayPal-based payments.
+| redirectUrls       | JSON  | Optional: Json object. Set of redirect URLs you provide only for PayPal-based payments.
+### payer format:
+
+```json
+{"payment_method": "paypal"}
+```
+### transactions format:
+
+```json
+[
+{
+  "amount": {
+    "total": "30.11",
+    "currency": "USD",
+    "details": {
+      "subtotal": "30.00",
+      "tax": "0.07",
+      "shipping": "0.03",
+      "handling_fee": "1.00",
+      "shipping_discount": "-1.00",
+      "insurance": "0.01"
+    }
+  },
+  "description": "This is the payment transaction description.",
+  "custom": "EBAY_EMS_90048630024435",
+  "invoice_number": "48787589673",
+  "payment_options": {
+    "allowed_payment_method": "INSTANT_FUNDING_SOURCE"
+  },
+  "soft_descriptor": "ECHI5786786",
+  "item_list": {
+    "items": [
+      {
+        "name": "hat",
+        "description": "Brown color hat",
+        "quantity": "5",
+        "price": "3",
+        "tax": "0.01",
+        "sku": "1",
+        "currency": "USD"
+      },
+      {
+        "name": "handbag",
+        "description": "Black color hand bag",
+        "quantity": "1",
+        "price": "15",
+        "tax": "0.02",
+        "sku": "product34",
+        "currency": "USD"
+      }
+    ],
+    "shipping_address": {
+      "recipient_name": "Hello World",
+      "line1": "4thFloor",
+      "line2": "unit#34",
+      "city": "SAn Jose",
+      "country_code": "US",
+      "postal_code": "95131",
+      "phone": "011862212345678",
+      "state": "CA"
+    }
+  }
+}
+]
+```
+### redirectUrls format:
+
+```json
+{
+    "return_url": "http://www.amazon.com",
+    "cancel_url": "http://www.hawaii.com"
+}
+```
 
 <a name="executePayment"/>
 ## Paypal.executePayment
@@ -147,6 +219,35 @@ Partially updates a payment, by ID. You cannot update a payment after the paymen
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | paymentId  | String| Required: The ID of the payment to execute.
 | items      | JSON  | Required: A JSON patch object that you can use to apply partial updates to resources.
+### items format:
+
+```json
+[
+    {
+      "op": "replace",
+      "path": "/transactions/0/amount",
+      "value": {
+        "total": "32.37",
+        "currency": "USD",
+        "details": {
+          "subtotal": "30.00",
+          "shipping": "2.37"
+        }
+      }
+    },
+    {
+      "op": "add",
+      "path": "/transactions/0/item_list/shipping_address",
+      "value": {
+        "recipient_name": "Gruneberg, Anna",
+        "line1": "Kathwarinenhof 1",
+        "city": "Flensburg",
+        "postal_code": "24939",
+        "country_code": "DE"
+      }
+    }
+]
+```
 
 <a name="getPaymentList"/>
 ## Paypal.getPaymentList
@@ -178,10 +279,18 @@ Refunds a completed payment.
 |--------------|-------|----------
 | accessToken  | String| Required: accessToken obtained with clientId and secret.
 | saleId       | String| Required: The ID of the sale for which to show details.
-| amount       | JSON  | Optional: Refund details including both the refunded amount to payer and refunded fee to payee. If you do not provide an amount, you must still provide an empty JSON payload in the body to indicate a full refund.
+| amount       | JSON  | Optional: Json object. Refund details including both the refunded amount to payer and refunded fee to payee. If you do not provide an amount, you must still provide an empty JSON payload in the body to indicate a full refund.
 | refundSource | String| Optional: Type of PayPal funding source (balance or eCheck) that can be used for auto refund. Allowed values: INSTANT_FUNDING_SOURCE, ECHECK, UNRESTRICTED. Default: UNRESTRICTED.
 | invoiceNumber| String| Optional: The invoice number that is used to track this payment. Character length and limitations: 127 single-byte alphanumeric characters. Maximum length: 127.
 | refundAdvice | Bool  | Optional: Flag to indicate that the buyer was already given store credit for a given transaction.
+### amount format:
+
+```json
+{
+    "total": "2.34",
+    "currency": "USD"
+}
+```
 
 <a name="getRefund"/>
 ## Paypal.getRefund
@@ -212,6 +321,14 @@ Use this resource to capture and process a previously created authorization.
 | amount         | JSON  | Optional: The amount to capture. If the amount matches the orginally authorized amount, the state of the authorization changes to captured. If not, the state of the authorization changes to partially_captured.
 | isFinalCapture | Bool  | Optional: Indicates whether to release all remaining funds that the authorization holds in the funding instrument. Default is false. Default: false.
 | invoiceNumber  | String| Optional: The invoice number to track this payment. Maximum length: 127.
+### amount format:
+
+```json
+{
+    "total": "2.34",
+    "currency": "USD"
+}
+```
 
 <a name="voidAuthorization"/>
 ## Paypal.voidAuthorization
@@ -230,7 +347,15 @@ Reauthorizes a PayPal account payment. We recommend that you reauthorize a payme
 |----------------|-------|----------
 | accessToken    | String| Required: accessToken obtained with clientId and secret.
 | authorizationId| String| Required: The ID of the authorization for which to show details.
-| amount         | JSON  | Required: Amount being reauthorized.
+| amount         | JSON  | Required: Json object. Amount being reauthorized.
+### amount format:
+
+```json
+{
+    "total": "2.34",
+    "currency": "USD"
+}
+```
 
 <a name="getCapture"/>
 ## Paypal.getCapture
@@ -249,12 +374,20 @@ Refunds a captured payment, by ID.
 |--------------|-------|----------
 | accessToken  | String| Required: accessToken obtained with clientId and secret.
 | captureId    | String| Required: The ID of the captured payment for which to show details.
-| amount       | JSON  | Optional: The amount to be refunded to the original payer by the payee.
+| amount       | JSON  | Optional: Json object. The amount to be refunded to the original payer by the payee.
 | description  | String| Optional: Description of what is being refunded for. Character length and limitations: 255 single-byte alphanumeric characters.
 | refundSource | String| Optional: Type of PayPal funding source (balance or eCheck) that can be used for auto refund. Allowed values: INSTANT_FUNDING_SOURCE, ECHECK, UNRESTRICTED. Default: UNRESTRICTED.
 | reason       | String| Optional: Reason description for the Sale transaction being refunded.
 | invoiceNumber| String| Optional: The invoice number that is used to track this payment. Character length and limitations: 127 single-byte alphanumeric characters.
 | refundAdvice | String| Optional: Flag to indicate that the buyer was already given store credit for a given transaction.
+### amount format:
+
+```json
+{
+    "total": "2.34",
+    "currency": "USD"
+}
+```
 
 <a name="getOrder"/>
 ## Paypal.getOrder
@@ -273,7 +406,15 @@ Authorizes an order, by ID.
 |------------|-------|----------
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | orderId    | String| Required: The ID of the order for which to show details.
-| amount     | JSON  | Required: Amount being collected.
+| amount     | JSON  | Required: Json object. Amount being collected.
+### amount format:
+
+```json
+{
+    "total": "2.34",
+    "currency": "USD"
+}
+```
 
 <a name="captureOrder"/>
 ## Paypal.captureOrder
@@ -283,10 +424,26 @@ Captures a payment on an order.
 |---------------|-------|----------
 | accessToken   | String| Required: accessToken obtained with clientId and secret.
 | orderId       | String| Required: The ID of the order for which to show details.
-| amount        | JSON  | Optional: The amount to capture. If the amount matches the orginally authorized amount, the state of the authorization changes to captured. If not, the state of the authorization changes to partially_captured.
+| amount        | JSON  | Optional: Json object. The amount to capture. If the amount matches the orginally authorized amount, the state of the authorization changes to captured. If not, the state of the authorization changes to partially_captured.
 | isFinalCapture| Bool  | Optional: Indicates whether to release all remaining funds that the authorization holds in the funding instrument. Default is false. Default: false.
 | invoiceNumber | String| Optional: The invoice number to track this payment.
-| transactionFee| JSON  | Optional: The transaction fee for this payment.
+| transactionFee| JSON  | Optional: Json object. The transaction fee for this payment.
+### amount format:
+
+```json
+{
+    "total": "2.34",
+    "currency": "USD"
+}
+```
+### transactionFee format:
+
+```json
+{
+    "value": "2.34",
+    "currency": "USD"
+}
+```
 
 <a name="voidOrder"/>
 ## Paypal.voidOrder
@@ -307,8 +464,56 @@ You can create an empty billing plan and add a trial period and/or regular billi
 | name               | String| Required: The billing plan name.
 | description        | String| Required: The billing plan description.
 | type               | String| Required: The billing plan type. Allowed values: FIXED, INFINITE.
-| paymentDefinitions | JSON  | Required: Resource that represents payment definition scheduling information.
-| merchantPreferences| JSON  | Optional: Resource that represents the merchant preferences for a plan, such as max failed attempts, set up fee, and so on.
+| paymentDefinitions | JSON  | Required: Array of json objects. Resource that represents payment definition scheduling information.
+| merchantPreferences| JSON  | Optional: Json object. Resource that represents the merchant preferences for a plan, such as max failed attempts, set up fee, and so on.
+### paymentDefinitions format:
+
+```json
+[
+    {
+      "name": "Regular Payments",
+      "type": "REGULAR",
+      "frequency": "MONTH",
+      "frequency_interval": "2",
+      "amount": {
+        "value": "100",
+        "currency": "USD"
+      },
+      "cycles": "12",
+      "charge_models": [
+        {
+          "type": "SHIPPING",
+          "amount": {
+            "value": "10",
+            "currency": "USD"
+          }
+        },
+        {
+          "type": "TAX",
+          "amount": {
+            "value": "12",
+            "currency": "USD"
+          }
+        }
+      ]
+    }
+]
+```
+### merchantPreferences format:
+
+```json
+{
+    "setup_fee": {
+      "value": "1",
+      "currency": "USD"
+    },
+    "return_url": "http://www.return.com",
+    "cancel_url": "http://www.cancel.com",
+    "auto_bill_amount": "YES",
+    "initial_fail_amount_action": "CONTINUE",
+    "max_fail_attempts": "0"
+}
+```
 
 <a name="updatePlan"/>
 ## Paypal.updatePlan
@@ -318,7 +523,20 @@ You can update the information for an existing billing plan. The state of a plan
 |------------|-------|----------
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | planId     | String| Required: The ID of the billing plan to update.
-| items      | JSON  | Optional: A JSON patch object used for applying partial updates to resources.
+| items      | JSON  | Optional: A JSON array patch object used for applying partial updates to resources.
+### items format:
+
+```json
+[
+  {
+    "path": "/",
+    "value": {
+      "state": "ACTIVE"
+    },
+    "op": "replace"
+  }
+]
+```
 
 <a name="getPlan"/>
 ## Paypal.getPlan
@@ -351,12 +569,71 @@ Creates a billing agreement for the buyer.
 | name                       | String| Required: Name of the agreement. Maximum length: 128.
 | description                | String| Required: Description of the agreement. Maximum length: 128.
 | startDate                  | String| Required: Start date of the agreement. Date format yyyy-MM-dd z, as defined in ISO8601. Format: YYYY-MM-DDTHH:MM:SSTimeZone.
-| payer                      | JSON  | Required: A resource representing a Payer that funds a payment.
-| plan                       | JSON  | Required: Billing plan resource that will be used to create a billing agreement.
-| agreementDetails           | JSON  | Optional: A resource representing the agreement details.
-| shippingAddress            | JSON  | Optional: Base Address object used as billing address in a payment or extended for Shipping Address.
-| overrideChargeModels       | JSON  | Optional: A resource representing an override_charge_model to be used during creation of the agreement.
-| overrideMerchantPreferences| JSON  | Optional: Resource representing merchant preferences like max failed attempts,set up fee and others for a plan.
+| payer                      | JSON  | Required: Json object. A resource representing a Payer that funds a payment.
+| plan                       | JSON  | Required: Json object. Billing plan resource that will be used to create a billing agreement.
+| agreementDetails           | JSON  | Optional: Json object. A resource representing the agreement details.
+| shippingAddress            | JSON  | Optional: Json object. Base Address object used as billing address in a payment or extended for Shipping Address.
+| overrideChargeModels       | JSON  | Optional: Array of json objects. A resource representing an override_charge_model to be used during creation of the agreement.
+| overrideMerchantPreferences| JSON  | Optional: Json object. Resource representing merchant preferences like max failed attempts,set up fee and others for a plan.
+### payer format:
+
+```json
+{
+    "payment_method": "paypal"
+}
+```
+### plan format:
+
+```json
+{
+    "id": "P-94458432VR012762KRWBZEUA"
+}
+```
+### agreementDetails format:
+
+```json
+{
+    YOUR_AGREEMENT_DETAILS_JSON_OBJECT
+}
+```
+### shippingAddress format:
+
+```json
+{
+    "line1": "111 First Street",
+    "city": "Saratoga",
+    "state": "CA",
+    "postal_code": "95070",
+    "country_code": "US"
+}
+```
+### overrideChargeModels format:
+
+```json
+{
+    "id": "CHM-92S85978TN737850VRWBZEUA",
+    "type": "TAX",
+    "amount": {
+      "currency": "USD",
+      "value": "12"
+    }
+}
+```
+### overrideMerchantPreferences format:
+
+```json
+{
+      "setup_fee": {
+        "currency": "USD",
+        "value": "1"
+      },
+      "max_fail_attempts": "0",
+      "return_url": "http://www.return.com",
+      "cancel_url": "http://www.cancel.com",
+      "auto_bill_amount": "YES",
+      "initial_fail_amount_action": "CONTINUE"
+}
+```
 
 <a name="executeAgreement"/>
 ## Paypal.executeAgreement
@@ -375,7 +652,27 @@ Updates an agreement, by ID.
 |------------|-------|----------
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | agreementId| String| Required: Identifier of the agreement resource to update.
-| items      | JSON  | Required: A JSON patch object used for applying partial updates to resources.
+| items      | JSON  | Required: Array of json objects. A JSON patch object used for applying partial updates to resources.
+### items format:
+
+```json
+[
+  {
+    "op": "replace",
+    "path": "/",
+    "value": {
+      "description": "New Description",
+      "shipping_address": {
+        "line1": "2065 Hamilton Ave",
+        "city": "San Jose",
+        "state": "CA",
+        "postal_code": "95125",
+        "country_code": "US"
+      }
+    }
+  }
+]
+```
 
 <a name="getAgreement"/>
 ## Paypal.getAgreement
@@ -395,7 +692,15 @@ Suspends an agreement, by ID.
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | agreementId| String| Required: Identifier of the agreement resource to suspend.
 | note       | String| Required: Reason for changing the state of the agreement. Maximum length: 128.
-| amount     | JSON  | Optional: Base object for all financial value related fields (balance, payment due, etc.)
+| amount     | JSON  | Optional: Json object. Base object for all financial value related fields (balance, payment due, etc.)
+### amount format:
+
+```json
+{
+    "value": "2.34",
+    "currency": "USD"
+}
+```
 
 <a name="reactivateAgreement"/>
 ## Paypal.reactivateAgreement
@@ -406,7 +711,15 @@ Reactivates an agreement, by ID.
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | agreementId| String| Required: Identifier of the agreement resource to re-activate.
 | note       | String| Required: Reason for changing the state of the agreement. Maximum length: 128.
-| amount     | JSON  | Optional: Base object for all financial value related fields (balance, payment due, etc.)
+| amount     | JSON  | Optional: Json object. Base object for all financial value related fields (balance, payment due, etc.)
+### amount format:
+
+```json
+{
+    "value": "2.34",
+    "currency": "USD"
+}
+```
 
 <a name="cancelAgreement"/>
 ## Paypal.cancelAgreement
@@ -417,7 +730,15 @@ Cancels an agreement, by ID.
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | agreementId| String| Required: Identifier of the agreement resource to cancel.
 | note       | String| Required: Reason for changing the state of the agreement. Maximum length: 128.
-| amount     | JSON  | Optional: Base object for all financial value related fields (balance, payment due, etc.)
+| amount     | JSON  | Optional: Json object. Base object for all financial value related fields (balance, payment due, etc.)
+### amount format:
+
+```json
+{
+    "value": "2.34",
+    "currency": "USD"
+}
+```
 
 <a name="getTransactionsForBillingAgreement"/>
 ## Paypal.getTransactionsForBillingAgreement
@@ -450,7 +771,15 @@ Bills the outstanding amount of an agreement, by ID.
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | agreementId| String| Required: Identifier of the agreement resource to cancel.
 | note       | String| Required: Reason for changing the state of the agreement. Maximum length: 128.
-| amount     | JSON  | Required: Base object for all financial value related fields (balance, payment due, etc.)
+| amount     | JSON  | Required: Json object. Base object for all financial value related fields (balance, payment due, etc.)
+### amount format:
+
+```json
+{
+    "value": "2.34",
+    "currency": "USD"
+}
+```
 
 <a name="createPayout"/>
 ## Paypal.createPayout
@@ -459,9 +788,33 @@ You can make payouts to one or more PayPal accounts.
 | Field            | Type  | Description
 |------------------|-------|----------
 | accessToken      | String| Required: accessToken obtained with clientId and secret.
-| senderBatchHeader| JSON  | Required: The sender-provided batch header for a batch payout request.
-| items            | JSON  | Required: A sender-created definition of a payout to a single recipient. Maximum length: 5000.
-| syncMode         | JSON  | Optional: Set to true to return an immediate and synchronous response. Default is false, which returns an asynchronous response in the background.
+| senderBatchHeader| JSON  | Required: Json object. The sender-provided batch header for a batch payout request.
+| items            | JSON  | Required: Array of json objects. A sender-created definition of a payout to a single recipient. Maximum length: 5000.
+| syncMode         | String| Optional: Set to true to return an immediate and synchronous response. Default is false, which returns an asynchronous response in the background.
+### senderBatchHeader format:
+
+```json
+{
+    "sender_batch_id": "325272063",
+    "email_subject": "You have a Payout!"
+}
+```
+### items format:
+
+```json
+[
+    {
+      "recipient_type": "EMAIL",
+      "amount": {
+        "value": "9.87",
+        "currency": "USD"
+      },
+      "note": "Thanks for your patronage!",
+      "sender_item_id": "201403140001",
+      "receiver": "anybody01@gmail.com"
+    }
+]
+```
 
 <a name="getPayout"/>
 ## Paypal.getPayout
@@ -505,11 +858,22 @@ Stores credit card details with PayPal.
 | cvv2              | String| Optional: The 3 to 4 digit card validation code.
 | firstName         | String| Optional: The first name of the card holder. Maximum length is 25 characters.
 | lastName          | String| Optional: The last name of the card holder.
-| billingAddress    | JSON  | Optional: Base Address object used as billing address in a payment or extended for Shipping Address.
-| externalCustomerId| JSON  | Optional: Externally provided ID of the customer for which to list credit card resources.
-| merchantId        | JSON  | Optional: ID of the merchant for which to list credit card resources.
-| payerId           | JSON  | Optional:  unique ID that you can assign and track when you store a credit card or use a stored credit card.
-| externalCardId    | JSON  | Optional:  Externally provided ID of the card for which to list credit card resources.
+| billingAddress    | JSON  | Optional: Json object. Base Address object used as billing address in a payment or extended for Shipping Address.
+| externalCustomerId| String  | Optional: Externally provided ID of the customer for which to list credit card resources.
+| merchantId        | String  | Optional: ID of the merchant for which to list credit card resources.
+| payerId           | String  | Optional:  unique ID that you can assign and track when you store a credit card or use a stored credit card.
+| externalCardId    | String  | Optional:  Externally provided ID of the card for which to list credit card resources.
+### billingAddress format:
+
+```json
+{
+    "line1":"111 First Street",
+    "city":"Saratoga",
+    "country_code":"US",
+    "state":"CA",
+    "postal_code":"95070"
+}
+```
 
 <a name="deleteCreditCard"/>
 ## Paypal.deleteCreditCard
@@ -555,7 +919,24 @@ Updates a stored credit card, by ID.
 |-------------|-------|----------
 | accessToken | String| Required: accessToken obtained with clientId and secret.
 | creditCardId| String| Required: The ID of the credit card resource to update.
-| items       | JSON  | Required: A JSON patch object used for applying partial updates to resources.
+| items       | JSON  | Required: Array of json objects. A JSON patch object used for applying partial updates to resources.
+### items format:
+
+```json
+[
+    {
+      "op": "replace",
+      "path": "/billing_address",
+      "value": {
+        "line1": "111 First Street",
+        "city": "Saratoga",
+        "country_code": "US",
+        "state": "CA",
+        "postal_code": "95070"
+      }
+    }
+]
+```
 
 <a name="createTokenFromAurhorizationCode"/>
 ## Paypal.createTokenFromAurhorizationCode
@@ -597,21 +978,21 @@ Creates a draft invoice.
 | Field                     | Type  | Description
 |---------------------------|-------|----------
 | accessToken               | String| Required: accessToken obtained with clientId and secret.
-| merchantInfo              | JSON  | Required: Merchant business information that appears on the invoice.
+| merchantInfo              | JSON  | Required: Json object. Merchant business information that appears on the invoice.
 | number                    | String| Optional: The unique invoice number. If you omit this number, it is auto-incremented from the previous invoice number. Maximum length: 25.
 | templateId                | String| Optional: The ID of the template from which to create the invoice. Useful for copy functionality.
-| billingInfo               | JSON  | Optional: Billing information for the invoice recipient.
-| ccInfo                    | JSON  | Optional: Participant information.
-| shippingInfo              | JSON  | Optional: Shipping information for the invoice recipient.
-| items                     | JSON  | Optional: Line item information.
+| billingInfo               | JSON  | Optional: Array of json objects. Billing information for the invoice recipient.
+| ccInfo                    | JSON  | Optional: Array of json objects. Participant information.
+| shippingInfo              | JSON  | Optional: Json object. Shipping information for the invoice recipient.
+| items                     | JSON  | Optional: Array of json objects. Line item information.
 | invoiceDate               | String| Optional: The date when the invoice was enabled. The date format is yyyy-MM-dd z.
-| paymentTerm               | JSON  | Optional: The payment term of the invoice. If you specify term_type, you cannot specify due_date, and vice versa.
+| paymentTerm               | JSON  | Optional: Json object. The payment term of the invoice. If you specify term_type, you cannot specify due_date, and vice versa.
 | reference                 | String| Optional: Reference data, such as PO number, to add to the invoice. Maximum length: 60.
-| discount                  | JSON  | Optional: The cost as a percent or an amount value. For example, to specify 10%, enter 10. Alternatively, to specify an amount of 5, enter 5.
-| shippingCost              | JSON  | Optional: Shipping cost, as a percent or an amount value.
-| custom                    | JSON  | Optional: The custom amount to apply to an invoice. If you include a label, you must include a custom amount.
+| discount                  | JSON  | Optional: Json object. The cost as a percent or an amount value. For example, to specify 10%, enter 10. Alternatively, to specify an amount of 5, enter 5.
+| shippingCost              | JSON  | Optional: Json object. Shipping cost, as a percent or an amount value.
+| custom                    | JSON  | Optional: Json object. The custom amount to apply to an invoice. If you include a label, you must include a custom amount.
 | allowPartialPayment       | String| Optional: Indicates whether the invoice allows a partial payment. If false, invoice must be paid in full. If true, the invoice allows partial payments. Default is false.
-| minimumAmountDue          | JSON  | Optional: Base object for all financial value related fields (balance, payment due, etc.)
+| minimumAmountDue          | JSON  | Optional: Json object. Base object for all financial value related fields (balance, payment due, etc.)
 | taxCalculatedAfterDiscount| String| Optional: Indicates whether the tax is calculated before or after a discount. If false, the tax is calculated before a discount. If true, the tax is calculated after a discount. Default is false.
 | taxInclusive              | String| Optional: Indicates whether the unit price includes tax. Default is false.
 | terms                     | String| Optional: The general terms of the invoice. Maximum length: 4000.
@@ -619,6 +1000,126 @@ Creates a draft invoice.
 | merchantMemo              | String| Optional: A private bookkeeping memo for the merchant. Maximum length: 150.
 | logoUrl                   | String| Optional: The full URL to an external logo image. Maximum length: 4000.
 | attachments               | JSON  | Optional: The array of files attached to an invoice or template.
+### merchantInfo format:
+
+```json
+{
+    "email": "test@test.com",
+    "first_name": "Dennis",
+    "last_name": "Doctor",
+    "business_name": "Medical Professionals, LLC",
+    "phone": {
+      "country_code": "001",
+      "national_number": "5032141716"
+    },
+    "address": {
+      "line1": "1234 Main St.",
+      "city": "Portland",
+      "state": "OR",
+      "postal_code": "97217",
+      "country_code": "US"
+    }
+}
+```
+### billingInfo format:
+
+```json
+[
+    {
+      "email": "example@example.com"
+    }
+]
+```
+### ccInfo format:
+
+```json
+{
+    "email": "test@test.com",
+    "first_name": "Dennis",
+    "last_name": "Doctor",
+    "business_name": "Medical Professionals, LLC",
+    "phone": {
+      "country_code": "001",
+      "national_number": "5032141716"
+    },
+    "address": {
+      "line1": "1234 Main St.",
+      "city": "Portland",
+      "state": "OR",
+      "postal_code": "97217",
+      "country_code": "US"
+    }
+}
+```
+### shippingInfo format:
+
+```json
+{
+    "first_name": "Sally",
+    "last_name": "Patient",
+    "business_name": "Not applicable",
+    "phone": {
+      "country_code": "001",
+      "national_number": "5039871234"
+    },
+    "address": {
+      "line1": "1234 Broad St.",
+      "city": "Portland",
+      "state": "OR",
+      "postal_code": "97216",
+      "country_code": "US"
+    }
+}
+```
+### items format:
+
+```json
+[
+    {
+      "name": "Sutures",
+      "quantity": 100,
+      "unit_price": {
+        "currency": "USD",
+        "value": "5"
+      }
+    }
+]
+```
+### paymentTerm format:
+
+```json
+{
+    "term_type": "NET_45"
+}
+```
+### discount format:
+
+```json
+{
+    "percent": "5"
+}
+```
+### shippingCost format:
+
+```json
+{
+    YOUR_SHIPPING_COST_JSON_OBJECT
+}
+```
+### custom format:
+
+```json
+{
+    YOUR_CUSTOM_JSON_OBJECT
+}
+```
+### minimumAmountDue format:
+
+```json
+{
+    YOUR_MINIMAL_AMOUNT_DUE_JSON_OBJECT
+}
+```
 
 <a name="sendInvoice"/>
 ## Paypal.sendInvoice
@@ -638,22 +1139,22 @@ Updates an invoice, by ID.
 |---------------------------|-------|----------
 | accessToken               | String| Required: accessToken obtained with clientId and secret.
 | invoiceId                 | String| Required: The ID of the invoice to update.
-| merchantInfo              | JSON  | Required: Merchant business information that appears on the invoice.
+| merchantInfo              | JSON  | Required: Json object. Merchant business information that appears on the invoice.
 | notifyMerchant            | String| Optional: Indicates whether to send the invoice update notification to the merchant. Default is true.
 | number                    | String| Optional: The unique invoice number. If you omit this number, it is auto-incremented from the previous invoice number. Maximum length: 25.
 | templateId                | String| Optional: The ID of the template from which to create the invoice. Useful for copy functionality.
-| billingInfo               | JSON  | Optional: Billing information for the invoice recipient.
-| ccInfo                    | JSON  | Optional: Participant information.
-| shippingInfo              | JSON  | Optional: Shipping information for the invoice recipient.
-| items                     | JSON  | Optional: Line item information.
+| billingInfo               | JSON  | Optional: Array of json objects. Billing information for the invoice recipient.
+| ccInfo                    | JSON  | Optional: Array of json objects. Participant information.
+| shippingInfo              | JSON  | Optional: Json object. Shipping information for the invoice recipient.
+| items                     | JSON  | Optional: Array of json objects. Line item information.
 | invoiceDate               | String| Optional: The date when the invoice was enabled. The date format is yyyy-MM-dd z.
-| paymentTerm               | JSON  | Optional: The payment term of the invoice. If you specify term_type, you cannot specify due_date, and vice versa.
+| paymentTerm               | JSON  | Optional: Json object. The payment term of the invoice. If you specify term_type, you cannot specify due_date, and vice versa.
 | reference                 | String| Optional: Reference data, such as PO number, to add to the invoice. Maximum length: 60.
-| discount                  | JSON  | Optional: The cost as a percent or an amount value. For example, to specify 10%, enter 10. Alternatively, to specify an amount of 5, enter 5.
-| shippingCost              | JSON  | Optional: Shipping cost, as a percent or an amount value.
-| custom                    | JSON  | Optional: The custom amount to apply to an invoice. If you include a label, you must include a custom amount.
+| discount                  | JSON  | Optional: Json object. The cost as a percent or an amount value. For example, to specify 10%, enter 10. Alternatively, to specify an amount of 5, enter 5.
+| shippingCost              | JSON  | Optional: Json object. Shipping cost, as a percent or an amount value.
+| custom                    | JSON  | Optional: Json object. The custom amount to apply to an invoice. If you include a label, you must include a custom amount.
 | allowPartialPayment       | String| Optional: Indicates whether the invoice allows a partial payment. If false, invoice must be paid in full. If true, the invoice allows partial payments. Default is false.
-| minimumAmountDue          | JSON  | Optional: Base object for all financial value related fields (balance, payment due, etc.)
+| minimumAmountDue          | JSON  | Optional: Json object. Base object for all financial value related fields (balance, payment due, etc.)
 | taxCalculatedAfterDiscount| String| Optional: Indicates whether the tax is calculated before or after a discount. If false, the tax is calculated before a discount. If true, the tax is calculated after a discount. Default is false.
 | taxInclusive              | String| Optional: Indicates whether the unit price includes tax. Default is false.
 | terms                     | String| Optional: The general terms of the invoice. Maximum length: 4000.
@@ -661,6 +1162,126 @@ Updates an invoice, by ID.
 | merchantMemo              | String| Optional: A private bookkeeping memo for the merchant. Maximum length: 150.
 | logoUrl                   | String| Optional: The full URL to an external logo image. Maximum length: 4000.
 | attachments               | JSON  | Optional: The array of files attached to an invoice or template.
+### merchantInfo format:
+
+```json
+{
+    "email": "test@test.com",
+    "first_name": "Dennis",
+    "last_name": "Doctor",
+    "business_name": "Medical Professionals, LLC",
+    "phone": {
+      "country_code": "001",
+      "national_number": "5032141716"
+    },
+    "address": {
+      "line1": "1234 Main St.",
+      "city": "Portland",
+      "state": "OR",
+      "postal_code": "97217",
+      "country_code": "US"
+    }
+}
+```
+### billingInfo format:
+
+```json
+[
+    {
+      "email": "example@example.com"
+    }
+]
+```
+### ccInfo format:
+
+```json
+{
+    "email": "test@test.com",
+    "first_name": "Dennis",
+    "last_name": "Doctor",
+    "business_name": "Medical Professionals, LLC",
+    "phone": {
+      "country_code": "001",
+      "national_number": "5032141716"
+    },
+    "address": {
+      "line1": "1234 Main St.",
+      "city": "Portland",
+      "state": "OR",
+      "postal_code": "97217",
+      "country_code": "US"
+    }
+}
+```
+### shippingInfo format:
+
+```json
+{
+    "first_name": "Sally",
+    "last_name": "Patient",
+    "business_name": "Not applicable",
+    "phone": {
+      "country_code": "001",
+      "national_number": "5039871234"
+    },
+    "address": {
+      "line1": "1234 Broad St.",
+      "city": "Portland",
+      "state": "OR",
+      "postal_code": "97216",
+      "country_code": "US"
+    }
+}
+```
+### items format:
+
+```json
+[
+    {
+      "name": "Sutures",
+      "quantity": 100,
+      "unit_price": {
+        "currency": "USD",
+        "value": "5"
+      }
+    }
+]
+```
+### paymentTerm format:
+
+```json
+{
+    "term_type": "NET_45"
+}
+```
+### discount format:
+
+```json
+{
+    "percent": "5"
+}
+```
+### shippingCost format:
+
+```json
+{
+    YOUR_SHIPPING_COST_JSON_OBJECT
+}
+```
+### custom format:
+
+```json
+{
+    YOUR_CUSTOM_JSON_OBJECT
+}
+```
+### minimumAmountDue format:
+
+```json
+{
+    YOUR_MINIMAL_AMOUNT_DUE_JSON_OBJECT
+}
+```
 
 <a name="getInvoice"/>
 ## Paypal.getInvoice
@@ -703,8 +1324,8 @@ Lists invoices that match search criteria.
 | recipientBusinessName| String| Optional: The initial letters of the recipient business name.
 | number               | String| Optional: The invoice number.
 | status               | String| Optional: The invoice status. Allowed values: DRAFT, SENT, PAID, MARKED_AS_PAID, CANCELLED, REFUNDED, PARTIALLY_REFUNDED, MARKED_AS_REFUNDED.
-| lowerTotalAmount     | JSON  | Optional: Base object for all financial value related fields (balance, payment due, etc.)
-| upperTotalAmount     | JSON  | Optional: Base object for all financial value related fields (balance, payment due, etc.)
+| lowerTotalAmount     | JSON  | Optional: Json object. Base object for all financial value related fields (balance, payment due, etc.)
+| upperTotalAmount     | JSON  | Optional: Json object. Base object for all financial value related fields (balance, payment due, etc.)
 | startInvoiceDate     | String| Optional: The start date for the invoice. Date format is yyyy-MM-dd z.
 | endInvoiceDate       | String| Optional: The end date for the invoice. Date format is yyyy-MM-dd z.
 | startDueDate         | String| Optional: The start due date for the invoice. Date format is yyyy-MM-dd z.
@@ -717,6 +1338,22 @@ Lists invoices that match search criteria.
 | pageSize             | String| Optional: The page size for the search results.
 | totalCountRequired   | String| Optional: Indicates whether the total count appears in the response. Default is false.
 | archived             | String| Optional: Indicates whether to list merchant-archived invoices in the response. If true, response lists only merchant-archived invoices. If false, response lists only unarchived invoices. If null, response lists all invoices.
+### lowerTotalAmount format:
+
+```json
+{
+    "currency": "USD",
+    "value": "5"
+}
+```
+### upperTotalAmount format:
+
+```json
+{
+    "currency": "USD",
+    "value": "5"
+}
+```
 
 <a name="sendInvoiceReminder"/>
 ## Paypal.sendInvoiceReminder
@@ -729,7 +1366,14 @@ Sends a reminder to the payer that a payment is due for an invoice, by ID.
 | subject       | String| Required: The subject of the notification.
 | note          | String| Required: A note to the payer.
 | sendToMerchant| String| Required: Indicates whether to send a copy of the email to the merchant. True or false.
-| ccEmails      | JSON  | Optional: An array of one or more Cc: emails. 
+| ccEmails      | JSON  | Optional: An json array of one or more Cc: emails. 
+### ccEmails format:
+
+```json
+[
+    "cc-email@paypal.com"
+]
+```
 
 <a name="deleteInvoice"/>
 ## Paypal.deleteInvoice
@@ -778,9 +1422,32 @@ Creates a web experience profile.
 |-------------|-------|----------
 | accessToken | String| Required: accessToken obtained with clientId and secret.
 | name        | String| Required: Name of the web experience profile. Unique among only the profiles for a given merchant.
-| flowConfig  | JSON  | Optional: Parameters for flow configuration.
-| inputFields | JSON  | Optional: Parameters for input fields customization.
-| presentation| JSON  | Optional: Parameters for style and presentation.
+| flowConfig  | JSON  | Optional: Json object. Parameters for flow configuration.
+| inputFields | JSON  | Optional: Json object. Parameters for input fields customization.
+| presentation| JSON  | Optional: Json object. Parameters for style and presentation.
+### flowConfig format:
+
+```json
+{
+  "landing_page_type": "billing",
+  "bank_txn_pending_url": "http://www.ebay.com"
+}
+```
+### inputFields format:
+
+```json
+{
+  "no_shipping": 1,
+  "address_override": 1
+}
+```
+### presentation format:
+
+```json
+{
+  "logo_image": "http://www.ebay.com"
+}
+```
 
 <a name="getWebProfile"/>
 ## Paypal.getWebProfile
@@ -808,9 +1475,32 @@ Updates a web experience profile, by ID.
 | accessToken | String| Required: accessToken obtained with clientId and secret.
 | profileId   | String| Required: ID of the profile to update.
 | name        | String| Required: Name of the web experience profile. Unique among only the profiles for a given merchant.
-| flowConfig  | JSON  | Optional: Parameters for flow configuration.
-| inputFields | JSON  | Optional: Parameters for input fields customization.
-| presentation| JSON  | Optional: Parameters for style and presentation.
+| flowConfig  | JSON  | Optional: Json object. Parameters for flow configuration.
+| inputFields | JSON  | Optional: Json object. Parameters for input fields customization.
+| presentation| JSON  | Optional: Json object. Parameters for style and presentation.
+### flowConfig format:
+
+```json
+{
+  "landing_page_type": "billing",
+  "bank_txn_pending_url": "http://www.ebay.com"
+}
+```
+### inputFields format:
+
+```json
+{
+  "no_shipping": 1,
+  "address_override": 1
+}
+```
+### presentation format:
+
+```json
+{
+  "logo_image": "http://www.ebay.com"
+}
+```
 
 <a name="deleteWebProfile"/>
 ## Paypal.deleteWebProfile
@@ -829,7 +1519,19 @@ Subscribes your webhook listener to events.
 |------------|-------|----------
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | url        | String| Required: The URL that is configured to listen on localhost for incoming POST notification messages that contain event information.
-| eventTypes | JSON  | Required: A list of events.
+| eventTypes | JSON  | Required: Array of json objects. A list of events.
+### eventTypes format:
+
+```json
+[
+    {
+      "name": "PAYMENT.AUTHORIZATION.CREATED"
+    },
+    {
+      "name": "PAYMENT.AUTHORIZATION.VOIDED"
+    }
+]
+```
 
 <a name="getWebhook"/>
 ## Paypal.getWebhook
@@ -857,7 +1559,27 @@ Updates a webhook, by ID. Supports only the replace operation.
 |------------|-------|----------
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | webhookId  | String| Required: The ID of the webhook to update.
-| items      | JSON  | Required: A JSON patch object that you can use to apply partial updates to resources.
+| items      | JSON  | Required: Array of json objects. A JSON patch object that you can use to apply partial updates to resources.
+### items format:
+
+```json
+[
+  {
+    "op": "replace",
+    "path": "/url",
+    "value": "http://www.ebay.com/paypal_webhook_new_url"
+  },
+  {
+    "op": "replace",
+    "path": "/event_types",
+    "value": [
+      {
+        "name": "PAYMENT.SALE.REFUNDED"
+      }
+    ]
+  }
+]
+```
 
 <a name="deleteWebhook"/>
 ## Paypal.deleteWebhook
@@ -940,7 +1662,14 @@ Cancels a sent invoice, by ID, and, optionally, sends a notification about the c
 | note          | String| Optional: A note to the payer.
 | sendToMerchant| String| Optional: Indicates whether to send the notification to the merchant.
 | sendToPayer   | String| Optional: Indicates whether to send the notification to the payer.
-| ccEmails      | String| Optional: An array of one or more Cc: emails. If you omit this parameter from the JSON request body, a notification is sent to all Cc: email addresses that are part of the invoice. Otherwise, specify this parameter to limit the email addresses to which a notification is sent.
+| ccEmails      | JSON  | Optional: An array of one or more Cc: emails. If you omit this parameter from the JSON request body, a notification is sent to all Cc: email addresses that are part of the invoice. Otherwise, specify this parameter to limit the email addresses to which a notification is sent.
+### ccEmails format:
+
+```json
+[
+    "cc-email@paypal.com"
+]
+```
 
 <a name="markInvoiceAsPaid"/>
 ## Paypal.markInvoiceAsPaid
@@ -953,7 +1682,15 @@ Marks an invoice, by ID, as paid.
 | method     | String| Required: The payment mode or method. Required with the EXTERNAL payment type. Value is bank transfer, cash, check, credit card, debit card, PayPal, wire transfer, or other. Allowed values: BANK_TRANSFER, CASH, CHECK, CREDIT_CARD, DEBIT_CARD, PAYPAL, WIRE_TRANSFER, OTHER.
 | date       | String| Optional: The date when the invoice was paid. The date format is yyyy-MM-dd z
 | note       | String| Optional: A note associated with the payment.
-| amount     | JSON  | Optional: Base object for all financial value related fields (balance, payment due, etc.)
+| amount     | JSON  | Optional: Json object. Base object for all financial value related fields (balance, payment due, etc.)
+### amount format:
+
+```json
+{
+    "currency": "USD",
+    "value": "20.00"
+}
+```
 
 <a name="markInvoiceAsRefunded"/>
 ## Paypal.markInvoiceAsRefunded
@@ -965,7 +1702,15 @@ Marks an invoice, by ID, as refunded.
 | invoiceId  | String| Required: The ID of the invoice.
 | date       | String| Optional: The date when the invoice was paid. The date format is yyyy-MM-dd z
 | note       | String| Optional: A note associated with the payment.
-| amount     | JSON  | Optional: Base object for all financial value related fields (balance, payment due, etc.)
+| amount     | JSON  | Optional: Json object. Base object for all financial value related fields (balance, payment due, etc.)
+### amount format:
+
+```json
+{
+    "currency": "USD",
+    "value": "20.00"
+}
+```
 
 <a name="deleteExternalPayment"/>
 ## Paypal.deleteExternalPayment
@@ -996,9 +1741,50 @@ Creates an invoice template. When you create an invoice from a template, the inv
 | accessToken  | String| Required: accessToken obtained with clientId and secret.
 | name         | String| Required: The template name.
 | default      | String| Required: Indicates whether this template is the default merchant template. A merchant can have one default template. True or false
-| templateData | JSON  | Required: Detailed template information.
-| settings     | JSON  | Required: Template settings.
-| unitOfMeasure| JSON  | Required: The unit of measure for the template. Value is quantity, hours, or amount.
+| templateData | JSON  | Required: Json object. Detailed template information.
+| settings     | JSON  | Required: Array of json objects. Template settings.
+| unitOfMeasure| String| Required: The unit of measure for the template. Value is quantity, hours, or amount.
+### templateData format:
+
+```json
+{
+    "items": [
+      {
+        "name": "Nutri Bullet",
+        "quantity": 1,
+        "unit_price": {
+          "currency": "USD",
+          "value": "50.00"
+        }
+      }
+    ],
+    "merchant_info": {
+      "email": "jaypatel512-facilitator@hotmail.com"
+    },
+    "tax_calculated_after_discount": false,
+    "tax_inclusive": false,
+    "note": "Thank you for your business.",
+    "logo_url": "https://pics.paypal.com/v1/images/redDot.jpeg"
+}
+```
+### settings format:
+
+```json
+[
+    {
+      "field_name": "items.date",
+      "display_preference": {
+        "hidden": true
+      }
+    },
+    {
+      "field_name": "custom",
+      "display_preference": {
+        "hidden": true
+      }
+    }
+]
+```
 
 <a name="deleteTemplate"/>
 ## Paypal.deleteTemplate
@@ -1034,7 +1820,48 @@ Updates a template, by ID. In the JSON request body, pass a complete template ob
 | templateId   | String| Required: The ID of the template to update.
 | name         | String| Required: The template name.
 | default      | String| Required: Indicates whether this template is the default merchant template. A merchant can have one default template. True or false
-| templateData | JSON  | Required: Detailed template information.
-| settings     | JSON  | Required: Template settings.
-| unitOfMeasure| JSON  | Required: The unit of measure for the template. Value is quantity, hours, or amount.
+| templateData | JSON  | Required: Json object. Detailed template information.
+| settings     | JSON  | Required: Array of json objects. Template settings.
+| unitOfMeasure| String| Required: The unit of measure for the template. Value is quantity, hours, or amount.
+### templateData format:
+
+```json
+{
+    "items": [
+      {
+        "name": "Nutri Bullet",
+        "quantity": 1,
+        "unit_price": {
+          "currency": "USD",
+          "value": "50.00"
+        }
+      }
+    ],
+    "merchant_info": {
+      "email": "jaypatel512-facilitator@hotmail.com"
+    },
+    "tax_calculated_after_discount": false,
+    "tax_inclusive": false,
+    "note": "Thank you for your business.",
+    "logo_url": "https://pics.paypal.com/v1/images/redDot.jpeg"
+}
+```
+### settings format:
+
+```json
+[
+    {
+      "field_name": "items.date",
+      "display_preference": {
+        "hidden": true
+      }
+    },
+    {
+      "field_name": "custom",
+      "display_preference": {
+        "hidden": true
+      }
+    }
+]
+```
 

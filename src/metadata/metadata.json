@@ -49,11 +49,11 @@
                 }, {
                     "name": "payer",
                     "type": "JSON",
-                    "info": "Required: Source of the funds for this payment represented by a PayPal account or a direct credit card."
+                    "info": "Required: Json object. Source of the funds for this payment represented by a PayPal account or a direct credit card. See the parameter notes section for more information. See createPayment README for more details."
                 }, {
                     "name": "transactions",
                     "type": "JSON",
-                    "info": "Required: Transaction details, if updating a payment. Note that this instance of the transactions object accepts only the amount object."
+                    "info": "Required: Array of json objects. Transaction details, if updating a payment. Note that this instance of the transactions object accepts only the amount object. See the parameter notes section for more information. See createPayment README for more details."
                 }, {
                     "name": "experienceProfileId",
                     "type": "String",
@@ -65,7 +65,7 @@
                 }, {
                     "name": "redirectUrls",
                     "type": "JSON",
-                    "info": "Optional: Set of redirect URLs you provide only for PayPal-based payments."
+                    "info": "Optional: Json object. Set of redirect URLs you provide only for PayPal-based payments. See the parameter notes section for more information. See createPayment README for more details."
                 }, {
                     "name": "sandbox",
                     "type": "String",
@@ -146,7 +146,7 @@
                 }, {
                     "name": "items",
                     "type": "JSON",
-                    "info": "Required: A JSON patch object that you can use to apply partial updates to resources."
+                    "info": "Required: A JSON patch object that you can use to apply partial updates to resources. See the parameter notes section for more information. See updatePayment README for more details."
                 }, {
                     "name": "sandbox",
                     "type": "String",
@@ -235,7 +235,7 @@
                 }, {
                     "name": "amount",
                     "type": "JSON",
-                    "info": "Optional: Refund details including both the refunded amount to payer and refunded fee to payee. If you do not provide an amount, you must still provide an empty JSON payload in the body to indicate a full refund."
+                    "info": "Optional: Json object. Refund details including both the refunded amount to payer and refunded fee to payee. If you do not provide an amount, you must still provide an empty JSON payload in the body to indicate a full refund. See the parameter notes section for more information. See refundSale README for more details."
                 }, {
                     "name": "refundSource",
                     "type": "String",
@@ -320,7 +320,7 @@
                 }, {
                     "name": "amount",
                     "type": "JSON",
-                    "info": "Optional: The amount to capture. If the amount matches the orginally authorized amount, the state of the authorization changes to captured. If not, the state of the authorization changes to partially_captured."
+                    "info": "Optional: Json object. The amount to capture. If the amount matches the orginally authorized amount, the state of the authorization changes to captured. If not, the state of the authorization changes to partially_captured. See the parameter notes section for more information. See captureAuthorization README for more details."
                 }, {
                     "name": "isFinalCapture",
                     "type": "String",
@@ -378,7 +378,7 @@
                 }, {
                     "name": "amount",
                     "type": "JSON",
-                    "info": "Required: Amount being reauthorized."
+                    "info": "Required: Json object. Amount being reauthorized. See the parameter notes section for more information. See reauthorizePayment README for more details."
                 }, {
                     "name": "sandbox",
                     "type": "String",
@@ -428,7 +428,7 @@
                 }, {
                     "name": "amount",
                     "type": "JSON",
-                    "info": "Optional: The amount to be refunded to the original payer by the payee."
+                    "info": "Optional: Json object. The amount to be refunded to the original payer by the payee. See the parameter notes section for more information. See refundCapture README for more details."
                 }, {
                     "name": "description",
                     "type": "String",
@@ -498,7 +498,7 @@
                 }, {
                     "name": "amount",
                     "type": "JSON",
-                    "info": "Required: Amount being collected."
+                    "info": "Required: Json object. Amount being collected. See the parameter notes section for more information. See authorizeOrder README for more details."
                 }, {
                     "name": "sandbox",
                     "type": "String",
@@ -525,7 +525,7 @@
                 }, {
                     "name": "amount",
                     "type": "JSON",
-                    "info": "Optional: The amount to capture. If the amount matches the orginally authorized amount, the state of the authorization changes to captured. If not, the state of the authorization changes to partially_captured."
+                    "info": "Optional: Json object. The amount to capture. If the amount matches the orginally authorized amount, the state of the authorization changes to captured. If not, the state of the authorization changes to partially_captured. See the parameter notes section for more information. See captureOrder README for more details."
                 }, {
                     "name": "isFinalCapture",
                     "type": "String",
@@ -537,7 +537,7 @@
                 }, {
                     "name": "transactionFee",
                     "type": "JSON",
-                    "info": "Optional: The transaction fee for this payment."
+                    "info": "Optional: Json object. The transaction fee for this payment. See the parameter notes section for more information. See captureOrder README for more details."
                 }, {
                     "name": "sandbox",
                     "type": "String",
@@ -595,11 +595,11 @@
                 }, {
                     "name": "paymentDefinitions",
                     "type": "JSON",
-                    "info": "Required: Resource that represents payment definition scheduling information."
+                    "info": "Required: Array of json objects. Resource that represents payment definition scheduling information. See the parameter notes section for more information. See createPlan README for more details."
                 }, {
                     "name": "merchantPreferences",
                     "type": "JSON",
-                    "info": "Optional: Resource that represents the merchant preferences for a plan, such as max failed attempts, set up fee, and so on."
+                    "info": "Optional: Json object. Resource that represents the merchant preferences for a plan, such as max failed attempts, set up fee, and so on. See the parameter notes section for more information. See createPlan README for more details."
                 }, {
                     "name": "sandbox",
                     "type": "String",
@@ -626,7 +626,7 @@
                 }, {
                     "name": "items",
                     "type": "JSON",
-                    "info": "Optional: A JSON patch object used for applying partial updates to resources."
+                    "info": "Optional: A JSON array patch object used for applying partial updates to resources. See the parameter notes section for more information. See updatePlan README for more details."
                 }, {
                     "name": "sandbox",
                     "type": "String",
@@ -719,27 +719,27 @@
                 }, {
                     "name": "payer",
                     "type": "JSON",
-                    "info": "Required: A resource representing a Payer that funds a payment."
+                    "info": "Required: Json object. A resource representing a Payer that funds a payment. See the parameter notes section for more information. See createAgreement README for more details."
                 }, {
                     "name": "plan",
                     "type": "JSON",
-                    "info": "Required: Billing plan resource that will be used to create a billing agreement."
+                    "info": "Required: Json object. Billing plan resource that will be used to create a billing agreement. See the parameter notes section for more information. See createAgreement README for more details."
                 }, {
                     "name": "agreementDetails",
                     "type": "JSON",
-                    "info": "Optional: A resource representing the agreement details."
+                    "info": "Optional: Json object. A resource representing the agreement details. See the parameter notes section for more information. See createAgreement README for more details."
                 }, {
                     "name": "shippingAddress",
                     "type": "JSON",
-                    "info": "Optional: Base Address object used as billing address in a payment or extended for Shipping Address."
+                    "info": "Optional: Json object. Base Address object used as billing address in a payment or extended for Shipping Address. See the parameter notes section for more information. See createAgreement README for more details."
                 }, {
                     "name": "overrideChargeModels",
                     "type": "JSON",
-                    "info": "Optional: A resource representing an override_charge_model to be used during creation of the agreement."
+                    "info": "Optional: Array of json objects. A resource representing an override_charge_model to be used during creation of the agreement. See the parameter notes section for more information. See createAgreement README for more details."
                 }, {
                     "name": "overrideMerchantPreferences",
                     "type": "JSON",
-                    "info": "Optional: Resource representing merchant preferences like max failed attempts,set up fee and others for a plan."
+                    "info": "Optional: Json object. Resource representing merchant preferences like max failed attempts,set up fee and others for a plan. See the parameter notes section for more information. See createAgreement README for more details."
                 }, {
                     "name": "sandbox",
                     "type": "String",
@@ -789,7 +789,7 @@
                 }, {
                     "name": "items",
                     "type": "JSON",
-                    "info": "Required: A JSON patch object used for applying partial updates to resources."
+                    "info": "Required: Array of json objects. A JSON patch object used for applying partial updates to resources. See the parameter notes section for more information. See updateAgreement README for more details."
                 }, {
                     "name": "sandbox",
                     "type": "String",
@@ -843,7 +843,7 @@
                 }, {
                     "name": "amount",
                     "type": "JSON",
-                    "info": "Optional: Base object for all financial value related fields (balance, payment due, etc.)"
+                    "info": "Optional: Json object. Base object for all financial value related fields (balance, payment due, etc.). See the parameter notes section for more information. See suspendAgreement README for more details."
                 }, {
                     "name": "sandbox",
                     "type": "String",
@@ -874,7 +874,7 @@
                 }, {
                     "name": "amount",
                     "type": "JSON",
-                    "info": "Optional: Base object for all financial value related fields (balance, payment due, etc.)"
+                    "info": "Optional: Json object. Base object for all financial value related fields (balance, payment due, etc.). See the parameter notes section for more information. See reactivateAgreement README for more details."
                 }, {
                     "name": "sandbox",
                     "type": "String",
@@ -905,7 +905,7 @@
                 }, {
                     "name": "amount",
                     "type": "JSON",
-                    "info": "Optional: Base object for all financial value related fields (balance, payment due, etc.)"
+                    "info": "Optional: Json object. Base object for all financial value related fields (balance, payment due, etc.). See the parameter notes section for more information. See cancelAgreement README for more details."
                 }, {
                     "name": "sandbox",
                     "type": "String",
@@ -998,7 +998,7 @@
                 }, {
                     "name": "amount",
                     "type": "JSON",
-                    "info": "Required: Base object for all financial value related fields (balance, payment due, etc.)"
+                    "info": "Required: Json object. Base object for all financial value related fields (balance, payment due, etc.). See the parameter notes section for more information. See billAgreementBalance README for more details."
                 }, {
                     "name": "sandbox",
                     "type": "String",
@@ -1021,14 +1021,14 @@
                 }, {
                     "name": "senderBatchHeader",
                     "type": "JSON",
-                    "info": "Required: The sender-provided batch header for a batch payout request."
+                    "info": "Required: Json object. The sender-provided batch header for a batch payout request. See the parameter notes section for more information. See createPayout README for more details."
                 }, {
                     "name": "items",
                     "type": "JSON",
-                    "info": "Required: A sender-created definition of a payout to a single recipient. Maximum length: 5000."
+                    "info": "Required: Array of json objects. A sender-created definition of a payout to a single recipient. Maximum length: 5000. See the parameter notes section for more information. See createPayout README for more details."
                 }, {
                     "name": "syncMode",
-                    "type": "JSON",
+                    "type": "String",
                     "info": "Optional: Set to true to return an immediate and synchronous response. Default is false, which returns an asynchronous response in the background."
                 }, {
                     "name": "sandbox",
@@ -1153,23 +1153,23 @@
                 }, {
                     "name": "billingAddress",
                     "type": "JSON",
-                    "info": "Optional: Base Address object used as billing address in a payment or extended for Shipping Address."
+                    "info": "Optional: Json object. Base Address object used as billing address in a payment or extended for Shipping Address. See the parameter notes section for more information. See createCreditCard README for more details."
                 }, {
                     "name": "externalCustomerId",
-                    "type": "JSON",
+                    "type": "String",
                     "info": "Optional: Externally provided ID of the customer for which to list credit card resources."
                 }, {
                     "name": "merchantId",
-                    "type": "JSON",
+                    "type": "String",
                     "info": "Optional: ID of the merchant for which to list credit card resources."
                 }, {
                     "name": "payerId",
-                    "type": "JSON",
-                    "info": "Optional:  unique ID that you can assign and track when you store a credit card or use a stored credit card."
+                    "type": "String",
+                    "info": "Optional: unique ID that you can assign and track when you store a credit card or use a stored credit card."
                 }, {
                     "name": "externalCardId",
-                    "type": "JSON",
-                    "info": "Optional:  Externally provided ID of the card for which to list credit card resources."
+                    "type": "String",
+                    "info": "Optional: Externally provided ID of the card for which to list credit card resources."
                 }, {
                     "name": "sandbox",
                     "type": "String",
@@ -1301,7 +1301,7 @@
                 }, {
                     "name": "items",
                     "type": "JSON",
-                    "info": "Required: A JSON patch object used for applying partial updates to resources."
+                    "info": "Required: Array of json objects. A JSON patch object used for applying partial updates to resources. See the parameter notes section for more information. See updateCreditCard README for more details."
                 }, {
                     "name": "sandbox",
                     "type": "String",
@@ -1417,7 +1417,7 @@
                 }, {
                     "name": "merchantInfo",
                     "type": "JSON",
-                    "info": "Required: Merchant business information that appears on the invoice."
+                    "info": "Required: Json object. Merchant business information that appears on the invoice. See the parameter notes section for more information. See createInvoice README for more details."
                 }, {
                     "name": "number",
                     "type": "String",
@@ -1429,19 +1429,19 @@
                 }, {
                     "name": "billingInfo",
                     "type": "JSON",
-                    "info": "Optional: Billing information for the invoice recipient."
+                    "info": "Optional: Array of json objects. Billing information for the invoice recipient. See the parameter notes section for more information. See createInvoice README for more details."
                 }, {
                     "name": "ccInfo",
                     "type": "JSON",
-                    "info": "Optional: Participant information."
+                    "info": "Optional: Array of json objects. Participant information. See the parameter notes section for more information. See createInvoice README for more details."
                 }, {
                     "name": "shippingInfo",
                     "type": "JSON",
-                    "info": "Optional: Shipping information for the invoice recipient."
+                    "info": "Optional: Json object. Shipping information for the invoice recipient. See the parameter notes section for more information. See createInvoice README for more details."
                 }, {
                     "name": "items",
                     "type": "JSON",
-                    "info": "Optional: Line item information."
+                    "info": "Optional: Array of json objects. Line item information. See the parameter notes section for more information. See createInvoice README for more details."
                 }, {
                     "name": "invoiceDate",
                     "type": "String",
@@ -1449,7 +1449,7 @@
                 }, {
                     "name": "paymentTerm",
                     "type": "JSON",
-                    "info": "Optional: The payment term of the invoice. If you specify term_type, you cannot specify due_date, and vice versa."
+                    "info": "Optional: Json object. The payment term of the invoice. If you specify term_type, you cannot specify due_date, and vice versa. See the parameter notes section for more information. See createInvoice README for more details."
                 }, {
                     "name": "reference",
                     "type": "String",
@@ -1457,15 +1457,15 @@
                 }, {
                     "name": "discount",
                     "type": "JSON",
-                    "info": "Optional: The cost as a percent or an amount value. For example, to specify 10%, enter 10. Alternatively, to specify an amount of 5, enter 5."
+                    "info": "Optional: Json object. The cost as a percent or an amount value. For example, to specify 10%, enter 10. Alternatively, to specify an amount of 5, enter 5. See the parameter notes section for more information. See createInvoice README for more details."
                 }, {
                     "name": "shippingCost",
                     "type": "JSON",
-                    "info": "Optional: Shipping cost, as a percent or an amount value."
+                    "info": "Optional: Json object. Shipping cost, as a percent or an amount value. See the parameter notes section for more information. See createInvoice README for more details."
                 }, {
                     "name": "custom",
                     "type": "JSON",
-                    "info": "Optional: The custom amount to apply to an invoice. If you include a label, you must include a custom amount."
+                    "info": "Optional: Json object. The custom amount to apply to an invoice. If you include a label, you must include a custom amount. See the parameter notes section for more information. See createInvoice README for more details."
                 }, {
                     "name": "allowPartialPayment",
                     "type": "String",
@@ -1473,7 +1473,7 @@
                 }, {
                     "name": "minimumAmountDue",
                     "type": "JSON",
-                    "info": "Optional: Base object for all financial value related fields (balance, payment due, etc.)"
+                    "info": "Optional: Json object. Base object for all financial value related fields (balance, payment due, etc.). See the parameter notes section for more information. See createInvoice README for more details."
                 }, {
                     "name": "taxCalculatedAfterDiscount",
                     "type": "String",
@@ -1555,7 +1555,7 @@
                 }, {
                     "name": "merchantInfo",
                     "type": "JSON",
-                    "info": "Required: Merchant business information that appears on the invoice."
+                    "info": "Required: Json object. Merchant business information that appears on the invoice. See the parameter notes section for more information. See updateInvoice README for more details."
                 }, {
                     "name": "notifyMerchant",
                     "type": "String",
@@ -1571,19 +1571,19 @@
                 }, {
                     "name": "billingInfo",
                     "type": "JSON",
-                    "info": "Optional: Billing information for the invoice recipient."
+                    "info": "Optional: Array of json objects. Billing information for the invoice recipient. See the parameter notes section for more information. See updateInvoice README for more details."
                 }, {
                     "name": "ccInfo",
                     "type": "JSON",
-                    "info": "Optional: Participant information."
+                    "info": "Optional: Array of json objects. Participant information. See the parameter notes section for more information. See updateInvoice README for more details."
                 }, {
                     "name": "shippingInfo",
                     "type": "JSON",
-                    "info": "Optional: Shipping information for the invoice recipient."
+                    "info": "Optional: Json object. Shipping information for the invoice recipient. See the parameter notes section for more information. See updateInvoice README for more details."
                 }, {
                     "name": "items",
                     "type": "JSON",
-                    "info": "Optional: Line item information."
+                    "info": "Optional: Array of json objects. Line item information. See the parameter notes section for more information. See updateInvoice README for more details."
                 }, {
                     "name": "invoiceDate",
                     "type": "String",
@@ -1591,7 +1591,7 @@
                 }, {
                     "name": "paymentTerm",
                     "type": "JSON",
-                    "info": "Optional: The payment term of the invoice. If you specify term_type, you cannot specify due_date, and vice versa."
+                    "info": "Optional: Json object. The payment term of the invoice. If you specify term_type, you cannot specify due_date, and vice versa. See the parameter notes section for more information. See updateInvoice README for more details."
                 }, {
                     "name": "reference",
                     "type": "String",
@@ -1599,15 +1599,15 @@
                 }, {
                     "name": "discount",
                     "type": "JSON",
-                    "info": "Optional: The cost as a percent or an amount value. For example, to specify 10%, enter 10. Alternatively, to specify an amount of 5, enter 5."
+                    "info": "Optional: Json object. The cost as a percent or an amount value. For example, to specify 10%, enter 10. Alternatively, to specify an amount of 5, enter 5. See the parameter notes section for more information. See updateInvoice README for more details."
                 }, {
                     "name": "shippingCost",
                     "type": "JSON",
-                    "info": "Optional: Shipping cost, as a percent or an amount value."
+                    "info": "Optional: Json object. Shipping cost, as a percent or an amount value. See the parameter notes section for more information. See updateInvoice README for more details."
                 }, {
                     "name": "custom",
                     "type": "JSON",
-                    "info": "Optional: The custom amount to apply to an invoice. If you include a label, you must include a custom amount."
+                    "info": "Optional: Json object. The custom amount to apply to an invoice. If you include a label, you must include a custom amount. See the parameter notes section for more information. See updateInvoice README for more details."
                 }, {
                     "name": "allowPartialPayment",
                     "type": "String",
@@ -1615,7 +1615,7 @@
                 }, {
                     "name": "minimumAmountDue",
                     "type": "JSON",
-                    "info": "Optional: Base object for all financial value related fields (balance, payment due, etc.)"
+                    "info": "Optional: Json object. Base object for all financial value related fields (balance, payment due, etc.). See the parameter notes section for more information. See updateInvoice README for more details."
                 }, {
                     "name": "taxCalculatedAfterDiscount",
                     "type": "String",
@@ -1763,11 +1763,11 @@
                 }, {
                     "name": "lowerTotalAmount",
                     "type": "JSON",
-                    "info": "Optional: Base object for all financial value related fields (balance, payment due, etc.)"
+                    "info": "Optional: Json object. Base object for all financial value related fields (balance, payment due, etc.). See the parameter notes section for more information. See searchInvoice README for more details."
                 }, {
                     "name": "upperTotalAmount",
                     "type": "JSON",
-                    "info": "Optional: Base object for all financial value related fields (balance, payment due, etc.)"
+                    "info": "Optional: Json object. Base object for all financial value related fields (balance, payment due, etc.). See the parameter notes section for more information. See searchInvoice README for more details."
                 }, {
                     "name": "startInvoiceDate",
                     "type": "String",
@@ -1854,7 +1854,7 @@
                 }, {
                     "name": "ccEmails",
                     "type": "JSON",
-                    "info": "Optional: An array of one or more Cc: emails. "
+                    "info": "Optional: An json array of one or more Cc: emails. See the parameter notes section for more information. See sendInvoiceReminder README for more details."
                 }, {
                     "name": "sandbox",
                     "type": "String",
@@ -1985,15 +1985,15 @@
                 }, {
                     "name": "flowConfig",
                     "type": "JSON",
-                    "info": "Optional: Parameters for flow configuration."
+                    "info": "Optional: Json object. Parameters for flow configuration. See the parameter notes section for more information. See createWebProfile README for more details."
                 }, {
                     "name": "inputFields",
                     "type": "JSON",
-                    "info": "Optional: Parameters for input fields customization."
+                    "info": "Optional: Json object. Parameters for input fields customization. See the parameter notes section for more information. See createWebProfile README for more details."
                 }, {
                     "name": "presentation",
                     "type": "JSON",
-                    "info": "Optional: Parameters for style and presentation."
+                    "info": "Optional: Json object. Parameters for style and presentation. See the parameter notes section for more information. See createWebProfile README for more details."
                 }, {
                     "name": "sandbox",
                     "type": "String",
@@ -2066,15 +2066,15 @@
                 }, {
                     "name": "flowConfig",
                     "type": "JSON",
-                    "info": "Optional: Parameters for flow configuration."
+                    "info": "Optional: Json object. Parameters for flow configuration. See the parameter notes section for more information. See updateWebProfile README for more details."
                 }, {
                     "name": "inputFields",
                     "type": "JSON",
-                    "info": "Optional: Parameters for input fields customization."
+                    "info": "Optional: Json object. Parameters for input fields customization. See the parameter notes section for more information. See updateWebProfile README for more details."
                 }, {
                     "name": "presentation",
                     "type": "JSON",
-                    "info": "Optional: Parameters for style and presentation."
+                    "info": "Optional: Json object. Parameters for style and presentation. See the parameter notes section for more information. See updateWebProfile README for more details."
                 }, {
                     "name": "sandbox",
                     "type": "String",
@@ -2124,7 +2124,7 @@
                 }, {
                     "name": "eventTypes",
                     "type": "JSON",
-                    "info": "Required: A list of events."
+                    "info": "Required: Array of json objects. A list of events. See the parameter notes section for more information. See createWebhook README for more details."
                 }, {
                     "name": "sandbox",
                     "type": "String",
@@ -2197,7 +2197,7 @@
                 }, {
                     "name": "items",
                     "type": "JSON",
-                    "info": "Required: A JSON patch object that you can use to apply partial updates to resources."
+                    "info": "Required: Array of json objects. A JSON patch object that you can use to apply partial updates to resources. See the parameter notes section for more information. See updateWebhook README for more details."
                 }, {
                     "name": "sandbox",
                     "type": "String",
@@ -2424,8 +2424,8 @@
                     "info": "Optional: Indicates whether to send the notification to the payer."
                 }, {
                     "name": "ccEmails",
-                    "type": "String",
-                    "info": "Optional: An array of one or more Cc: emails. If you omit this parameter from the JSON request body, a notification is sent to all Cc: email addresses that are part of the invoice. Otherwise, specify this parameter to limit the email addresses to which a notification is sent."
+                    "type": "JSON",
+                    "info": "Optional: An array of one or more Cc: emails. If you omit this parameter from the JSON request body, a notification is sent to all Cc: email addresses that are part of the invoice. Otherwise, specify this parameter to limit the email addresses to which a notification is sent. See the parameter notes section for more information. See cancelSentInvoice README for more details."
                 }, {
                     "name": "sandbox",
                     "type": "String",
@@ -2464,7 +2464,7 @@
                 }, {
                     "name": "amount",
                     "type": "JSON",
-                    "info": "Optional: Base object for all financial value related fields (balance, payment due, etc.)"
+                    "info": "Optional: Json object. Base object for all financial value related fields (balance, payment due, etc.). See the parameter notes section for more information. See markInvoiceAsPaid README for more details."
                 }, {
                     "name": "sandbox",
                     "type": "String",
@@ -2499,7 +2499,7 @@
                 }, {
                     "name": "amount",
                     "type": "JSON",
-                    "info": "Optional: Base object for all financial value related fields (balance, payment due, etc.)"
+                    "info": "Optional: Json object.Base object for all financial value related fields (balance, payment due, etc.). See the parameter notes section for more information. See markInvoiceAsRefunded README for more details."
                 }, {
                     "name": "sandbox",
                     "type": "String",
@@ -2584,14 +2584,14 @@
                 }, {
                     "name": "templateData",
                     "type": "JSON",
-                    "info": "Required: Detailed template information."
+                    "info": "Required: Json object. Detailed template information. See the parameter notes section for more information. See createTemplate README for more details."
                 }, {
                     "name": "settings",
                     "type": "JSON",
-                    "info": "Required: Template settings."
+                    "info": "Required: Array of json object. Template settings. See the parameter notes section for more information. See createTemplate README for more details."
                 }, {
                     "name": "unitOfMeasure",
-                    "type": "JSON",
+                    "type": "String",
                     "info": "Required: The unit of measure for the template. Value is quantity, hours, or amount."
                 }, {
                     "name": "sandbox",
@@ -2697,14 +2697,14 @@
                 }, {
                     "name": "templateData",
                     "type": "JSON",
-                    "info": "Required: Detailed template information."
+                    "info": "Required: Json object. Detailed template information. See the parameter notes section for more information. See updateTemplate README for more details."
                 }, {
                     "name": "settings",
                     "type": "JSON",
-                    "info": "Required: Template settings."
+                    "info": "Required: Array of json objects. Template settings. See the parameter notes section for more information. See updateTemplate README for more details."
                 }, {
                     "name": "unitOfMeasure",
-                    "type": "JSON",
+                    "type": "String",
                     "info": "Required: The unit of measure for the template. Value is quantity, hours, or amount."
                 }, {
                     "name": "sandbox",

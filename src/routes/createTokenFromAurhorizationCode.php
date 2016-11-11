@@ -13,27 +13,38 @@ $app->post('/api/PayPal/createTokenFromAurhorizationCode', function ($request, $
         $data = str_replace('\"', '"', $data);
         $post_data = json_decode($data, true);
     }
-        
-    $error = [];
-    if(empty($post_data['args']['clientId'])) {
-        $error[] = 'clientId cannot be empty';
-    }
-    if(empty($post_data['args']['secret'])) {
-        $error[] = 'secret cannot be empty';
-    }
-    if(empty($post_data['args']['grantType'])) {
-        $error[] = 'grantType cannot be empty';
-    }
-    if(empty($post_data['args']['code'])) {
-        $error[] = 'code cannot be empty';
-    }
-    if(empty($post_data['args']['redirectUri'])) {
-        $error[] = 'redirect_uri cannot be empty';
+    
+    if(json_last_error() != 0) {
+        $error[] = json_last_error_msg() . '. Incorrect input JSON. Please, check fields with JSON input.';
     }
     
     if(!empty($error)) {
         $result['callback'] = 'error';
         $result['contextWrites']['to'] = implode(',', $error);
+        return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($result);
+    }
+        
+    $error = [];
+    if(empty($post_data['args']['clientId'])) {
+        $error[] = 'clientId is required';
+    }
+    if(empty($post_data['args']['secret'])) {
+        $error[] = 'secret is required';
+    }
+    if(empty($post_data['args']['grantType'])) {
+        $error[] = 'grantType is required';
+    }
+    if(empty($post_data['args']['code'])) {
+        $error[] = 'code is required';
+    }
+    if(empty($post_data['args']['redirectUri'])) {
+        $error[] = 'redirect_uri is required';
+    }
+    
+    if(!empty($error)) {
+        $result['callback'] = 'error';
+        $result['contextWrites']['to']['message'] = "There are incomplete fields in your request";
+        $result['contextWrites']['to']['fields'] = $error;
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($result);
     }
 

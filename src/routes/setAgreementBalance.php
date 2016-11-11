@@ -13,24 +13,35 @@ $app->post('/api/PayPal/setAgreementBalance', function ($request, $response, $ar
         $data = str_replace('\"', '"', $data);
         $post_data = json_decode($data, true);
     }
-        
-    $error = [];
-    if(empty($post_data['args']['accessToken'])) {
-        $error[] = 'accessToken cannot be empty';
-    }
-    if(empty($post_data['args']['agreementId'])) {
-        $error[] = 'agreementId cannot be empty';
-    }
-    if(empty($post_data['args']['currency'])) {
-        $error[] = 'currency cannot be empty';
-    }
-    if(empty($post_data['args']['value'])) {
-        $error[] = 'value cannot be empty';
+    
+    if(json_last_error() != 0) {
+        $error[] = json_last_error_msg() . '. Incorrect input JSON. Please, check fields with JSON input.';
     }
     
     if(!empty($error)) {
         $result['callback'] = 'error';
         $result['contextWrites']['to'] = implode(',', $error);
+        return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($result);
+    }
+        
+    $error = [];
+    if(empty($post_data['args']['accessToken'])) {
+        $error[] = 'accessToken is required';
+    }
+    if(empty($post_data['args']['agreementId'])) {
+        $error[] = 'agreementId is required';
+    }
+    if(empty($post_data['args']['currency'])) {
+        $error[] = 'currency is required';
+    }
+    if(empty($post_data['args']['value'])) {
+        $error[] = 'value is required';
+    }
+    
+    if(!empty($error)) {
+        $result['callback'] = 'error';
+        $result['contextWrites']['to']['message'] = "There are incomplete fields in your request";
+        $result['contextWrites']['to']['fields'] = $error;
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($result);
     }
 

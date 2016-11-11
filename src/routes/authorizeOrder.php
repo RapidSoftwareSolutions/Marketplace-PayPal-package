@@ -13,22 +13,33 @@ $app->post('/api/PayPal/authorizeOrder', function ($request, $response, $args) {
         $data = str_replace('\"', '"', $data);
         $post_data = json_decode($data, true);
     }
+    
+    if(json_last_error() != 0) {
+        $error[] = json_last_error_msg() . '. Incorrect input JSON. Please, check fields with JSON input.';
+    }
+    
+    if(!empty($error)) {
+        $result['callback'] = 'error';
+        $result['contextWrites']['to'] = implode(',', $error);
+        return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($result);
+    }
         
     $error = [];
     if(empty($post_data['args']['accessToken'])) {
-        $error[] = 'accessToken cannot be empty';
+        $error[] = 'accessToken is required';
     }
     if(empty($post_data['args']['orderId'])) {
-        $error[] = 'orderId cannot be empty';
+        $error[] = 'orderId is required';
     }
     if(empty($post_data['args']['amount'])) {
-        $error[] = 'amount cannot be empty';
+        $error[] = 'amount is required';
     }
 
     
     if(!empty($error)) {
         $result['callback'] = 'error';
-        $result['contextWrites']['to'] = implode(',', $error);
+        $result['contextWrites']['to']['message'] = "There are incomplete fields in your request";
+        $result['contextWrites']['to']['fields'] = $error;
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($result);
     }
 
