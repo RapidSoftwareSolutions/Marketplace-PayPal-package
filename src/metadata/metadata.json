@@ -4,6 +4,7 @@
     "description": "PayPal offers online payment solutions.",
     "image": "http://logo.clearbit.com/paypal.com",
     "repo": "https://github.com/RapidSoftwareSolutions/Marketplace-PayPal-package",
+    "keywords": ["payment", "billing"],
     "accounts": {
         "domain": "paypal.com",
         "credentials": ["clientId", "secret"]
@@ -14,19 +15,23 @@
             "args": [{
                     "name": "clientId",
                     "type": "credentials",
-                    "info": "Required: Client id."
+                    "info": "Client id.",
+                    "required": true
                 }, {
                     "name": "secret",
                     "type": "credentials",
-                    "info": "Required: secret"
+                    "info": "secret",
+                    "required": true
                 }, {
                     "name": "grantType",
                     "type": "String",
-                    "info": "Required: Token grant type. Must be set to client_credentials."
+                    "info": "Token grant type. Must be set to client_credentials.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -41,35 +46,43 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "intent",
                     "type": "String",
-                    "info": "Required: Payment intent. Must be set to sale for immediate payment, authorize to authorize a payment for capture later, or order to create an order. Allowed values: sale, authorize, order."
+                    "info": "Payment intent. Must be set to sale for immediate payment, authorize to authorize a payment for capture later, or order to create an order. Allowed values: sale, authorize, order.",
+                    "required": true
                 }, {
                     "name": "payer",
                     "type": "JSON",
-                    "info": "Required: Json object. Source of the funds for this payment represented by a PayPal account or a direct credit card. See the parameter notes section for more information. See createPayment README for more details."
+                    "info": "Json object. Source of the funds for this payment represented by a PayPal account or a direct credit card. See the parameter notes section for more information. See createPayment README for more details.",
+                    "required": true
                 }, {
                     "name": "transactions",
                     "type": "JSON",
-                    "info": "Required: Array of json objects. Transaction details, if updating a payment. Note that this instance of the transactions object accepts only the amount object. See the parameter notes section for more information. See createPayment README for more details."
+                    "info": "Array of json objects. Transaction details, if updating a payment. Note that this instance of the transactions object accepts only the amount object. See the parameter notes section for more information. See createPayment README for more details.",
+                    "required": true
                 }, {
                     "name": "experienceProfileId",
                     "type": "String",
-                    "info": "Optional: PayPal generated identifier for the merchant\u0027s payment experience profile."
+                    "info": "PayPal generated identifier for the merchant's payment experience profile.",
+                    "required": false
                 }, {
                     "name": "noteToPayer",
                     "type": "String",
-                    "info": "Optional: free-form field for the use of clients to pass in a message to the payer."
+                    "info": "free-form field for the use of clients to pass in a message to the payer.",
+                    "required": false
                 }, {
                     "name": "redirectUrls",
                     "type": "JSON",
-                    "info": "Optional: Json object. Set of redirect URLs you provide only for PayPal-based payments. See the parameter notes section for more information. See createPayment README for more details."
+                    "info": "Json object. Set of redirect URLs you provide only for PayPal-based payments. See the parameter notes section for more information. See createPayment README for more details.",
+                    "required": false
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -84,23 +97,28 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "paymentId",
                     "type": "String",
-                    "info": "Required: The ID of the payment to execute."
+                    "info": "The ID of the payment to execute.",
+                    "required": true
                 }, {
                     "name": "payerId",
                     "type": "String",
-                    "info": "Required: The ID of the payer, passed in the return_url by PayPal."
+                    "info": "The ID of the payer, passed in the return_url by PayPal.",
+                    "required": true
                 }, {
                     "name": "transactions",
                     "type": "String",
-                    "info": "Optional: Transactional details if updating a payment. Note that this instance of the transactions object accepts only the amount object."
+                    "info": "Transactional details if updating a payment. Note that this instance of the transactions object accepts only the amount object.",
+                    "required": false
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -115,15 +133,18 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "paymentId",
                     "type": "String",
-                    "info": "Required: The ID of the payment to execute."
+                    "info": "The ID of the payment to execute.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -138,19 +159,23 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "paymentId",
                     "type": "String",
-                    "info": "Required: The ID of the payment to execute."
+                    "info": "The ID of the payment to execute.",
+                    "required": true
                 }, {
                     "name": "items",
                     "type": "JSON",
-                    "info": "Required: A JSON patch object that you can use to apply partial updates to resources. See the parameter notes section for more information. See updatePayment README for more details."
+                    "info": "A JSON patch object that you can use to apply partial updates to resources. See the parameter notes section for more information. See updatePayment README for more details.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -165,31 +190,38 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "count",
                     "type": "String",
-                    "info": "Optional: The number of items to list in the response. Default: 10."
+                    "info": "The number of items to list in the response. Default: 10.",
+                    "required": false
                 }, {
                     "name": "startId",
                     "type": "String",
-                    "info": "Optional: The ID of the starting resource in the response. When results are paged, you can use the next_id value as the start_id to continue with the next set of results."
+                    "info": "The ID of the starting resource in the response. When results are paged, you can use the next_id value as the start_id to continue with the next set of results.",
+                    "required": false
                 }, {
                     "name": "startIndex",
                     "type": "String",
-                    "info": "Optional: The start index of the resources to return. Typically used to jump to a specific position in the resource history based on its cart. Example for starting at the second item in a list of results: ?start_index=2"
+                    "info": "The start index of the resources to return. Typically used to jump to a specific position in the resource history based on its cart. Example for starting at the second item in a list of results: ?start_index=2",
+                    "required": false
                 }, {
                     "name": "startTime",
                     "type": "String",
-                    "info": "Optional: The date and time when the resource was created. Indicates the start of a range of results. Example: start_time=2013-03-06T11:00:00Z Format: date-time."
+                    "info": "The date and time when the resource was created. Indicates the start of a range of results. Example: start_time=2013-03-06T11:00:00Z Format: date-time.",
+                    "required": false
                 }, {
                     "name": "endTime",
                     "type": "String",
-                    "info": "Optional: The date and time when the resource was created. Indicates the end of a range of results. Format: date-time."
+                    "info": "The date and time when the resource was created. Indicates the end of a range of results. Format: date-time.",
+                    "required": false
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -204,15 +236,18 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "saleId",
                     "type": "String",
-                    "info": "Required: The ID of the sale for which to show details."
+                    "info": "The ID of the sale for which to show details.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -227,31 +262,38 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "saleId",
                     "type": "String",
-                    "info": "Required: The ID of the sale for which to show details."
+                    "info": "The ID of the sale for which to show details.",
+                    "required": true
                 }, {
                     "name": "amount",
                     "type": "JSON",
-                    "info": "Optional: Json object. Refund details including both the refunded amount to payer and refunded fee to payee. If you do not provide an amount, you must still provide an empty JSON payload in the body to indicate a full refund. See the parameter notes section for more information. See refundSale README for more details."
+                    "info": "Json object. Refund details including both the refunded amount to payer and refunded fee to payee. If you do not provide an amount, you must still provide an empty JSON payload in the body to indicate a full refund. See the parameter notes section for more information. See refundSale README for more details.",
+                    "required": false
                 }, {
                     "name": "refundSource",
                     "type": "String",
-                    "info": "Optional: Type of PayPal funding source (balance or eCheck) that can be used for auto refund. Allowed values: INSTANT_FUNDING_SOURCE, ECHECK, UNRESTRICTED. Default: UNRESTRICTED."
+                    "info": "Type of PayPal funding source (balance or eCheck) that can be used for auto refund. Allowed values: INSTANT_FUNDING_SOURCE, ECHECK, UNRESTRICTED. Default: UNRESTRICTED.",
+                    "required": false
                 }, {
                     "name": "invoiceNumber",
                     "type": "String",
-                    "info": "Optional: The invoice number that is used to track this payment. Character length and limitations: 127 single-byte alphanumeric characters. Maximum length: 127."
+                    "info": "The invoice number that is used to track this payment. Character length and limitations: 127 single-byte alphanumeric characters. Maximum length: 127.",
+                    "required": false
                 }, {
                     "name": "refundAdvice",
                     "type": "String",
-                    "info": "Optional: Flag to indicate that the buyer was already given store credit for a given transaction."
+                    "info": "Flag to indicate that the buyer was already given store credit for a given transaction.",
+                    "required": false
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -266,15 +308,18 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "refundId",
                     "type": "String",
-                    "info": "Required: The ID of the refund for which to show details."
+                    "info": "The ID of the refund for which to show details.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -289,15 +334,18 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "authorizationId",
                     "type": "String",
-                    "info": "Required: The ID of the authorization for which to show details."
+                    "info": "The ID of the authorization for which to show details.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -312,27 +360,33 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "authorizationId",
                     "type": "String",
-                    "info": "Required: The ID of the authorization for which to show details."
+                    "info": "The ID of the authorization for which to show details.",
+                    "required": true
                 }, {
                     "name": "amount",
                     "type": "JSON",
-                    "info": "Optional: Json object. The amount to capture. If the amount matches the orginally authorized amount, the state of the authorization changes to captured. If not, the state of the authorization changes to partially_captured. See the parameter notes section for more information. See captureAuthorization README for more details."
+                    "info": "Json object. The amount to capture. If the amount matches the orginally authorized amount, the state of the authorization changes to captured. If not, the state of the authorization changes to partially_captured. See the parameter notes section for more information. See captureAuthorization README for more details.",
+                    "required": false
                 }, {
                     "name": "isFinalCapture",
                     "type": "String",
-                    "info": "Optional: Indicates whether to release all remaining funds that the authorization holds in the funding instrument. Default is false. Default: false."
+                    "info": "Indicates whether to release all remaining funds that the authorization holds in the funding instrument. Default is false. Default: false.",
+                    "required": false
                 }, {
                     "name": "invoiceNumber",
                     "type": "String",
-                    "info": "Optional: The invoice number to track this payment. Maximum length: 127."
+                    "info": "The invoice number to track this payment. Maximum length: 127.",
+                    "required": false
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -347,15 +401,18 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "authorizationId",
                     "type": "String",
-                    "info": "Required: The ID of the authorization for which to show details."
+                    "info": "The ID of the authorization for which to show details.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -370,19 +427,23 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "authorizationId",
                     "type": "String",
-                    "info": "Required: The ID of the authorization for which to show details."
+                    "info": "The ID of the authorization for which to show details.",
+                    "required": true
                 }, {
                     "name": "amount",
                     "type": "JSON",
-                    "info": "Required: Json object. Amount being reauthorized. See the parameter notes section for more information. See reauthorizePayment README for more details."
+                    "info": "Json object. Amount being reauthorized. See the parameter notes section for more information. See reauthorizePayment README for more details.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -397,15 +458,18 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "captureId",
                     "type": "String",
-                    "info": "Required: The ID of the captured payment for which to show details."
+                    "info": "The ID of the captured payment for which to show details.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -420,39 +484,48 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "captureId",
                     "type": "String",
-                    "info": "Required: The ID of the captured payment for which to show details."
+                    "info": "The ID of the captured payment for which to show details.",
+                    "required": true
                 }, {
                     "name": "amount",
                     "type": "JSON",
-                    "info": "Optional: Json object. The amount to be refunded to the original payer by the payee. See the parameter notes section for more information. See refundCapture README for more details."
+                    "info": "Json object. The amount to be refunded to the original payer by the payee. See the parameter notes section for more information. See refundCapture README for more details.",
+                    "required": false
                 }, {
                     "name": "description",
                     "type": "String",
-                    "info": "Optional: Description of what is being refunded for. Character length and limitations: 255 single-byte alphanumeric characters."
+                    "info": "Description of what is being refunded for. Character length and limitations: 255 single-byte alphanumeric characters.",
+                    "required": false
                 }, {
                     "name": "refundSource",
                     "type": "String",
-                    "info": "Optional: Type of PayPal funding source (balance or eCheck) that can be used for auto refund. Allowed values: INSTANT_FUNDING_SOURCE, ECHECK, UNRESTRICTED. Default: UNRESTRICTED."
+                    "info": "Type of PayPal funding source (balance or eCheck) that can be used for auto refund. Allowed values: INSTANT_FUNDING_SOURCE, ECHECK, UNRESTRICTED. Default: UNRESTRICTED.",
+                    "required": false
                 }, {
                     "name": "reason",
                     "type": "String",
-                    "info": "Optional: Reason description for the Sale transaction being refunded."
+                    "info": "Reason description for the Sale transaction being refunded.",
+                    "required": false
                 }, {
                     "name": "invoiceNumber",
                     "type": "String",
-                    "info": "Optional: The invoice number that is used to track this payment. Character length and limitations: 127 single-byte alphanumeric characters."
+                    "info": "The invoice number that is used to track this payment. Character length and limitations: 127 single-byte alphanumeric characters.",
+                    "required": false
                 }, {
                     "name": "refundAdvice",
                     "type": "String",
-                    "info": "Optional: Flag to indicate that the buyer was already given store credit for a given transaction."
+                    "info": "Flag to indicate that the buyer was already given store credit for a given transaction.",
+                    "required": false
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -467,15 +540,18 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "orderId",
                     "type": "String",
-                    "info": "Required: The ID of the order for which to show details."
+                    "info": "The ID of the order for which to show details.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -490,19 +566,23 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "orderId",
                     "type": "String",
-                    "info": "Required: The ID of the order for which to show details."
+                    "info": "The ID of the order for which to show details.",
+                    "required": true
                 }, {
                     "name": "amount",
                     "type": "JSON",
-                    "info": "Required: Json object. Amount being collected. See the parameter notes section for more information. See authorizeOrder README for more details."
+                    "info": "Json object. Amount being collected. See the parameter notes section for more information. See authorizeOrder README for more details.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -517,31 +597,38 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "orderId",
                     "type": "String",
-                    "info": "Required: The ID of the order for which to show details."
+                    "info": "The ID of the order for which to show details.",
+                    "required": true
                 }, {
                     "name": "amount",
                     "type": "JSON",
-                    "info": "Optional: Json object. The amount to capture. If the amount matches the orginally authorized amount, the state of the authorization changes to captured. If not, the state of the authorization changes to partially_captured. See the parameter notes section for more information. See captureOrder README for more details."
+                    "info": "Json object. The amount to capture. If the amount matches the orginally authorized amount, the state of the authorization changes to captured. If not, the state of the authorization changes to partially_captured. See the parameter notes section for more information. See captureOrder README for more details.",
+                    "required": false
                 }, {
                     "name": "isFinalCapture",
                     "type": "String",
-                    "info": "Optional: Indicates whether to release all remaining funds that the authorization holds in the funding instrument. Default is false. Default: false."
+                    "info": "Indicates whether to release all remaining funds that the authorization holds in the funding instrument. Default is false. Default: false.",
+                    "required": false
                 }, {
                     "name": "invoiceNumber",
                     "type": "String",
-                    "info": "Optional: The invoice number to track this payment."
+                    "info": "The invoice number to track this payment.",
+                    "required": false
                 }, {
                     "name": "transactionFee",
                     "type": "JSON",
-                    "info": "Optional: Json object. The transaction fee for this payment. See the parameter notes section for more information. See captureOrder README for more details."
+                    "info": "Json object. The transaction fee for this payment. See the parameter notes section for more information. See captureOrder README for more details.",
+                    "required": false
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -556,15 +643,18 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "orderId",
                     "type": "String",
-                    "info": "Required: The ID of the order to void."
+                    "info": "The ID of the order to void.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -575,35 +665,42 @@
                 }]
         }, {
             "name": "createPlan",
-            "description": "You can create an empty billing plan and add a trial period and/or regular billing. Alternatively, you can create a fully loaded plan that includes both a trial period and regular billing.",
+            "description": "You can create an empty billing plan and add a trial period and\/or regular billing. Alternatively, you can create a fully loaded plan that includes both a trial period and regular billing.",
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "name",
                     "type": "String",
-                    "info": "Required: The billing plan name."
+                    "info": "The billing plan name.",
+                    "required": true
                 }, {
                     "name": "description",
                     "type": "String",
-                    "info": "Required: The billing plan description."
+                    "info": "The billing plan description.",
+                    "required": true
                 }, {
                     "name": "type",
                     "type": "String",
-                    "info": "Required: The billing plan type. Allowed values: FIXED, INFINITE."
+                    "info": "The billing plan type. Allowed values: FIXED, INFINITE.",
+                    "required": true
                 }, {
                     "name": "paymentDefinitions",
                     "type": "JSON",
-                    "info": "Required: Array of json objects. Resource that represents payment definition scheduling information. See the parameter notes section for more information. See createPlan README for more details."
+                    "info": "Array of json objects. Resource that represents payment definition scheduling information. See the parameter notes section for more information. See createPlan README for more details.",
+                    "required": true
                 }, {
                     "name": "merchantPreferences",
                     "type": "JSON",
-                    "info": "Optional: Json object. Resource that represents the merchant preferences for a plan, such as max failed attempts, set up fee, and so on. See the parameter notes section for more information. See createPlan README for more details."
+                    "info": "Json object. Resource that represents the merchant preferences for a plan, such as max failed attempts, set up fee, and so on. See the parameter notes section for more information. See createPlan README for more details.",
+                    "required": false
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -618,19 +715,23 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "planId",
                     "type": "String",
-                    "info": "Required: The ID of the billing plan to update."
+                    "info": "The ID of the billing plan to update.",
+                    "required": true
                 }, {
                     "name": "items",
                     "type": "JSON",
-                    "info": "Optional: A JSON array patch object used for applying partial updates to resources. See the parameter notes section for more information. See updatePlan README for more details."
+                    "info": "A JSON array patch object used for applying partial updates to resources. See the parameter notes section for more information. See updatePlan README for more details.",
+                    "required": false
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -645,15 +746,18 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "planId",
                     "type": "String",
-                    "info": "Required: The ID of the billing plan to update."
+                    "info": "The ID of the billing plan to update.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -668,27 +772,33 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "page",
                     "type": "String",
-                    "info": "Optional: The page to return. Default is 0."
+                    "info": "The page to return. Default is 0.",
+                    "required": false
                 }, {
                     "name": "status",
                     "type": "String",
-                    "info": "Optional: The state. Default is CREATED. Possible values: created, active, inactive."
+                    "info": "The state. Default is CREATED. Possible values: created, active, inactive.",
+                    "required": false
                 }, {
                     "name": "pageSize",
                     "type": "String",
-                    "info": "Optional: The maximum number of results to return at one time. A valid value is a non-negative, non-zero integer. Default is 10."
+                    "info": "The maximum number of results to return at one time. A valid value is a non-negative, non-zero integer. Default is 10.",
+                    "required": false
                 }, {
                     "name": "totalRequired",
                     "type": "String",
-                    "info": "Optional: The total number of items and pages to return in the response."
+                    "info": "The total number of items and pages to return in the response.",
+                    "required": false
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -703,47 +813,58 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "name",
                     "type": "String",
-                    "info": "Required: Name of the agreement. Maximum length: 128."
+                    "info": "Name of the agreement. Maximum length: 128.",
+                    "required": true
                 }, {
                     "name": "description",
                     "type": "String",
-                    "info": "Required: Description of the agreement. Maximum length: 128."
+                    "info": "Description of the agreement. Maximum length: 128.",
+                    "required": true
                 }, {
                     "name": "startDate",
                     "type": "String",
-                    "info": "Required: Start date of the agreement. Date format yyyy-MM-dd z, as defined in ISO8601. Format: YYYY-MM-DDTHH:MM:SSTimeZone."
+                    "info": "Start date of the agreement. Date format yyyy-MM-dd z, as defined in ISO8601. Format: YYYY-MM-DDTHH:MM:SSTimeZone.",
+                    "required": true
                 }, {
                     "name": "payer",
                     "type": "JSON",
-                    "info": "Required: Json object. A resource representing a Payer that funds a payment. See the parameter notes section for more information. See createAgreement README for more details."
+                    "info": "Json object. A resource representing a Payer that funds a payment. See the parameter notes section for more information. See createAgreement README for more details.",
+                    "required": true
                 }, {
                     "name": "plan",
                     "type": "JSON",
-                    "info": "Required: Json object. Billing plan resource that will be used to create a billing agreement. See the parameter notes section for more information. See createAgreement README for more details."
+                    "info": "Json object. Billing plan resource that will be used to create a billing agreement. See the parameter notes section for more information. See createAgreement README for more details.",
+                    "required": true
                 }, {
                     "name": "agreementDetails",
                     "type": "JSON",
-                    "info": "Optional: Json object. A resource representing the agreement details. See the parameter notes section for more information. See createAgreement README for more details."
+                    "info": "Json object. A resource representing the agreement details. See the parameter notes section for more information. See createAgreement README for more details.",
+                    "required": false
                 }, {
                     "name": "shippingAddress",
                     "type": "JSON",
-                    "info": "Optional: Json object. Base Address object used as billing address in a payment or extended for Shipping Address. See the parameter notes section for more information. See createAgreement README for more details."
+                    "info": "Json object. Base Address object used as billing address in a payment or extended for Shipping Address. See the parameter notes section for more information. See createAgreement README for more details.",
+                    "required": false
                 }, {
                     "name": "overrideChargeModels",
                     "type": "JSON",
-                    "info": "Optional: Array of json objects. A resource representing an override_charge_model to be used during creation of the agreement. See the parameter notes section for more information. See createAgreement README for more details."
+                    "info": "Array of json objects. A resource representing an override_charge_model to be used during creation of the agreement. See the parameter notes section for more information. See createAgreement README for more details.",
+                    "required": false
                 }, {
                     "name": "overrideMerchantPreferences",
                     "type": "JSON",
-                    "info": "Optional: Json object. Resource representing merchant preferences like max failed attempts,set up fee and others for a plan. See the parameter notes section for more information. See createAgreement README for more details."
+                    "info": "Json object. Resource representing merchant preferences like max failed attempts,set up fee and others for a plan. See the parameter notes section for more information. See createAgreement README for more details.",
+                    "required": false
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -758,15 +879,18 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "paymentToken",
                     "type": "String",
-                    "info": "Required: Identifier of the agreement resource to execute."
+                    "info": "Identifier of the agreement resource to execute.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -781,19 +905,23 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "agreementId",
                     "type": "String",
-                    "info": "Required: Identifier of the agreement resource to update."
+                    "info": "Identifier of the agreement resource to update.",
+                    "required": true
                 }, {
                     "name": "items",
                     "type": "JSON",
-                    "info": "Required: Array of json objects. A JSON patch object used for applying partial updates to resources. See the parameter notes section for more information. See updateAgreement README for more details."
+                    "info": "Array of json objects. A JSON patch object used for applying partial updates to resources. See the parameter notes section for more information. See updateAgreement README for more details.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -808,15 +936,18 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "agreementId",
                     "type": "String",
-                    "info": "Required: Identifier of the agreement resource to retrieve."
+                    "info": "Identifier of the agreement resource to retrieve.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -831,23 +962,28 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "agreementId",
                     "type": "String",
-                    "info": "Required: Identifier of the agreement resource to suspend."
+                    "info": "Identifier of the agreement resource to suspend.",
+                    "required": true
                 }, {
                     "name": "note",
                     "type": "String",
-                    "info": "Required: Reason for changing the state of the agreement. Maximum length: 128."
+                    "info": "Reason for changing the state of the agreement. Maximum length: 128.",
+                    "required": true
                 }, {
                     "name": "amount",
                     "type": "JSON",
-                    "info": "Optional: Json object. Base object for all financial value related fields (balance, payment due, etc.). See the parameter notes section for more information. See suspendAgreement README for more details."
+                    "info": "Json object. Base object for all financial value related fields (balance, payment due, etc.). See the parameter notes section for more information. See suspendAgreement README for more details.",
+                    "required": false
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -862,23 +998,28 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "agreementId",
                     "type": "String",
-                    "info": "Required: Identifier of the agreement resource to re-activate."
+                    "info": "Identifier of the agreement resource to re-activate.",
+                    "required": true
                 }, {
                     "name": "note",
                     "type": "String",
-                    "info": "Required: Reason for changing the state of the agreement. Maximum length: 128."
+                    "info": "Reason for changing the state of the agreement. Maximum length: 128.",
+                    "required": true
                 }, {
                     "name": "amount",
                     "type": "JSON",
-                    "info": "Optional: Json object. Base object for all financial value related fields (balance, payment due, etc.). See the parameter notes section for more information. See reactivateAgreement README for more details."
+                    "info": "Json object. Base object for all financial value related fields (balance, payment due, etc.). See the parameter notes section for more information. See reactivateAgreement README for more details.",
+                    "required": false
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -893,23 +1034,28 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "agreementId",
                     "type": "String",
-                    "info": "Required: Identifier of the agreement resource to cancel."
+                    "info": "Identifier of the agreement resource to cancel.",
+                    "required": true
                 }, {
                     "name": "note",
                     "type": "String",
-                    "info": "Required: Reason for changing the state of the agreement. Maximum length: 128."
+                    "info": "Reason for changing the state of the agreement. Maximum length: 128.",
+                    "required": true
                 }, {
                     "name": "amount",
                     "type": "JSON",
-                    "info": "Optional: Json object. Base object for all financial value related fields (balance, payment due, etc.). See the parameter notes section for more information. See cancelAgreement README for more details."
+                    "info": "Json object. Base object for all financial value related fields (balance, payment due, etc.). See the parameter notes section for more information. See cancelAgreement README for more details.",
+                    "required": false
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -924,23 +1070,28 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "agreementId",
                     "type": "String",
-                    "info": "Required: Identifier of the agreement resource to cancel."
+                    "info": "Identifier of the agreement resource to cancel.",
+                    "required": true
                 }, {
                     "name": "startDate",
                     "type": "String",
-                    "info": "Required: The start date of the range of transactions to list."
+                    "info": "The start date of the range of transactions to list.",
+                    "required": true
                 }, {
                     "name": "endDate",
                     "type": "String",
-                    "info": "Required: The end date of the range of transactions to list."
+                    "info": "The end date of the range of transactions to list.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -955,23 +1106,28 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "agreementId",
                     "type": "String",
-                    "info": "Required: Identifier of the agreement resource to cancel."
+                    "info": "Identifier of the agreement resource to cancel.",
+                    "required": true
                 }, {
                     "name": "currency",
                     "type": "String",
-                    "info": "Required: 3 letter currency code as defined by ISO 4217."
+                    "info": "3 letter currency code as defined by ISO 4217.",
+                    "required": true
                 }, {
                     "name": "value",
                     "type": "String",
-                    "info": "Required: amount up to N digit after the decimals separator as defined in ISO 4217 for the appropriate currency code"
+                    "info": "amount up to N digit after the decimals separator as defined in ISO 4217 for the appropriate currency code",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -986,23 +1142,28 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "agreementId",
                     "type": "String",
-                    "info": "Required: Identifier of the agreement resource to cancel."
+                    "info": "Identifier of the agreement resource to cancel.",
+                    "required": true
                 }, {
                     "name": "note",
                     "type": "String",
-                    "info": "Required: Reason for changing the state of the agreement. Maximum length: 128."
+                    "info": "Reason for changing the state of the agreement. Maximum length: 128.",
+                    "required": true
                 }, {
                     "name": "amount",
                     "type": "JSON",
-                    "info": "Required: Json object. Base object for all financial value related fields (balance, payment due, etc.). See the parameter notes section for more information. See billAgreementBalance README for more details."
+                    "info": "Json object. Base object for all financial value related fields (balance, payment due, etc.). See the parameter notes section for more information. See billAgreementBalance README for more details.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1017,23 +1178,28 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "senderBatchHeader",
                     "type": "JSON",
-                    "info": "Required: Json object. The sender-provided batch header for a batch payout request. See the parameter notes section for more information. See createPayout README for more details."
+                    "info": "Json object. The sender-provided batch header for a batch payout request. See the parameter notes section for more information. See createPayout README for more details.",
+                    "required": true
                 }, {
                     "name": "items",
                     "type": "JSON",
-                    "info": "Required: Array of json objects. A sender-created definition of a payout to a single recipient. Maximum length: 5000. See the parameter notes section for more information. See createPayout README for more details."
+                    "info": "Array of json objects. A sender-created definition of a payout to a single recipient. Maximum length: 5000. See the parameter notes section for more information. See createPayout README for more details.",
+                    "required": true
                 }, {
                     "name": "syncMode",
                     "type": "String",
-                    "info": "Optional: Set to true to return an immediate and synchronous response. Default is false, which returns an asynchronous response in the background."
+                    "info": "Set to true to return an immediate and synchronous response. Default is false, which returns an asynchronous response in the background.",
+                    "required": false
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1048,19 +1214,23 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "payoutBatchId",
                     "type": "String",
-                    "info": "Required: The ID of the batch payout for which to show status."
+                    "info": "The ID of the batch payout for which to show status.",
+                    "required": true
                 }, {
                     "name": "fields",
                     "type": "String",
-                    "info": "Optional: Shows details for only specified fields."
+                    "info": "Shows details for only specified fields.",
+                    "required": false
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1075,15 +1245,18 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "payoutItemId",
                     "type": "String",
-                    "info": "Required: The ID of the payout item for which to show details."
+                    "info": "The ID of the payout item for which to show details.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1098,15 +1271,18 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "payoutItemId",
                     "type": "String",
-                    "info": "Required: The ID of the payout item for which to show details."
+                    "info": "The ID of the payout item for which to show details.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1121,59 +1297,73 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "number",
                     "type": "String",
-                    "info": "Required: Credit card number. Valid value is numeric characters with no spaces or punctuation. The string must conform with modulo and length required by each credit card type."
+                    "info": "Credit card number. Valid value is numeric characters with no spaces or punctuation. The string must conform with modulo and length required by each credit card type.",
+                    "required": true
                 }, {
                     "name": "type",
                     "type": "String",
-                    "info": "Required: Credit card type. Allowed values: visa, mastercard, amex, discover, maestro."
+                    "info": "Credit card type. Allowed values: visa, mastercard, amex, discover, maestro.",
+                    "required": true
                 }, {
                     "name": "expireMonth",
                     "type": "String",
-                    "info": "Required: Expiration month with no leading zero."
+                    "info": "Expiration month with no leading zero.",
+                    "required": true
                 }, {
                     "name": "expireYear",
                     "type": "String",
-                    "info": "Required: The 4-digit card expiry year."
+                    "info": "The 4-digit card expiry year.",
+                    "required": true
                 }, {
                     "name": "cvv2",
                     "type": "String",
-                    "info": "Optional: The 3 to 4 digit card validation code."
+                    "info": "The 3 to 4 digit card validation code.",
+                    "required": false
                 }, {
                     "name": "firstName",
                     "type": "String",
-                    "info": "Optional: The first name of the card holder. Maximum length is 25 characters."
+                    "info": "The first name of the card holder. Maximum length is 25 characters.",
+                    "required": false
                 }, {
                     "name": "lastName",
                     "type": "String",
-                    "info": "Optional: The last name of the card holder."
+                    "info": "The last name of the card holder.",
+                    "required": false
                 }, {
                     "name": "billingAddress",
                     "type": "JSON",
-                    "info": "Optional: Json object. Base Address object used as billing address in a payment or extended for Shipping Address. See the parameter notes section for more information. See createCreditCard README for more details."
+                    "info": "Json object. Base Address object used as billing address in a payment or extended for Shipping Address. See the parameter notes section for more information. See createCreditCard README for more details.",
+                    "required": false
                 }, {
                     "name": "externalCustomerId",
                     "type": "String",
-                    "info": "Optional: Externally provided ID of the customer for which to list credit card resources."
+                    "info": "Externally provided ID of the customer for which to list credit card resources.",
+                    "required": false
                 }, {
                     "name": "merchantId",
                     "type": "String",
-                    "info": "Optional: ID of the merchant for which to list credit card resources."
+                    "info": "ID of the merchant for which to list credit card resources.",
+                    "required": false
                 }, {
                     "name": "payerId",
                     "type": "String",
-                    "info": "Optional: unique ID that you can assign and track when you store a credit card or use a stored credit card."
+                    "info": "unique ID that you can assign and track when you store a credit card or use a stored credit card.",
+                    "required": false
                 }, {
                     "name": "externalCardId",
                     "type": "String",
-                    "info": "Optional: Externally provided ID of the card for which to list credit card resources."
+                    "info": "Externally provided ID of the card for which to list credit card resources.",
+                    "required": false
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1188,15 +1378,18 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "creditCardId",
                     "type": "String",
-                    "info": "Required: The ID of the credit card resource for which to show data."
+                    "info": "The ID of the credit card resource for which to show data.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1211,15 +1404,18 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "creditCardId",
                     "type": "String",
-                    "info": "Required: The ID of the credit card resource for which to show data."
+                    "info": "The ID of the credit card resource for which to show data.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1234,51 +1430,63 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "pageSize",
                     "type": "String",
-                    "info": "Optional: The number of resources to list, starting with the specified page. Default: 10." 
+                    "info": "The number of resources to list, starting with the specified page. Default: 10.",
+                    "required": false
                 }, {
                     "name": "page",
                     "type": "String",
-                    "info": "Optional: The number of pages to get. Default: 1."
+                    "info": "The number of pages to get. Default: 1.",
+                    "required": false
                 }, {
                     "name": "startTime",
                     "type": "String",
-                    "info": "Optional: The date and time when the resource was created in ISO8601 date-time format that indicates the start of a range of results. For example, 2013-11-05T13:15:30Z."
+                    "info": "The date and time when the resource was created in ISO8601 date-time format that indicates the start of a range of results. For example, 2013-11-05T13:15:30Z.",
+                    "required": false
                 }, {
                     "name": "endTime",
                     "type": "String",
-                    "info": "Optional: The date and time when the resource was created in ISO8601 date-time format that indicates the end of a range of results. For example, 2014-11-05T13:15:30Z."
+                    "info": "The date and time when the resource was created in ISO8601 date-time format that indicates the end of a range of results. For example, 2014-11-05T13:15:30Z.",
+                    "required": false
                 }, {
                     "name": "sortOrder",
                     "type": "String",
-                    "info": "Optional: Sorts the response in ascending or descending order. Value is asc for ascending order or desc for descending order. Default: desc."
+                    "info": "Sorts the response in ascending or descending order. Value is asc for ascending order or desc for descending order. Default: desc.",
+                    "required": false
                 }, {
                     "name": "sortBy",
                     "type": "String",
-                    "info": "Optional: Sorts the response by create_time or update_time. Default: create_time."
+                    "info": "Sorts the response by create_time or update_time. Default: create_time.",
+                    "required": false
                 }, {
                     "name": "merchantId",
                     "type": "String",
-                    "info": "Optional: A user-provided, optional field that functions as a unique identifier for the merchant holding the card. Note that this has no relation to PayPal merchant ID."
+                    "info": "A user-provided, optional field that functions as a unique identifier for the merchant holding the card. Note that this has no relation to PayPal merchant ID.",
+                    "required": false
                 }, {
                     "name": "externalCardId",
                     "type": "String",
-                    "info": "Optional: A unique identifier of the bank account resource. Generated and provided by the facilitator to use to restrict the usage of the bank account to the specific merchant."
+                    "info": "A unique identifier of the bank account resource. Generated and provided by the facilitator to use to restrict the usage of the bank account to the specific merchant.",
+                    "required": false
                 }, {
                     "name": "externalCustomerId",
                     "type": "String",
-                    "info": "Optional: Externally provided customer identifier to filter the search results in list operations."
+                    "info": "Externally provided customer identifier to filter the search results in list operations.",
+                    "required": false
                 }, {
                     "name": "totalRequired",
                     "type": "String",
-                    "info": "Optional: Indicates whether the response returns the total_items and total_pages values. Default is true. Set to false to omit these values from the response."
+                    "info": "Indicates whether the response returns the total_items and total_pages values. Default is true. Set to false to omit these values from the response.",
+                    "required": false
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1293,19 +1501,23 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "creditCardId",
                     "type": "String",
-                    "info": "Required: The ID of the credit card resource to update."
+                    "info": "The ID of the credit card resource to update.",
+                    "required": true
                 }, {
                     "name": "items",
                     "type": "JSON",
-                    "info": "Required: Array of json objects. A JSON patch object used for applying partial updates to resources. See the parameter notes section for more information. See updateCreditCard README for more details."
+                    "info": "Array of json objects. A JSON patch object used for applying partial updates to resources. See the parameter notes section for more information. See updateCreditCard README for more details.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1320,27 +1532,33 @@
             "args": [{
                     "name": "clientId",
                     "type": "credentials",
-                    "info": "Required: Client id."
+                    "info": "Client id.",
+                    "required": true
                 }, {
                     "name": "secret",
                     "type": "credentials",
-                    "info": "Required: secret"
+                    "info": "secret",
+                    "required": true
                 }, {
                     "name": "grantType",
                     "type": "String",
-                    "info": "Required: Token grant type. Value must be set to authorization_code."
+                    "info": "Token grant type. Value must be set to authorization_code.",
+                    "required": true
                 }, {
                     "name": "code",
                     "type": "String",
-                    "info": "Required: Authorization code previously received from the authorization server."
+                    "info": "Authorization code previously received from the authorization server.",
+                    "required": true
                 }, {
                     "name": "redirectUri",
                     "type": "String",
-                    "info": "Required: AApplication return URL where the authorization code is sent."
+                    "info": "Application return URL where the authorization code is sent.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1355,27 +1573,33 @@
             "args": [{
                     "name": "clientId",
                     "type": "credentials",
-                    "info": "Required: Client id."
+                    "info": "Client id.",
+                    "required": true
                 }, {
                     "name": "secret",
                     "type": "credentials",
-                    "info": "Required: secret"
+                    "info": "secret",
+                    "required": true
                 }, {
                     "name": "grantType",
                     "type": "String",
-                    "info": "Required: Token grant type. Value must be set to authorization_code."
+                    "info": "Token grant type. Value must be set to authorization_code.",
+                    "required": true
                 }, {
                     "name": "refreshToken",
                     "type": "String",
-                    "info": "Required: Refresh token previously received along with the access token that is to be refreshed."
+                    "info": "Refresh token previously received along with the access token that is to be refreshed.",
+                    "required": true
                 }, {
                     "name": "scope",
                     "type": "String",
-                    "info": "Optional: Resource URL endpoints that the client wants the token to be scoped for. The value of the scope parameter is expressed as a list of space-delimited, case-sensitive strings."
+                    "info": "Resource URL endpoints that the client wants the token to be scoped for. The value of the scope parameter is expressed as a list of space-delimited, case-sensitive strings.",
+                    "required": false
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1390,15 +1614,18 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "schema",
                     "type": "String",
-                    "info": "Required: the schema that is used to return as per openidconnect protocol. Possible values: openid."
+                    "info": "the schema that is used to return as per openidconnect protocol. Possible values: openid.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1413,99 +1640,123 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "merchantInfo",
                     "type": "JSON",
-                    "info": "Required: Json object. Merchant business information that appears on the invoice. See the parameter notes section for more information. See createInvoice README for more details."
+                    "info": "Json object. Merchant business information that appears on the invoice. See the parameter notes section for more information. See createInvoice README for more details.",
+                    "required": true
                 }, {
                     "name": "number",
                     "type": "String",
-                    "info": "Optional: The unique invoice number. If you omit this number, it is auto-incremented from the previous invoice number. Maximum length: 25."
+                    "info": "The unique invoice number. If you omit this number, it is auto-incremented from the previous invoice number. Maximum length: 25.",
+                    "required": false
                 }, {
                     "name": "templateId",
                     "type": "String",
-                    "info": "Optional: The ID of the template from which to create the invoice. Useful for copy functionality."
+                    "info": "The ID of the template from which to create the invoice. Useful for copy functionality.",
+                    "required": false
                 }, {
                     "name": "billingInfo",
                     "type": "JSON",
-                    "info": "Optional: Array of json objects. Billing information for the invoice recipient. See the parameter notes section for more information. See createInvoice README for more details."
+                    "info": "Array of json objects. Billing information for the invoice recipient. See the parameter notes section for more information. See createInvoice README for more details.",
+                    "required": false
                 }, {
                     "name": "ccInfo",
                     "type": "JSON",
-                    "info": "Optional: Array of json objects. Participant information. See the parameter notes section for more information. See createInvoice README for more details."
+                    "info": "Array of json objects. Participant information. See the parameter notes section for more information. See createInvoice README for more details.",
+                    "required": false
                 }, {
                     "name": "shippingInfo",
                     "type": "JSON",
-                    "info": "Optional: Json object. Shipping information for the invoice recipient. See the parameter notes section for more information. See createInvoice README for more details."
+                    "info": "Json object. Shipping information for the invoice recipient. See the parameter notes section for more information. See createInvoice README for more details.",
+                    "required": false
                 }, {
                     "name": "items",
                     "type": "JSON",
-                    "info": "Optional: Array of json objects. Line item information. See the parameter notes section for more information. See createInvoice README for more details."
+                    "info": "Array of json objects. Line item information. See the parameter notes section for more information. See createInvoice README for more details.",
+                    "required": false
                 }, {
                     "name": "invoiceDate",
                     "type": "String",
-                    "info": "Optional: The date when the invoice was enabled. The date format is yyyy-MM-dd z."
+                    "info": "The date when the invoice was enabled. The date format is yyyy-MM-dd z.",
+                    "required": false
                 }, {
                     "name": "paymentTerm",
                     "type": "JSON",
-                    "info": "Optional: Json object. The payment term of the invoice. If you specify term_type, you cannot specify due_date, and vice versa. See the parameter notes section for more information. See createInvoice README for more details."
+                    "info": "Json object. The payment term of the invoice. If you specify term_type, you cannot specify due_date, and vice versa. See the parameter notes section for more information. See createInvoice README for more details.",
+                    "required": false
                 }, {
                     "name": "reference",
                     "type": "String",
-                    "info": "Optional: Reference data, such as PO number, to add to the invoice. Maximum length: 60."
+                    "info": "Reference data, such as PO number, to add to the invoice. Maximum length: 60.",
+                    "required": false
                 }, {
                     "name": "discount",
                     "type": "JSON",
-                    "info": "Optional: Json object. The cost as a percent or an amount value. For example, to specify 10%, enter 10. Alternatively, to specify an amount of 5, enter 5. See the parameter notes section for more information. See createInvoice README for more details."
+                    "info": "Json object. The cost as a percent or an amount value. For example, to specify 10%, enter 10. Alternatively, to specify an amount of 5, enter 5. See the parameter notes section for more information. See createInvoice README for more details.",
+                    "required": false
                 }, {
                     "name": "shippingCost",
                     "type": "JSON",
-                    "info": "Optional: Json object. Shipping cost, as a percent or an amount value. See the parameter notes section for more information. See createInvoice README for more details."
+                    "info": "Json object. Shipping cost, as a percent or an amount value. See the parameter notes section for more information. See createInvoice README for more details.",
+                    "required": false
                 }, {
                     "name": "custom",
                     "type": "JSON",
-                    "info": "Optional: Json object. The custom amount to apply to an invoice. If you include a label, you must include a custom amount. See the parameter notes section for more information. See createInvoice README for more details."
+                    "info": "Json object. The custom amount to apply to an invoice. If you include a label, you must include a custom amount. See the parameter notes section for more information. See createInvoice README for more details.",
+                    "required": false
                 }, {
                     "name": "allowPartialPayment",
                     "type": "String",
-                    "info": "Optional: Indicates whether the invoice allows a partial payment. If false, invoice must be paid in full. If true, the invoice allows partial payments. Default is false."
+                    "info": "Indicates whether the invoice allows a partial payment. If false, invoice must be paid in full. If true, the invoice allows partial payments. Default is false.",
+                    "required": false
                 }, {
                     "name": "minimumAmountDue",
                     "type": "JSON",
-                    "info": "Optional: Json object. Base object for all financial value related fields (balance, payment due, etc.). See the parameter notes section for more information. See createInvoice README for more details."
+                    "info": "Json object. Base object for all financial value related fields (balance, payment due, etc.). See the parameter notes section for more information. See createInvoice README for more details.",
+                    "required": false
                 }, {
                     "name": "taxCalculatedAfterDiscount",
                     "type": "String",
-                    "info": "Optional: Indicates whether the tax is calculated before or after a discount. If false, the tax is calculated before a discount. If true, the tax is calculated after a discount. Default is false."
+                    "info": "Indicates whether the tax is calculated before or after a discount. If false, the tax is calculated before a discount. If true, the tax is calculated after a discount. Default is false.",
+                    "required": false
                 }, {
                     "name": "taxInclusive",
                     "type": "String",
-                    "info": "Optional: Indicates whether the unit price includes tax. Default is false."
+                    "info": "Indicates whether the unit price includes tax. Default is false.",
+                    "required": false
                 }, {
                     "name": "terms",
                     "type": "String",
-                    "info": "Optional: The general terms of the invoice. Maximum length: 4000."
+                    "info": "The general terms of the invoice. Maximum length: 4000.",
+                    "required": false
                 }, {
                     "name": "note",
                     "type": "String",
-                    "info": "Optional: A note to the payer. Maximum length: 4000."
+                    "info": "A note to the payer. Maximum length: 4000.",
+                    "required": false
                 }, {
                     "name": "merchantMemo",
                     "type": "String",
-                    "info": "Optional: A private bookkeeping memo for the merchant. Maximum length: 150."
+                    "info": "A private bookkeeping memo for the merchant. Maximum length: 150.",
+                    "required": false
                 }, {
                     "name": "logoUrl",
                     "type": "String",
-                    "info": "Optional: The full URL to an external logo image. Maximum length: 4000."
+                    "info": "The full URL to an external logo image. Maximum length: 4000.",
+                    "required": false
                 }, {
                     "name": "attachments",
                     "type": "JSON",
-                    "info": "Optional: The array of files attached to an invoice or template."
+                    "info": "The array of files attached to an invoice or template.",
+                    "required": false
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1520,19 +1771,23 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "invoiceId",
                     "type": "String",
-                    "info": "Required: The ID of the invoice to send."
+                    "info": "The ID of the invoice to send.",
+                    "required": true
                 }, {
                     "name": "notifyMerchant",
                     "type": "String",
-                    "info": "Optional: Indicates whether to send the invoice update notification to the merchant. Default is true."
+                    "info": "Indicates whether to send the invoice update notification to the merchant. Default is true.",
+                    "required": false
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1547,107 +1802,133 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "invoiceId",
                     "type": "String",
-                    "info": "Required: The ID of the invoice to update."
+                    "info": "The ID of the invoice to update.",
+                    "required": true
                 }, {
                     "name": "merchantInfo",
                     "type": "JSON",
-                    "info": "Required: Json object. Merchant business information that appears on the invoice. See the parameter notes section for more information. See updateInvoice README for more details."
+                    "info": "Json object. Merchant business information that appears on the invoice. See the parameter notes section for more information. See updateInvoice README for more details.",
+                    "required": true
                 }, {
                     "name": "notifyMerchant",
                     "type": "String",
-                    "info": "Optional: Indicates whether to send the invoice update notification to the merchant. Default is true."
+                    "info": "Indicates whether to send the invoice update notification to the merchant. Default is true.",
+                    "required": false
                 }, {
                     "name": "number",
                     "type": "String",
-                    "info": "Optional: The unique invoice number. If you omit this number, it is auto-incremented from the previous invoice number. Maximum length: 25."
+                    "info": "The unique invoice number. If you omit this number, it is auto-incremented from the previous invoice number. Maximum length: 25.",
+                    "required": false
                 }, {
                     "name": "templateId",
                     "type": "String",
-                    "info": "Optional: The ID of the template from which to create the invoice. Useful for copy functionality."
+                    "info": "The ID of the template from which to create the invoice. Useful for copy functionality.",
+                    "required": false
                 }, {
                     "name": "billingInfo",
                     "type": "JSON",
-                    "info": "Optional: Array of json objects. Billing information for the invoice recipient. See the parameter notes section for more information. See updateInvoice README for more details."
+                    "info": "Array of json objects. Billing information for the invoice recipient. See the parameter notes section for more information. See updateInvoice README for more details.",
+                    "required": false
                 }, {
                     "name": "ccInfo",
                     "type": "JSON",
-                    "info": "Optional: Array of json objects. Participant information. See the parameter notes section for more information. See updateInvoice README for more details."
+                    "info": "Array of json objects. Participant information. See the parameter notes section for more information. See updateInvoice README for more details.",
+                    "required": false
                 }, {
                     "name": "shippingInfo",
                     "type": "JSON",
-                    "info": "Optional: Json object. Shipping information for the invoice recipient. See the parameter notes section for more information. See updateInvoice README for more details."
+                    "info": "Json object. Shipping information for the invoice recipient. See the parameter notes section for more information. See updateInvoice README for more details.",
+                    "required": false
                 }, {
                     "name": "items",
                     "type": "JSON",
-                    "info": "Optional: Array of json objects. Line item information. See the parameter notes section for more information. See updateInvoice README for more details."
+                    "info": "Array of json objects. Line item information. See the parameter notes section for more information. See updateInvoice README for more details.",
+                    "required": false
                 }, {
                     "name": "invoiceDate",
                     "type": "String",
-                    "info": "Optional: The date when the invoice was enabled. The date format is yyyy-MM-dd z."
+                    "info": "The date when the invoice was enabled. The date format is yyyy-MM-dd z.",
+                    "required": false
                 }, {
                     "name": "paymentTerm",
                     "type": "JSON",
-                    "info": "Optional: Json object. The payment term of the invoice. If you specify term_type, you cannot specify due_date, and vice versa. See the parameter notes section for more information. See updateInvoice README for more details."
+                    "info": "Json object. The payment term of the invoice. If you specify term_type, you cannot specify due_date, and vice versa. See the parameter notes section for more information. See updateInvoice README for more details.",
+                    "required": false
                 }, {
                     "name": "reference",
                     "type": "String",
-                    "info": "Optional: Reference data, such as PO number, to add to the invoice. Maximum length: 60."
+                    "info": "Reference data, such as PO number, to add to the invoice. Maximum length: 60.",
+                    "required": false
                 }, {
                     "name": "discount",
                     "type": "JSON",
-                    "info": "Optional: Json object. The cost as a percent or an amount value. For example, to specify 10%, enter 10. Alternatively, to specify an amount of 5, enter 5. See the parameter notes section for more information. See updateInvoice README for more details."
+                    "info": "Json object. The cost as a percent or an amount value. For example, to specify 10%, enter 10. Alternatively, to specify an amount of 5, enter 5. See the parameter notes section for more information. See updateInvoice README for more details.",
+                    "required": false
                 }, {
                     "name": "shippingCost",
                     "type": "JSON",
-                    "info": "Optional: Json object. Shipping cost, as a percent or an amount value. See the parameter notes section for more information. See updateInvoice README for more details."
+                    "info": "Json object. Shipping cost, as a percent or an amount value. See the parameter notes section for more information. See updateInvoice README for more details.",
+                    "required": false
                 }, {
                     "name": "custom",
                     "type": "JSON",
-                    "info": "Optional: Json object. The custom amount to apply to an invoice. If you include a label, you must include a custom amount. See the parameter notes section for more information. See updateInvoice README for more details."
+                    "info": "Json object. The custom amount to apply to an invoice. If you include a label, you must include a custom amount. See the parameter notes section for more information. See updateInvoice README for more details.",
+                    "required": false
                 }, {
                     "name": "allowPartialPayment",
                     "type": "String",
-                    "info": "Optional: Indicates whether the invoice allows a partial payment. If false, invoice must be paid in full. If true, the invoice allows partial payments. Default is false."
+                    "info": "Indicates whether the invoice allows a partial payment. If false, invoice must be paid in full. If true, the invoice allows partial payments. Default is false.",
+                    "required": false
                 }, {
                     "name": "minimumAmountDue",
                     "type": "JSON",
-                    "info": "Optional: Json object. Base object for all financial value related fields (balance, payment due, etc.). See the parameter notes section for more information. See updateInvoice README for more details."
+                    "info": "Json object. Base object for all financial value related fields (balance, payment due, etc.). See the parameter notes section for more information. See updateInvoice README for more details.",
+                    "required": false
                 }, {
                     "name": "taxCalculatedAfterDiscount",
                     "type": "String",
-                    "info": "Optional: Indicates whether the tax is calculated before or after a discount. If false, the tax is calculated before a discount. If true, the tax is calculated after a discount. Default is false."
+                    "info": "Indicates whether the tax is calculated before or after a discount. If false, the tax is calculated before a discount. If true, the tax is calculated after a discount. Default is false.",
+                    "required": false
                 }, {
                     "name": "taxInclusive",
                     "type": "String",
-                    "info": "Optional: Indicates whether the unit price includes tax. Default is false."
+                    "info": "Indicates whether the unit price includes tax. Default is false.",
+                    "required": false
                 }, {
                     "name": "terms",
                     "type": "String",
-                    "info": "Optional: The general terms of the invoice. Maximum length: 4000."
+                    "info": "The general terms of the invoice. Maximum length: 4000.",
+                    "required": false
                 }, {
                     "name": "note",
                     "type": "String",
-                    "info": "Optional: A note to the payer. Maximum length: 4000."
+                    "info": "A note to the payer. Maximum length: 4000.",
+                    "required": false
                 }, {
                     "name": "merchantMemo",
                     "type": "String",
-                    "info": "Optional: A private bookkeeping memo for the merchant. Maximum length: 150."
+                    "info": "A private bookkeeping memo for the merchant. Maximum length: 150.",
+                    "required": false
                 }, {
                     "name": "logoUrl",
                     "type": "String",
-                    "info": "Optional: The full URL to an external logo image. Maximum length: 4000."
+                    "info": "The full URL to an external logo image. Maximum length: 4000.",
+                    "required": false
                 }, {
                     "name": "attachments",
                     "type": "JSON",
-                    "info": "Optional: The array of files attached to an invoice or template."
+                    "info": "The array of files attached to an invoice or template.",
+                    "required": false
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1662,15 +1943,18 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "invoiceId",
                     "type": "String",
-                    "info": "Required: The ID of the invoice to update."
+                    "info": "The ID of the invoice to update.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1685,23 +1969,28 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "page",
                     "type": "String",
-                    "info": "Optional: A zero-relative index of the list of merchant invoices. Default: 1."
+                    "info": "A zero-relative index of the list of merchant invoices. Default: 1.",
+                    "required": false
                 }, {
                     "name": "pageSize",
                     "type": "String",
-                    "info": "Optional: The number of invoices to list beginning with the specified page. Default: 10."
+                    "info": "The number of invoices to list beginning with the specified page. Default: 10.",
+                    "required": false
                 }, {
                     "name": "totalCountRequired",
                     "type": "String",
-                    "info": "Optional: Indicates whether the total count appears in the response. Default is false."
+                    "info": "Indicates whether the total count appears in the response. Default is false.",
+                    "required": false
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1716,11 +2005,13 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1735,91 +2026,113 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "email",
                     "type": "String",
-                    "info": "Optional: The initial letters of the email address."
+                    "info": "The initial letters of the email address.",
+                    "required": false
                 }, {
                     "name": "recipientFirstName",
                     "type": "String",
-                    "info": "Optional: The initial letters of the recipient first name."
+                    "info": "The initial letters of the recipient first name.",
+                    "required": false
                 }, {
                     "name": "recipientLastName",
                     "type": "String",
-                    "info": "Optional: The initial letters of the recipient last name."
+                    "info": "The initial letters of the recipient last name.",
+                    "required": false
                 }, {
                     "name": "recipientBusinessName",
                     "type": "String",
-                    "info": "Optional: The initial letters of the recipient business name."
+                    "info": "The initial letters of the recipient business name.",
+                    "required": false
                 }, {
                     "name": "number",
                     "type": "String",
-                    "info": "Optional: The invoice number."
+                    "info": "The invoice number.",
+                    "required": false
                 }, {
                     "name": "status",
                     "type": "String",
-                    "info": "Optional: The invoice status. Allowed values: DRAFT, SENT, PAID, MARKED_AS_PAID, CANCELLED, REFUNDED, PARTIALLY_REFUNDED, MARKED_AS_REFUNDED."
+                    "info": "The invoice status. Allowed values: DRAFT, SENT, PAID, MARKED_AS_PAID, CANCELLED, REFUNDED, PARTIALLY_REFUNDED, MARKED_AS_REFUNDED.",
+                    "required": false
                 }, {
                     "name": "lowerTotalAmount",
                     "type": "JSON",
-                    "info": "Optional: Json object. Base object for all financial value related fields (balance, payment due, etc.). See the parameter notes section for more information. See searchInvoice README for more details."
+                    "info": "Json object. Base object for all financial value related fields (balance, payment due, etc.). See the parameter notes section for more information. See searchInvoice README for more details.",
+                    "required": false
                 }, {
                     "name": "upperTotalAmount",
                     "type": "JSON",
-                    "info": "Optional: Json object. Base object for all financial value related fields (balance, payment due, etc.). See the parameter notes section for more information. See searchInvoice README for more details."
+                    "info": "Json object. Base object for all financial value related fields (balance, payment due, etc.). See the parameter notes section for more information. See searchInvoice README for more details.",
+                    "required": false
                 }, {
                     "name": "startInvoiceDate",
                     "type": "String",
-                    "info": "Optional: The start date for the invoice. Date format is yyyy-MM-dd z."
+                    "info": "The start date for the invoice. Date format is yyyy-MM-dd z.",
+                    "required": false
                 }, {
                     "name": "endInvoiceDate",
                     "type": "String",
-                    "info": "Optional: The end date for the invoice. Date format is yyyy-MM-dd z."
+                    "info": "The end date for the invoice. Date format is yyyy-MM-dd z.",
+                    "required": false
                 }, {
                     "name": "startDueDate",
                     "type": "String",
-                    "info": "Optional: The start due date for the invoice. Date format is yyyy-MM-dd z."
+                    "info": "The start due date for the invoice. Date format is yyyy-MM-dd z.",
+                    "required": false
                 }, {
                     "name": "endDueDate",
                     "type": "String",
-                    "info": "Optional: The end due date for the invoice. Date format is yyyy-MM-dd z."
+                    "info": "The end due date for the invoice. Date format is yyyy-MM-dd z.",
+                    "required": false
                 }, {
                     "name": "startPaymentDate",
                     "type": "String",
-                    "info": "Optional: The start payment date for the invoice. Date format is yyyy-MM-dd z."
+                    "info": "The start payment date for the invoice. Date format is yyyy-MM-dd z.",
+                    "required": false
                 }, {
                     "name": "endPaymentDate",
                     "type": "String",
-                    "info": "Optional: The end payment date for the invoice. Date format is yyyy-MM-dd z."
+                    "info": "The end payment date for the invoice. Date format is yyyy-MM-dd z.",
+                    "required": false
                 }, {
                     "name": "startCreationDate",
                     "type": "String",
-                    "info": "Optional: The start creation date for the invoice. Date format is yyyy-MM-dd z."
+                    "info": "The start creation date for the invoice. Date format is yyyy-MM-dd z.",
+                    "required": false
                 }, {
                     "name": "endCreationDate",
                     "type": "String",
-                    "info": "Optional: The end creation date for the invoice. Date format is yyyy-MM-dd z."
+                    "info": "The end creation date for the invoice. Date format is yyyy-MM-dd z.",
+                    "required": false
                 }, {
                     "name": "page",
                     "type": "String",
-                    "info": "Optional: The offset for the search results."
+                    "info": "The offset for the search results.",
+                    "required": false
                 }, {
                     "name": "pageSize",
                     "type": "String",
-                    "info": "Optional: The page size for the search results."
+                    "info": "The page size for the search results.",
+                    "required": false
                 }, {
                     "name": "totalCountRequired",
                     "type": "String",
-                    "info": "Optional: Indicates whether the total count appears in the response. Default is false."
+                    "info": "Indicates whether the total count appears in the response. Default is false.",
+                    "required": false
                 }, {
                     "name": "archived",
                     "type": "String",
-                    "info": "Optional: Indicates whether to list merchant-archived invoices in the response. If true, response lists only merchant-archived invoices. If false, response lists only unarchived invoices. If null, response lists all invoices."
+                    "info": "Indicates whether to list merchant-archived invoices in the response. If true, response lists only merchant-archived invoices. If false, response lists only unarchived invoices. If null, response lists all invoices.",
+                    "required": false
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1834,31 +2147,38 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "invoiceId",
                     "type": "String",
-                    "info": "Required: The ID of the invoice."
+                    "info": "The ID of the invoice.",
+                    "required": true
                 }, {
                     "name": "subject",
                     "type": "String",
-                    "info": "Required: The subject of the notification."
+                    "info": "The subject of the notification.",
+                    "required": true
                 }, {
                     "name": "note",
                     "type": "String",
-                    "info": "Required: A note to the payer."
+                    "info": "A note to the payer.",
+                    "required": true
                 }, {
                     "name": "sendToMerchant",
                     "type": "String",
-                    "info": "Required: Indicates whether to send a copy of the email to the merchant. True or false."
+                    "info": "Indicates whether to send a copy of the email to the merchant. True or false.",
+                    "required": true
                 }, {
                     "name": "ccEmails",
                     "type": "JSON",
-                    "info": "Optional: An json array of one or more Cc: emails. See the parameter notes section for more information. See sendInvoiceReminder README for more details."
+                    "info": "An json array of one or more Cc: emails. See the parameter notes section for more information. See sendInvoiceReminder README for more details.",
+                    "required": false
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1873,15 +2193,18 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "invoiceId",
                     "type": "String",
-                    "info": "Required: The ID of the invoice."
+                    "info": "The ID of the invoice.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1896,27 +2219,33 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "invoiceId",
                     "type": "String",
-                    "info": "Required: The ID of the invoice."
+                    "info": "The ID of the invoice.",
+                    "required": true
                 }, {
                     "name": "width",
                     "type": "String",
-                    "info": "Optional: The width, in pixels, of the QR code image. Valid value is from 150 to 500. Default is 500."
+                    "info": "The width, in pixels, of the QR code image. Valid value is from 150 to 500. Default is 500.",
+                    "required": false
                 }, {
                     "name": "height",
                     "type": "String",
-                    "info": "Optional: The height, in pixels, of the QR code image. Valid value is from 150 to 500. Default is 500."
+                    "info": "The height, in pixels, of the QR code image. Valid value is from 150 to 500. Default is 500.",
+                    "required": false
                 }, {
                     "name": "action",
                     "type": "String",
-                    "info": "Optional: The type of URL for which to generate a QR code. Default is pay and is the only supported value."
+                    "info": "The type of URL for which to generate a QR code. Default is pay and is the only supported value.",
+                    "required": false
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1931,15 +2260,18 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "templateId",
                     "type": "String",
-                    "info": "Required: The ID of the template for which to show details."
+                    "info": "The ID of the template for which to show details.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1954,15 +2286,18 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "fields",
                     "type": "String",
-                    "info": "Optional: The fields to return in the response. Value is all or none. Specify none to return only the template name, ID, and default attributes. Default: all."
+                    "info": "The fields to return in the response. Value is all or none. Specify none to return only the template name, ID, and default attributes. Default: all.",
+                    "required": false
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -1977,27 +2312,33 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "name",
                     "type": "String",
-                    "info": "Required: Name of the web experience profile. Unique among only the profiles for a given merchant."
+                    "info": "Name of the web experience profile. Unique among only the profiles for a given merchant.",
+                    "required": true
                 }, {
                     "name": "flowConfig",
                     "type": "JSON",
-                    "info": "Optional: Json object. Parameters for flow configuration. See the parameter notes section for more information. See createWebProfile README for more details."
+                    "info": "Json object. Parameters for flow configuration. See the parameter notes section for more information. See createWebProfile README for more details.",
+                    "required": false
                 }, {
                     "name": "inputFields",
                     "type": "JSON",
-                    "info": "Optional: Json object. Parameters for input fields customization. See the parameter notes section for more information. See createWebProfile README for more details."
+                    "info": "Json object. Parameters for input fields customization. See the parameter notes section for more information. See createWebProfile README for more details.",
+                    "required": false
                 }, {
                     "name": "presentation",
                     "type": "JSON",
-                    "info": "Optional: Json object. Parameters for style and presentation. See the parameter notes section for more information. See createWebProfile README for more details."
+                    "info": "Json object. Parameters for style and presentation. See the parameter notes section for more information. See createWebProfile README for more details.",
+                    "required": false
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2012,15 +2353,18 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "profileId",
                     "type": "String",
-                    "info": "Required: ID of the profile to retrieve."
+                    "info": "ID of the profile to retrieve.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2035,11 +2379,13 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2054,31 +2400,38 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "profileId",
                     "type": "String",
-                    "info": "Required: ID of the profile to update."
+                    "info": "ID of the profile to update.",
+                    "required": true
                 }, {
                     "name": "name",
                     "type": "String",
-                    "info": "Required: Name of the web experience profile. Unique among only the profiles for a given merchant."
+                    "info": "Name of the web experience profile. Unique among only the profiles for a given merchant.",
+                    "required": true
                 }, {
                     "name": "flowConfig",
                     "type": "JSON",
-                    "info": "Optional: Json object. Parameters for flow configuration. See the parameter notes section for more information. See updateWebProfile README for more details."
+                    "info": "Json object. Parameters for flow configuration. See the parameter notes section for more information. See updateWebProfile README for more details.",
+                    "required": false
                 }, {
                     "name": "inputFields",
                     "type": "JSON",
-                    "info": "Optional: Json object. Parameters for input fields customization. See the parameter notes section for more information. See updateWebProfile README for more details."
+                    "info": "Json object. Parameters for input fields customization. See the parameter notes section for more information. See updateWebProfile README for more details.",
+                    "required": false
                 }, {
                     "name": "presentation",
                     "type": "JSON",
-                    "info": "Optional: Json object. Parameters for style and presentation. See the parameter notes section for more information. See updateWebProfile README for more details."
+                    "info": "Json object. Parameters for style and presentation. See the parameter notes section for more information. See updateWebProfile README for more details.",
+                    "required": false
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2093,15 +2446,18 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "profileId",
                     "type": "String",
-                    "info": "Required: ID of the profile to update."
+                    "info": "ID of the profile to delete.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2116,19 +2472,23 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "url",
                     "type": "String",
-                    "info": "Required: The URL that is configured to listen on localhost for incoming POST notification messages that contain event information."
+                    "info": "The URL that is configured to listen on localhost for incoming POST notification messages that contain event information.",
+                    "required": true
                 }, {
                     "name": "eventTypes",
                     "type": "JSON",
-                    "info": "Required: Array of json objects. A list of events. See the parameter notes section for more information. See createWebhook README for more details."
+                    "info": "Array of json objects. A list of events. See the parameter notes section for more information. See createWebhook README for more details.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2143,15 +2503,18 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "webhookId",
                     "type": "String",
-                    "info": "Required: aThe ID of the webhook for which to show details."
+                    "info": "aThe ID of the webhook for which to show details.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2166,15 +2529,18 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "anchorType",
                     "type": "String",
-                    "info": "Optional: Filters the response by an entity type, anchor_id. Value is APPLICATION or ACCOUNT. Default is APPLICATION."
+                    "info": "Filters the response by an entity type, anchor_id. Value is APPLICATION or ACCOUNT. Default is APPLICATION.",
+                    "required": false
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2189,19 +2555,23 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "webhookId",
                     "type": "String",
-                    "info": "Required: The ID of the webhook to update."
+                    "info": "The ID of the webhook to update.",
+                    "required": true
                 }, {
                     "name": "items",
                     "type": "JSON",
-                    "info": "Required: Array of json objects. A JSON patch object that you can use to apply partial updates to resources. See the parameter notes section for more information. See updateWebhook README for more details."
+                    "info": "Array of json objects. A JSON patch object that you can use to apply partial updates to resources. See the parameter notes section for more information. See updateWebhook README for more details.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2216,15 +2586,18 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "webhookId",
                     "type": "String",
-                    "info": "Required: The ID of the webhook to update."
+                    "info": "The ID of the webhook to update.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2239,15 +2612,18 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "eventId",
                     "type": "String",
-                    "info": "Required: The ID of the webhook event notification for which to show details."
+                    "info": "The ID of the webhook event notification for which to show details.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2262,31 +2638,38 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "pageSize",
                     "type": "String",
-                    "info": "Optional: The number of webhook event notifications to return in the response. Default: 10."
+                    "info": "The number of webhook event notifications to return in the response. Default: 10.",
+                    "required": false
                 }, {
                     "name": "startTime",
                     "type": "String",
-                    "info": "Optional: Filters the webhook event notifications in the response to those created on or after this date and time and on or before the endTime value."
+                    "info": "Filters the webhook event notifications in the response to those created on or after this date and time and on or before the endTime value.",
+                    "required": false
                 }, {
                     "name": "endTime",
                     "type": "String",
-                    "info": "Optional: Filters the webhook event notifications in the response to those created on or after the startTime and on or before this date and time."
+                    "info": "Filters the webhook event notifications in the response to those created on or after the startTime and on or before this date and time.",
+                    "required": false
                 }, {
                     "name": "transactionId",
                     "type": "String",
-                    "info": "Optional: Filters the response to a single transaction, by ID."
+                    "info": "Filters the response to a single transaction, by ID.",
+                    "required": false
                 }, {
                     "name": "eventType",
                     "type": "String",
-                    "info": "Optional: Filters the response to a single event."
+                    "info": "Filters the response to a single event.",
+                    "required": false
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2301,19 +2684,23 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "eventId",
                     "type": "String",
-                    "info": "Required: The ID of the webhook event notification to resend."
+                    "info": "The ID of the webhook event notification to resend.",
+                    "required": true
                 }, {
                     "name": "webhookIds",
                     "type": "String",
-                    "info": "Required: A list of webhook account IDs."
+                    "info": "A list of webhook account IDs.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2328,11 +2715,13 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2347,15 +2736,18 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "webhookId",
                     "type": "String",
-                    "info": "Required: The ID of the webhook for which to list subscriptions."
+                    "info": "The ID of the webhook for which to list subscriptions.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2370,23 +2762,28 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "eventType",
                     "type": "String",
-                    "info": "Required: The event name. Specify one of the subscribed events. For each request, provide only one event."
+                    "info": "The event name. Specify one of the subscribed events. For each request, provide only one event.",
+                    "required": true
                 }, {
                     "name": "webhookId",
                     "type": "String",
-                    "info": "Optional: The ID of the webhook. If omitted, the URL is required."
+                    "info": "The ID of the webhook. If omitted, the URL is required.",
+                    "required": false
                 }, {
                     "name": "url",
                     "type": "String",
-                    "info": "Optional: The URL for the webhook endpoint. If omitted, the webhook ID is required."
+                    "info": "The URL for the webhook endpoint. If omitted, the webhook ID is required.",
+                    "required": false
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2401,35 +2798,43 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "invoiceId",
                     "type": "String",
-                    "info": "Required: The ID of the invoice to cancel."
+                    "info": "The ID of the invoice to cancel.",
+                    "required": true
                 }, {
                     "name": "subject",
                     "type": "String",
-                    "info": "Optional: The subject of the notification."
+                    "info": "The subject of the notification.",
+                    "required": false
                 }, {
                     "name": "note",
                     "type": "String",
-                    "info": "Optional: A note to the payer."
+                    "info": "A note to the payer.",
+                    "required": false
                 }, {
                     "name": "sendToMerchant",
                     "type": "String",
-                    "info": "Optional: Indicates whether to send the notification to the merchant."
+                    "info": "Indicates whether to send the notification to the merchant.",
+                    "required": false
                 }, {
                     "name": "sendToPayer",
                     "type": "String",
-                    "info": "Optional: Indicates whether to send the notification to the payer."
+                    "info": "Indicates whether to send the notification to the payer.",
+                    "required": false
                 }, {
                     "name": "ccEmails",
                     "type": "JSON",
-                    "info": "Optional: An array of one or more Cc: emails. If you omit this parameter from the JSON request body, a notification is sent to all Cc: email addresses that are part of the invoice. Otherwise, specify this parameter to limit the email addresses to which a notification is sent. See the parameter notes section for more information. See cancelSentInvoice README for more details."
+                    "info": "An array of one or more Cc: emails. If you omit this parameter from the JSON request body, a notification is sent to all Cc: email addresses that are part of the invoice. Otherwise, specify this parameter to limit the email addresses to which a notification is sent. See the parameter notes section for more information. See cancelSentInvoice README for more details.",
+                    "required": false
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2444,31 +2849,38 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "invoiceId",
                     "type": "String",
-                    "info": "Required: The ID of the invoice to cancel."
+                    "info": "The ID of the invoice to cancel.",
+                    "required": true
                 }, {
                     "name": "method",
                     "type": "String",
-                    "info": "Required: The payment mode or method. Required with the EXTERNAL payment type. Value is bank transfer, cash, check, credit card, debit card, PayPal, wire transfer, or other. Allowed values: BANK_TRANSFER, CASH, CHECK, CREDIT_CARD, DEBIT_CARD, PAYPAL, WIRE_TRANSFER, OTHER."
+                    "info": "The payment mode or method. Required with the EXTERNAL payment type. Value is bank transfer, cash, check, credit card, debit card, PayPal, wire transfer, or other. Allowed values: BANK_TRANSFER, CASH, CHECK, CREDIT_CARD, DEBIT_CARD, PAYPAL, WIRE_TRANSFER, OTHER.",
+                    "required": true
                 }, {
                     "name": "date",
                     "type": "String",
-                    "info": "Optional: The date when the invoice was paid. The date format is yyyy-MM-dd z"
+                    "info": "The date when the invoice was paid. The date format is yyyy-MM-dd z",
+                    "required": false
                 }, {
                     "name": "note",
                     "type": "String",
-                    "info": "Optional: A note associated with the payment."
+                    "info": "A note associated with the payment.",
+                    "required": false
                 }, {
                     "name": "amount",
                     "type": "JSON",
-                    "info": "Optional: Json object. Base object for all financial value related fields (balance, payment due, etc.). See the parameter notes section for more information. See markInvoiceAsPaid README for more details."
+                    "info": "Json object. Base object for all financial value related fields (balance, payment due, etc.). See the parameter notes section for more information. See markInvoiceAsPaid README for more details.",
+                    "required": false
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2483,27 +2895,33 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "invoiceId",
                     "type": "String",
-                    "info": "Required: The ID of the invoice."
+                    "info": "The ID of the invoice.",
+                    "required": true
                 }, {
                     "name": "date",
                     "type": "String",
-                    "info": "Optional: The date when the invoice was paid. The date format is yyyy-MM-dd z"
+                    "info": "The date when the invoice was paid. The date format is yyyy-MM-dd z",
+                    "required": false
                 }, {
                     "name": "note",
                     "type": "String",
-                    "info": "Optional: A note associated with the payment."
+                    "info": "A note associated with the payment.",
+                    "required": false
                 }, {
                     "name": "amount",
                     "type": "JSON",
-                    "info": "Optional: Json object.Base object for all financial value related fields (balance, payment due, etc.). See the parameter notes section for more information. See markInvoiceAsRefunded README for more details."
+                    "info": "Json object.Base object for all financial value related fields (balance, payment due, etc.). See the parameter notes section for more information. See markInvoiceAsRefunded README for more details.",
+                    "required": false
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2518,19 +2936,23 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "invoiceId",
                     "type": "String",
-                    "info": "Required: The ID of the invoice from which to delete a payment transaction."
+                    "info": "The ID of the invoice from which to delete a payment transaction.",
+                    "required": true
                 }, {
                     "name": "transactionId",
                     "type": "String",
-                    "info": "Required: The ID of the payment transaction to delete."
+                    "info": "The ID of the payment transaction to delete.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2545,19 +2967,23 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "invoiceId",
                     "type": "String",
-                    "info": "Required: The ID of the invoice from which to delete the refund transaction."
+                    "info": "The ID of the invoice from which to delete the refund transaction.",
+                    "required": true
                 }, {
                     "name": "transactionId",
                     "type": "String",
-                    "info": "Required: The ID of the refund transaction to delete."
+                    "info": "The ID of the refund transaction to delete.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2572,31 +2998,38 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "name",
                     "type": "String",
-                    "info": "Required: The template name."
+                    "info": "The template name.",
+                    "required": true
                 }, {
                     "name": "default",
                     "type": "String",
-                    "info": "Required: Indicates whether this template is the default merchant template. A merchant can have one default template. True or false"
+                    "info": "Indicates whether this template is the default merchant template. A merchant can have one default template. True or false",
+                    "required": true
                 }, {
                     "name": "templateData",
                     "type": "JSON",
-                    "info": "Required: Json object. Detailed template information. See the parameter notes section for more information. See createTemplate README for more details."
+                    "info": "Json object. Detailed template information. See the parameter notes section for more information. See createTemplate README for more details.",
+                    "required": true
                 }, {
                     "name": "settings",
                     "type": "JSON",
-                    "info": "Required: Array of json object. Template settings. See the parameter notes section for more information. See createTemplate README for more details."
+                    "info": "Array of json object. Template settings. See the parameter notes section for more information. See createTemplate README for more details.",
+                    "required": true
                 }, {
                     "name": "unitOfMeasure",
                     "type": "String",
-                    "info": "Required: The unit of measure for the template. Value is quantity, hours, or amount."
+                    "info": "The unit of measure for the template. Value is quantity, hours, or amount.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2611,15 +3044,18 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "templateId",
                     "type": "String",
-                    "info": "Required: The ID of the template to delete."
+                    "info": "The ID of the template to delete.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2634,39 +3070,48 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "authAlgo",
                     "type": "String",
-                    "info": "Required: The algorithm that PayPal uses to generate the signature and that you can use to verify the signature. Extract this value from the PAYPAL-AUTH-ALGO response header, which is received with the webhook notification."
+                    "info": "The algorithm that PayPal uses to generate the signature and that you can use to verify the signature. Extract this value from the PAYPAL-AUTH-ALGO response header, which is received with the webhook notification.",
+                    "required": true
                 }, {
                     "name": "certUrl",
                     "type": "String",
-                    "info": "Required: The X.509 public key certificate. Download the certificate from this URL and use it to verify the signature. Extract this value from the PAYPAL-CERT-URL response header, which is received with the webhook notification."
+                    "info": "The X.509 public key certificate. Download the certificate from this URL and use it to verify the signature. Extract this value from the PAYPAL-CERT-URL response header, which is received with the webhook notification.",
+                    "required": true
                 }, {
                     "name": "transmissionId",
                     "type": "String",
-                    "info": "Required: The ID of the HTTP transmission. Contained in the PAYPAL-TRANSMISSION-ID header of the notification message."
+                    "info": "The ID of the HTTP transmission. Contained in the PAYPAL-TRANSMISSION-ID header of the notification message.",
+                    "required": true
                 }, {
                     "name": "transmissionSig",
                     "type": "String",
-                    "info": "Required: The PayPal-generated asymmetric signature. Extract this value from the PAYPAL-TRANSMISSION-SIG response header, which is received with the webhook notification."
+                    "info": "The PayPal-generated asymmetric signature. Extract this value from the PAYPAL-TRANSMISSION-SIG response header, which is received with the webhook notification.",
+                    "required": true
                 }, {
                     "name": "transmissionTime",
                     "type": "String",
-                    "info": "Required: The date and time of the HTTP transmission. Contained in the PAYPAL-TRANSMISSION-TIME header of the notification message."
+                    "info": "The date and time of the HTTP transmission. Contained in the PAYPAL-TRANSMISSION-TIME header of the notification message.",
+                    "required": true
                 }, {
                     "name": "webhookId",
                     "type": "String",
-                    "info": "Required: The ID of the webhook as configured in your Developer Portal account."
+                    "info": "The ID of the webhook as configured in your Developer Portal account.",
+                    "required": true
                 }, {
                     "name": "webhookEvent",
                     "type": "String",
-                    "info": "Required: A webhook event notification."
+                    "info": "A webhook event notification.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",
@@ -2681,35 +3126,43 @@
             "args": [{
                     "name": "accessToken",
                     "type": "String",
-                    "info": "Required: accessToken obtained with clientId and secret."
+                    "info": "accessToken obtained with clientId and secret.",
+                    "required": true
                 }, {
                     "name": "templateId",
                     "type": "String",
-                    "info": "Required: The ID of the template to update."
+                    "info": "The ID of the template to update.",
+                    "required": true
                 }, {
                     "name": "name",
                     "type": "String",
-                    "info": "Required: The template name."
+                    "info": "The template name.",
+                    "required": true
                 }, {
                     "name": "default",
                     "type": "String",
-                    "info": "Required: Indicates whether this template is the default merchant template. A merchant can have one default template. True or false"
+                    "info": "Indicates whether this template is the default merchant template. A merchant can have one default template. True or false",
+                    "required": true
                 }, {
                     "name": "templateData",
                     "type": "JSON",
-                    "info": "Required: Json object. Detailed template information. See the parameter notes section for more information. See updateTemplate README for more details."
+                    "info": "Json object. Detailed template information. See the parameter notes section for more information. See updateTemplate README for more details.",
+                    "required": true
                 }, {
                     "name": "settings",
                     "type": "JSON",
-                    "info": "Required: Array of json objects. Template settings. See the parameter notes section for more information. See updateTemplate README for more details."
+                    "info": "Array of json objects. Template settings. See the parameter notes section for more information. See updateTemplate README for more details.",
+                    "required": true
                 }, {
                     "name": "unitOfMeasure",
                     "type": "String",
-                    "info": "Required: The unit of measure for the template. Value is quantity, hours, or amount."
+                    "info": "The unit of measure for the template. Value is quantity, hours, or amount.",
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
-                    "info": "Optional: Use sandbox to tests. Set 1 to enable."
+                    "info": "Use sandbox to tests. Set 1 to enable.",
+                    "required": false
                 }],
             "callbacks": [{
                     "name": "error",

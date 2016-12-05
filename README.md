@@ -10,91 +10,6 @@ PayPal offers online payment solutions.
 3. Create an app to receive REST API credentials for testing and live transactions.
 4. Retrive your clientId and secret 
 
-## TOC: 
-* [getAccessToken](#getAccessToken)
-* [createPayment](#createPayment)
-* [executePayment](#executePayment)
-* [getPayment](#getPayment)
-* [updatePayment](#updatePayment)
-* [getPaymentList](#getPaymentList)
-* [getSale](#getSale)
-* [refundSale](#refundSale)
-* [getRefund](#getRefund)
-* [getAuthorization](#getAuthorization)
-* [captureAuthorization](#captureAuthorization)
-* [voidAuthorization](#voidAuthorization)
-* [reauthorizePayment](#reauthorizePayment)
-* [getCapture](#getCapture)
-* [refundCapture](#refundCapture)
-* [getOrder](#getOrder)
-* [authorizeOrder](#authorizeOrder)
-* [captureOrder](#captureOrder)
-* [voidOrder](#voidOrder)
-* [createPlan](#createPlan)
-* [updatePlan](#updatePlan)
-* [getPlan](#getPlan)
-* [getPlanList](#getPlanList)
-* [createAgreement](#createAgreement)
-* [executeAgreement](#executeAgreement)
-* [updateAgreement](#updateAgreement)
-* [getAgreement](#getAgreement)
-* [suspendAgreement](#suspendAgreement)
-* [reactivateAgreement](#reactivateAgreement)
-* [cancelAgreement](#cancelAgreement)
-* [getTransactionsForBillingAgreement](#getTransactionsForBillingAgreement)
-* [setAgreementBalance](#setAgreementBalance)
-* [billAgreementBalance](#billAgreementBalance)
-* [createPayout](#createPayout)
-* [getPayout](#getPayout)
-* [getPayoutItem](#getPayoutItem)
-* [cancelPayoutItem](#cancelPayoutItem)
-* [createCreditCard](#createCreditCard)
-* [deleteCreditCard](#deleteCreditCard)
-* [getCreditCard](#getCreditCard)
-* [getCreditCardList](#getCreditCardList)
-* [updateCreditCard](#updateCreditCard)
-* [createTokenFromAurhorizationCode](#createTokenFromAurhorizationCode)
-* [createTokenFromRefreshToken](#createTokenFromRefreshToken)
-* [getUser](#getUser)
-* [createInvoice](#createInvoice)
-* [sendInvoice](#sendInvoice)
-* [updateInvoice](#updateInvoice)
-* [getInvoice](#getInvoice)
-* [getInvoiceList](#getInvoiceList)
-* [generateInvoiceNumber](#generateInvoiceNumber)
-* [searchInvoice](#searchInvoice)
-* [sendInvoiceReminder](#sendInvoiceReminder)
-* [deleteInvoice](#deleteInvoice)
-* [getQRCode](#getQRCode)
-* [getTemplate](#getTemplate)
-* [getTemplateList](#getTemplateList)
-* [createWebProfile](#createWebProfile)
-* [getWebProfile](#getWebProfile)
-* [getProfileWebList](#getProfileWebList)
-* [updateWebProfile](#updateWebProfile)
-* [deleteWebProfile](#deleteWebProfile)
-* [createWebhook](#createWebhook)
-* [getWebhook](#getWebhook)
-* [getWebhookList](#getWebhookList)
-* [updateWebhook](#updateWebhook)
-* [deleteWebhook](#deleteWebhook)
-* [getEventNotifications](#getEventNotifications)
-* [getEventNotificationsList](#getEventNotificationsList)
-* [resendEventNotification](#resendEventNotification)
-* [getEventList](#getEventList)
-* [getWebhookEventSubscriptionList](#getWebhookEventSubscriptionList)
-* [simulateWebhookEvent](#simulateWebhookEvent)
-* [cancelSentInvoice](#cancelSentInvoice)
-* [markInvoiceAsPaid](#markInvoiceAsPaid)
-* [markInvoiceAsRefunded](#markInvoiceAsRefunded)
-* [deleteExternalPayment](#deleteExternalPayment)
-* [deleteExternalRefund](#deleteExternalRefund)
-* [createTemplate](#createTemplate)
-* [deleteTemplate](#deleteTemplate)
-* [verifyWebhookSignature](#verifyWebhookSignature)
-* [updateTemplate](#updateTemplate)
- 
-<a name="getAccessToken"/>
 ## Paypal.getAccessToken
 Use the OAuth request to get an access token for use with your payments calls.
 
@@ -104,7 +19,6 @@ Use the OAuth request to get an access token for use with your payments calls.
 | secret   | credentials| Required: secret
 | grantType| String     | Required: Token grant type. Must be set to client_credentials.
 
-<a name="createPayment"/>
 ## Paypal.createPayment
 Use the payment resource for direct credit card payments, stored credit card payments, or PayPal account payments.
 
@@ -190,7 +104,6 @@ Use the payment resource for direct credit card payments, stored credit card pay
 }
 ```
 
-<a name="executePayment"/>
 ## Paypal.executePayment
 Executes a PayPal payment that the payer has approved. You can optionally pass in one or more transactions to update transaction information when you execute the payment.
 
@@ -201,7 +114,6 @@ Executes a PayPal payment that the payer has approved. You can optionally pass i
 | payerId     | String| Required: The ID of the payer, passed in the return_url by PayPal.
 | transactions| String| Optional: Transactional details if updating a payment. Note that this instance of the transactions object accepts only the amount object.
 
-<a name="getPayment"/>
 ## Paypal.getPayment
 Shows details for a payment, by ID, that is yet completed. For example, a payment that was created, approved, or failed.
 
@@ -210,7 +122,6 @@ Shows details for a payment, by ID, that is yet completed. For example, a paymen
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | paymentId  | String| Required: The ID of the payment to execute.
 
-<a name="updatePayment"/>
 ## Paypal.updatePayment
 Partially updates a payment, by ID. You cannot update a payment after the payment is executed.
 
@@ -249,7 +160,6 @@ Partially updates a payment, by ID. You cannot update a payment after the paymen
 ]
 ```
 
-<a name="getPaymentList"/>
 ## Paypal.getPaymentList
 Lists payments that were created by the create payment call and are in any state. The list shows the payments that are made to the merchant who makes the call.
 
@@ -262,7 +172,6 @@ Lists payments that were created by the create payment call and are in any state
 | startTime  | String| Optional: The date and time when the resource was created. Indicates the start of a range of results. Example: start_time=2013-03-06T11:00:00Z Format: date-time.
 | endTime    | String| Optional: The date and time when the resource was created. Indicates the end of a range of results. Format: date-time.
 
-<a name="getSale"/>
 ## Paypal.getSale
 Shows details for a sale transaction, by ID.
 
@@ -271,7 +180,6 @@ Shows details for a sale transaction, by ID.
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | saleId     | String| Required: The ID of the sale for which to show details.
 
-<a name="refundSale"/>
 ## Paypal.refundSale
 Refunds a completed payment.
 
@@ -292,7 +200,6 @@ Refunds a completed payment.
 }
 ```
 
-<a name="getRefund"/>
 ## Paypal.getRefund
 Shows details for a refund, by ID. 
 
@@ -301,7 +208,6 @@ Shows details for a refund, by ID.
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | refundId   | String| Required: The ID of the refund for which to show details.
 
-<a name="getAuthorization"/>
 ## Paypal.getAuthorization
 Method description
 
@@ -310,7 +216,6 @@ Method description
 | accessToken    | String| Required: accessToken obtained with clientId and secret.
 | authorizationId| String| Required: The ID of the authorization for which to show details.
 
-<a name="captureAuthorization"/>
 ## Paypal.captureAuthorization
 Use this resource to capture and process a previously created authorization.
 
@@ -330,7 +235,6 @@ Use this resource to capture and process a previously created authorization.
 }
 ```
 
-<a name="voidAuthorization"/>
 ## Paypal.voidAuthorization
 Voids a previously authorized payment.
 
@@ -339,7 +243,6 @@ Voids a previously authorized payment.
 | accessToken    | String| Required: accessToken obtained with clientId and secret.
 | authorizationId| String| Required: The ID of the authorization for which to show details.
 
-<a name="reauthorizePayment"/>
 ## Paypal.reauthorizePayment
 Reauthorizes a PayPal account payment. We recommend that you reauthorize a payment after the initial three-day honor period to ensure that funds are still available.
 
@@ -357,7 +260,6 @@ Reauthorizes a PayPal account payment. We recommend that you reauthorize a payme
 }
 ```
 
-<a name="getCapture"/>
 ## Paypal.getCapture
 Shows details for a captured payment, by ID.
 
@@ -366,7 +268,6 @@ Shows details for a captured payment, by ID.
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | captureId  | String| Required: The ID of the captured payment for which to show details.
 
-<a name="refundCapture"/>
 ## Paypal.refundCapture
 Refunds a captured payment, by ID.
 
@@ -389,7 +290,6 @@ Refunds a captured payment, by ID.
 }
 ```
 
-<a name="getOrder"/>
 ## Paypal.getOrder
 Shows details for an order, by ID.
 
@@ -398,7 +298,6 @@ Shows details for an order, by ID.
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | orderId    | String| Required: The ID of the order for which to show details.
 
-<a name="authorizeOrder"/>
 ## Paypal.authorizeOrder
 Authorizes an order, by ID.
 
@@ -416,7 +315,6 @@ Authorizes an order, by ID.
 }
 ```
 
-<a name="captureOrder"/>
 ## Paypal.captureOrder
 Captures a payment on an order. 
 
@@ -445,7 +343,6 @@ Captures a payment on an order.
 }
 ```
 
-<a name="voidOrder"/>
 ## Paypal.voidOrder
 Voids an order, by ID.
 
@@ -454,7 +351,6 @@ Voids an order, by ID.
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | orderId    | String| Required: The ID of the order to void.
 
-<a name="createPlan"/>
 ## Paypal.createPlan
 You can create an empty billing plan and add a trial period and/or regular billing. Alternatively, you can create a fully loaded plan that includes both a trial period and regular billing.
 
@@ -515,7 +411,6 @@ You can create an empty billing plan and add a trial period and/or regular billi
 }
 ```
 
-<a name="updatePlan"/>
 ## Paypal.updatePlan
 You can update the information for an existing billing plan. The state of a plan must be active before a billing agreement is created.
 
@@ -538,7 +433,6 @@ You can update the information for an existing billing plan. The state of a plan
 ]
 ```
 
-<a name="getPlan"/>
 ## Paypal.getPlan
 Use this call to get details about a specific billing plan.
 
@@ -547,7 +441,6 @@ Use this call to get details about a specific billing plan.
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | planId     | String| Required: The ID of the billing plan to update.
 
-<a name="getPlanList"/>
 ## Paypal.getPlanList
 Use this call to get a list of all billing plans based on their current state and optional query string parameters.
 
@@ -559,7 +452,6 @@ Use this call to get a list of all billing plans based on their current state an
 | pageSize     | String| Optional: The maximum number of results to return at one time. A valid value is a non-negative, non-zero integer. Default is 10.
 | totalRequired| String| Optional: The total number of items and pages to return in the response.
 
-<a name="createAgreement"/>
 ## Paypal.createAgreement
 Creates a billing agreement for the buyer.
 
@@ -635,7 +527,6 @@ Creates a billing agreement for the buyer.
 }
 ```
 
-<a name="executeAgreement"/>
 ## Paypal.executeAgreement
 Executes an agreement after the buyer approves it.
 
@@ -644,7 +535,6 @@ Executes an agreement after the buyer approves it.
 | accessToken | String| Required: accessToken obtained with clientId and secret.
 | paymentToken| String| Required: Identifier of the agreement resource to execute.
 
-<a name="updateAgreement"/>
 ## Paypal.updateAgreement
 Updates an agreement, by ID.
 
@@ -674,7 +564,6 @@ Updates an agreement, by ID.
 ]
 ```
 
-<a name="getAgreement"/>
 ## Paypal.getAgreement
 Shows details for an agreement, by ID.
 
@@ -683,7 +572,6 @@ Shows details for an agreement, by ID.
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | agreementId| String| Required: Identifier of the agreement resource to retrieve.
 
-<a name="suspendAgreement"/>
 ## Paypal.suspendAgreement
 Suspends an agreement, by ID.
 
@@ -702,7 +590,6 @@ Suspends an agreement, by ID.
 }
 ```
 
-<a name="reactivateAgreement"/>
 ## Paypal.reactivateAgreement
 Reactivates an agreement, by ID.
 
@@ -721,7 +608,6 @@ Reactivates an agreement, by ID.
 }
 ```
 
-<a name="cancelAgreement"/>
 ## Paypal.cancelAgreement
 Cancels an agreement, by ID.
 
@@ -740,7 +626,6 @@ Cancels an agreement, by ID.
 }
 ```
 
-<a name="getTransactionsForBillingAgreement"/>
 ## Paypal.getTransactionsForBillingAgreement
 Lists transactions for a billing agreement.
 
@@ -751,7 +636,6 @@ Lists transactions for a billing agreement.
 | startDate  | String| Required: The start date of the range of transactions to list.
 | endDate    | String| Required: The end date of the range of transactions to list.
 
-<a name="setAgreementBalance"/>
 ## Paypal.setAgreementBalance
 Sets the outstanding amount of an agreement, by ID.
 
@@ -762,7 +646,6 @@ Sets the outstanding amount of an agreement, by ID.
 | currency   | String| Required: 3 letter currency code as defined by ISO 4217.
 | value      | String| Required: amount up to N digit after the decimals separator as defined in ISO 4217 for the appropriate currency code
 
-<a name="billAgreementBalance"/>
 ## Paypal.billAgreementBalance
 Bills the outstanding amount of an agreement, by ID.
 
@@ -781,7 +664,6 @@ Bills the outstanding amount of an agreement, by ID.
 }
 ```
 
-<a name="createPayout"/>
 ## Paypal.createPayout
 You can make payouts to one or more PayPal accounts.
 
@@ -816,7 +698,6 @@ You can make payouts to one or more PayPal accounts.
 ]
 ```
 
-<a name="getPayout"/>
 ## Paypal.getPayout
 Periodically shows the latest status of a batch payout along with the transaction status and other data for individual items.
 
@@ -826,7 +707,6 @@ Periodically shows the latest status of a batch payout along with the transactio
 | payoutBatchId| String| Required: The ID of the batch payout for which to show status.
 | fields       | String| Optional: Shows details for only specified fields.
 
-<a name="getPayoutItem"/>
 ## Paypal.getPayoutItem
 Shows the details for a payout item. Use this call to review the current status of a previously unclaimed, or pending, payout item.
 
@@ -835,7 +715,6 @@ Shows the details for a payout item. Use this call to review the current status 
 | accessToken | String| Required: accessToken obtained with clientId and secret.
 | payoutItemId| String| Required: The ID of the payout item for which to show details.
 
-<a name="cancelPayoutItem"/>
 ## Paypal.cancelPayoutItem
 Cancels an unclaimed transaction. If no one claims the unclaimed item within 30 days, the funds are automatically returned to the sender. Use this call to cancel the unclaimed item before the automatic 30-day refund.
 
@@ -844,7 +723,6 @@ Cancels an unclaimed transaction. If no one claims the unclaimed item within 30 
 | accessToken | String| Required: accessToken obtained with clientId and secret.
 | payoutItemId| String| Required: The ID of the payout item for which to show details.
 
-<a name="createCreditCard"/>
 ## Paypal.createCreditCard
 Stores credit card details with PayPal.
 
@@ -875,7 +753,6 @@ Stores credit card details with PayPal.
 }
 ```
 
-<a name="deleteCreditCard"/>
 ## Paypal.deleteCreditCard
 Deletes details of a stored credit card. Include the credit card ID in the request URI.
 
@@ -884,7 +761,6 @@ Deletes details of a stored credit card. Include the credit card ID in the reque
 | accessToken | String| Required: accessToken obtained with clientId and secret.
 | creditCardId| String| Required: The ID of the credit card resource for which to show data.
 
-<a name="getCreditCard"/>
 ## Paypal.getCreditCard
 Shows details for a stored credit card.
 
@@ -893,7 +769,6 @@ Shows details for a stored credit card.
 | accessToken | String| Required: accessToken obtained with clientId and secret.
 | creditCardId| String| Required: The ID of the credit card resource for which to show data.
 
-<a name="getCreditCardList"/>
 ## Paypal.getCreditCardList
 Lists stored credit cards.
 
@@ -911,7 +786,6 @@ Lists stored credit cards.
 | externalCustomerId| String| Optional: Externally provided customer identifier to filter the search results in list operations.
 | totalRequired     | String| Optional: Indicates whether the response returns the total_items and total_pages values. Default is true. Set to false to omit these values from the response.
 
-<a name="updateCreditCard"/>
 ## Paypal.updateCreditCard
 Updates a stored credit card, by ID.
 
@@ -938,7 +812,6 @@ Updates a stored credit card, by ID.
 ]
 ```
 
-<a name="createTokenFromAurhorizationCode"/>
 ## Paypal.createTokenFromAurhorizationCode
 Updates a stored credit card, by ID.
 
@@ -948,9 +821,8 @@ Updates a stored credit card, by ID.
 | secret     | credentials| Required: secret
 | grantType  | String     | Required: Token grant type. Value must be set to authorization_code.
 | code       | String     | Required: Authorization code previously received from the authorization server.
-| redirectUri| String     | Required: AApplication return URL where the authorization code is sent.
+| redirectUri| String     | Required: Application return URL where the authorization code is sent.
 
-<a name="createTokenFromRefreshToken"/>
 ## Paypal.createTokenFromRefreshToken
 Create an access token from a refresh token.
 
@@ -962,7 +834,6 @@ Create an access token from a refresh token.
 | refreshToken| String     | Required: Refresh token previously received along with the access token that is to be refreshed.
 | scope       | String     | Optional: Resource URL endpoints that the client wants the token to be scoped for. The value of the scope parameter is expressed as a list of space-delimited, case-sensitive strings.
 
-<a name="getUser"/>
 ## Paypal.getUser
 Use this call to retrieve user profile attributes.
 
@@ -971,7 +842,6 @@ Use this call to retrieve user profile attributes.
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | schema     | String| Required: the schema that is used to return as per openidconnect protocol. Possible values: openid.
 
-<a name="createInvoice"/>
 ## Paypal.createInvoice
 Creates a draft invoice.
 
@@ -1121,7 +991,6 @@ Creates a draft invoice.
 }
 ```
 
-<a name="sendInvoice"/>
 ## Paypal.sendInvoice
 Sends an invoice, by ID, to a customer.
 
@@ -1131,7 +1000,6 @@ Sends an invoice, by ID, to a customer.
 | invoiceId     | String| Required: The ID of the invoice to send.
 | notifyMerchant| String| Optional: Indicates whether to send the invoice update notification to the merchant. Default is true.
 
-<a name="updateInvoice"/>
 ## Paypal.updateInvoice
 Updates an invoice, by ID.
 
@@ -1283,7 +1151,6 @@ Updates an invoice, by ID.
 }
 ```
 
-<a name="getInvoice"/>
 ## Paypal.getInvoice
 Shows details for an invoice, by ID.
 
@@ -1292,7 +1159,6 @@ Shows details for an invoice, by ID.
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | invoiceId  | String| Required: The ID of the invoice to update.
 
-<a name="getInvoiceList"/>
 ## Paypal.getInvoiceList
 Lists invoices that belong to the merchant who makes the call.
 
@@ -1303,7 +1169,6 @@ Lists invoices that belong to the merchant who makes the call.
 | pageSize          | String| Optional: The number of invoices to list beginning with the specified page. Default: 10.
 | totalCountRequired| String| Optional: Indicates whether the total count appears in the response. Default is false.
 
-<a name="generateInvoiceNumber"/>
 ## Paypal.generateInvoiceNumber
 Generates the next invoice number that is available to the user.
 
@@ -1311,7 +1176,6 @@ Generates the next invoice number that is available to the user.
 |------------|-------|----------
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 
-<a name="searchInvoice"/>
 ## Paypal.searchInvoice
 Lists invoices that match search criteria.
 
@@ -1355,7 +1219,6 @@ Lists invoices that match search criteria.
 }
 ```
 
-<a name="sendInvoiceReminder"/>
 ## Paypal.sendInvoiceReminder
 Sends a reminder to the payer that a payment is due for an invoice, by ID.
 
@@ -1375,7 +1238,6 @@ Sends a reminder to the payer that a payment is due for an invoice, by ID.
 ]
 ```
 
-<a name="deleteInvoice"/>
 ## Paypal.deleteInvoice
 Deletes a draft invoice, by ID. Note that this call works for invoices in the draft state only.
 
@@ -1384,7 +1246,6 @@ Deletes a draft invoice, by ID. Note that this call works for invoices in the dr
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | invoiceId  | String| Required: The ID of the invoice.
 
-<a name="getQRCode"/>
 ## Paypal.getQRCode
 Generates a QR code for an invoice, by ID.
 
@@ -1396,7 +1257,6 @@ Generates a QR code for an invoice, by ID.
 | height     | String| Optional: The height, in pixels, of the QR code image. Valid value is from 150 to 500. Default is 500.
 | action     | String| Optional: The type of URL for which to generate a QR code. Default is pay and is the only supported value.
 
-<a name="getTemplate"/>
 ## Paypal.getTemplate
 Shows details for a template, by ID.
 
@@ -1405,7 +1265,6 @@ Shows details for a template, by ID.
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | templateId | String| Required: The ID of the template for which to show details.
 
-<a name="getTemplateList"/>
 ## Paypal.getTemplateList
 Lists all merchant-created templates. The list shows the emails, addresses, and phone numbers from the merchant profile.
 
@@ -1414,7 +1273,6 @@ Lists all merchant-created templates. The list shows the emails, addresses, and 
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | fields     | String| Optional: The fields to return in the response. Value is all or none. Specify none to return only the template name, ID, and default attributes. Default: all.
 
-<a name="createWebProfile"/>
 ## Paypal.createWebProfile
 Creates a web experience profile.
 
@@ -1449,7 +1307,6 @@ Creates a web experience profile.
 }
 ```
 
-<a name="getWebProfile"/>
 ## Paypal.getWebProfile
 Shows details for a web experience profile, by ID.
 
@@ -1458,7 +1315,6 @@ Shows details for a web experience profile, by ID.
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | profileId  | String| Required: ID of the profile to retrieve.
 
-<a name="getProfileWebList"/>
 ## Paypal.getProfileWebList
 Lists web experience profiles for a merchant.
 
@@ -1466,7 +1322,6 @@ Lists web experience profiles for a merchant.
 |------------|-------|----------
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 
-<a name="updateWebProfile"/>
 ## Paypal.updateWebProfile
 Updates a web experience profile, by ID.
 
@@ -1502,7 +1357,6 @@ Updates a web experience profile, by ID.
 }
 ```
 
-<a name="deleteWebProfile"/>
 ## Paypal.deleteWebProfile
 Deletes a web experience profile, by ID.
 
@@ -1511,7 +1365,6 @@ Deletes a web experience profile, by ID.
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | profileId  | String| Required: ID of the profile to update.
 
-<a name="createWebhook"/>
 ## Paypal.createWebhook
 Subscribes your webhook listener to events.
 
@@ -1533,7 +1386,6 @@ Subscribes your webhook listener to events.
 ]
 ```
 
-<a name="getWebhook"/>
 ## Paypal.getWebhook
 Shows details for a webhook, by ID.
 
@@ -1542,7 +1394,6 @@ Shows details for a webhook, by ID.
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | webhookId  | String| Required: aThe ID of the webhook for which to show details.
 
-<a name="getWebhookList"/>
 ## Paypal.getWebhookList
 Lists all webhooks.
 
@@ -1551,7 +1402,6 @@ Lists all webhooks.
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | anchorType | String| Optional: Filters the response by an entity type, anchor_id. Value is APPLICATION or ACCOUNT. Default is APPLICATION.
 
-<a name="updateWebhook"/>
 ## Paypal.updateWebhook
 Updates a webhook, by ID. Supports only the replace operation.
 
@@ -1581,7 +1431,6 @@ Updates a webhook, by ID. Supports only the replace operation.
 ]
 ```
 
-<a name="deleteWebhook"/>
 ## Paypal.deleteWebhook
 Deletes a webhook, by ID.
 
@@ -1590,7 +1439,6 @@ Deletes a webhook, by ID.
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | webhookId  | String| Required: The ID of the webhook to update.
 
-<a name="getEventNotifications"/>
 ## Paypal.getEventNotifications
 Shows details for an event notification, by ID.
 
@@ -1599,7 +1447,6 @@ Shows details for an event notification, by ID.
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | eventId    | String| Required: The ID of the webhook event notification for which to show details.
 
-<a name="getEventNotificationsList"/>
 ## Paypal.getEventNotificationsList
 Lists webhook event notifications. You can specify one or more optional query parameters to filter the response.
 
@@ -1612,7 +1459,6 @@ Lists webhook event notifications. You can specify one or more optional query pa
 | transactionId| String| Optional: Filters the response to a single transaction, by ID.
 | eventType    | String| Optional: Filters the response to a single event.
 
-<a name="resendEventNotification"/>
 ## Paypal.resendEventNotification
 Resends an event notification, by event ID.
 
@@ -1622,7 +1468,6 @@ Resends an event notification, by event ID.
 | eventId    | String| Required: The ID of the webhook event notification to resend.
 | webhookIds | String| Required: A list of webhook account IDs.
 
-<a name="getEventList"/>
 ## Paypal.getEventList
 Lists events to which an app can subscribe. 
 
@@ -1630,7 +1475,6 @@ Lists events to which an app can subscribe.
 |------------|-------|----------
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 
-<a name="getWebhookEventSubscriptionList"/>
 ## Paypal.getWebhookEventSubscriptionList
 Lists the event subscriptions for a webhook, by ID.
 
@@ -1639,7 +1483,6 @@ Lists the event subscriptions for a webhook, by ID.
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | webhookId  | String| Required: The ID of the webhook for which to list subscriptions.
 
-<a name="simulateWebhookEvent"/>
 ## Paypal.simulateWebhookEvent
 Simulates a webhook event by using a sample payload.
 
@@ -1650,7 +1493,6 @@ Simulates a webhook event by using a sample payload.
 | webhookId  | String| Optional: The ID of the webhook. If omitted, the URL is required.
 | url        | String| Optional: The URL for the webhook endpoint. If omitted, the webhook ID is required.
 
-<a name="cancelSentInvoice"/>
 ## Paypal.cancelSentInvoice
 Cancels a sent invoice, by ID, and, optionally, sends a notification about the cancellation to the payer, merchant, and Cc: emails.
 
@@ -1671,7 +1513,6 @@ Cancels a sent invoice, by ID, and, optionally, sends a notification about the c
 ]
 ```
 
-<a name="markInvoiceAsPaid"/>
 ## Paypal.markInvoiceAsPaid
 Marks an invoice, by ID, as paid.
 
@@ -1692,7 +1533,6 @@ Marks an invoice, by ID, as paid.
 }
 ```
 
-<a name="markInvoiceAsRefunded"/>
 ## Paypal.markInvoiceAsRefunded
 Marks an invoice, by ID, as refunded.
 
@@ -1712,7 +1552,6 @@ Marks an invoice, by ID, as refunded.
 }
 ```
 
-<a name="deleteExternalPayment"/>
 ## Paypal.deleteExternalPayment
 Deletes an external payment transaction, by ID, from an invoice, by ID.
 
@@ -1722,7 +1561,6 @@ Deletes an external payment transaction, by ID, from an invoice, by ID.
 | invoiceId    | String| Required: The ID of the invoice from which to delete a payment transaction.
 | transactionId| String| Required: The ID of the payment transaction to delete.
 
-<a name="deleteExternalRefund"/>
 ## Paypal.deleteExternalRefund
 Deletes an external refund transaction, by ID, from an invoice, by ID.
 
@@ -1732,7 +1570,6 @@ Deletes an external refund transaction, by ID, from an invoice, by ID.
 | invoiceId    | String| Required: The ID of the invoice from which to delete the refund transaction.
 | transactionId| String| Required: The ID of the refund transaction to delete.
 
-<a name="createTemplate"/>
 ## Paypal.createTemplate
 Creates an invoice template. When you create an invoice from a template, the invoice is populated with the predefined data that the source template contains.
 
@@ -1744,6 +1581,7 @@ Creates an invoice template. When you create an invoice from a template, the inv
 | templateData | JSON  | Required: Json object. Detailed template information.
 | settings     | JSON  | Required: Array of json objects. Template settings.
 | unitOfMeasure| String| Required: The unit of measure for the template. Value is quantity, hours, or amount.
+
 ### templateData format:
 
 ```json
@@ -1786,7 +1624,6 @@ Creates an invoice template. When you create an invoice from a template, the inv
 ]
 ```
 
-<a name="deleteTemplate"/>
 ## Paypal.deleteTemplate
 Deletes a template, by ID.
 
@@ -1795,7 +1632,6 @@ Deletes a template, by ID.
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | templateId | String| Required: The ID of the template to delete.
 
-<a name="verifyWebhookSignature"/>
 ## Paypal.verifyWebhookSignature
 Verifies a webhook signature.
 
@@ -1810,7 +1646,6 @@ Verifies a webhook signature.
 | webhookId       | String| Required: The ID of the webhook as configured in your Developer Portal account.
 | webhookEvent    | String| Required: A webhook event notification.
 
-<a name="updateTemplate"/>
 ## Paypal.updateTemplate
 Updates a template, by ID. In the JSON request body, pass a complete template object. The update method does not support partial updates.
 
