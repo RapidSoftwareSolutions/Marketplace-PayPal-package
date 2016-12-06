@@ -1,10 +1,10 @@
 {
     "package": "Paypal",
     "tagline": "Paypal API",
-    "description": "PayPal offers online payment solutions.",
+    "description": "Accept PayPal and credit card payments online or on mobile.",
     "image": "http://logo.clearbit.com/paypal.com",
     "repo": "https://github.com/RapidSoftwareSolutions/Marketplace-PayPal-package",
-    "keywords": ["payment", "billing"],
+    "keywords": ["API", "buy", "ecommerce", "finance", "marketplace", "payment", "payments", "shop", "shopping", "smb"],
     "accounts": {
         "domain": "paypal.com",
         "credentials": ["clientId", "secret"]
