@@ -1,5 +1,5 @@
 # Paypal Package
-PayPal offers online payment solutions.
+Accept PayPal and credit card payments online or on mobile.
 * Domain: paypal.com
 * Credentials: clientId, secret
 
