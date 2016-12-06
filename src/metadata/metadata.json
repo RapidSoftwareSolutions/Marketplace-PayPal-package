@@ -330,7 +330,7 @@
                 }]
         }, {
             "name": "getAuthorization",
-            "decription": "Shows details for an authorization, by ID.",
+            "description": "Shows details for an authorization, by ID.",
             "args": [{
                     "name": "accessToken",
                     "type": "String",
