@@ -1,3 +1,5 @@
+[![](https://scdn.rapidapi.com/RapidAPI_banner.png)](https://rapidapi.com/package/PayPal/functions?utm_source=RapidAPIGitHub_PayPalFunctions&utm_medium=button&utm_content=RapidAPI_GitHub)
+
 # Paypal Package
 Accept PayPal and credit card payments online or on mobile.
 * Domain: paypal.com
