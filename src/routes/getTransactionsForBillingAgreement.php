@@ -56,10 +56,10 @@ $app->post('/api/PayPal/getTransactionsForBillingAgreement', function ($request,
     }
 
     $date =  new DateTime($post_data['args']['startDate']);
-    $query['start_date'] = $date->format('Y-m-d\TH:i:s\Z');
+    $query['start_date'] = $date->format('Y-m-d');
 
     $date =  new DateTime($post_data['args']['endDate']);
-    $query['end_date'] = $date->format('Y-m-d\TH:i:s\Z');
+    $query['end_date'] = $date->format('Y-m-d');
 
     $client = $this->httpClient;
 
