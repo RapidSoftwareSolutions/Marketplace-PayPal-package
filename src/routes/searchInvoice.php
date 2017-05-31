@@ -73,35 +73,35 @@ $app->post('/api/PayPal/searchInvoice', function ($request, $response, $args) {
     }
     if(!empty($post_data['args']['startInvoiceDate'])) {
         $date =  new DateTime($post_data['args']['startInvoiceDate']);
-        $body['start_invoice_date'] = $date->format('Y-m-d\TH:i:s\Z');
+        $body['start_invoice_date'] = $date->format('Y-m-d z');
     }
     if(!empty($post_data['args']['endInvoiceDate'])) {
         $date =  new DateTime($post_data['args']['endInvoiceDate']);
-        $body['end_invoice_date'] = $date->format('Y-m-d\TH:i:s\Z');
+        $body['end_invoice_date'] = $date->format('Y-m-d z');
     }
     if(!empty($post_data['args']['startDueDate'])) {
         $date =  new DateTime($post_data['args']['startDueDate']);
-        $body['start_due_date'] = $date->format('Y-m-d\TH:i:s\Z');
+        $body['start_due_date'] = $date->format('Y-m-d z');
     }
     if(!empty($post_data['args']['endDueDate'])) {
         $date =  new DateTime($post_data['args']['endDueDate']);
-        $body['end_due_date'] = $date->format('Y-m-d\TH:i:s\Z');
+        $body['end_due_date'] = $date->format('Y-m-d z');
     }
     if(!empty($post_data['args']['startPaymentDate'])) {
         $date =  new DateTime($post_data['args']['startPaymentDate']);
-        $body['start_payment_date'] = $date->format('Y-m-d\TH:i:s\Z');
+        $body['start_payment_date'] = $date->format('Y-m-d z');
     }
     if(!empty($post_data['args']['endPaymentDate'])) {
         $date =  new DateTime($post_data['args']['endPaymentDate']);
-        $body['end_payment_date'] = $date->format('Y-m-d\TH:i:s\Z');
+        $body['end_payment_date'] = $date->format('Y-m-d z');
     }
     if(!empty($post_data['args']['startCreationDate'])) {
         $date =  new DateTime($post_data['args']['startCreationDate']);
-        $body['start_creation_date'] = $date->format('Y-m-d\TH:i:s\Z');
+        $body['start_creation_date'] = $date->format('Y-m-d z');
     }
     if(!empty($post_data['args']['endCreationDate'])) {
         $date =  new DateTime($post_data['args']['endCreationDate']);
-        $body['end_creation_date'] = $date->format('Y-m-d\TH:i:s\Z');
+        $body['end_creation_date'] = $date->format('Y-m-d z');
     }
     if(!empty($post_data['args']['page'])) {
         $body['page'] = $post_data['args']['page'];
