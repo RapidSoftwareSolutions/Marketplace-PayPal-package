@@ -55,7 +55,7 @@ $app->post('/api/PayPal/markInvoiceAsRefunded', function ($request, $response, $
     $body['method'] = $post_data['args']['method'];
     if(!empty($post_data['args']['date'])) {
         $date =  new DateTime($post_data['args']['date']);
-        $body['date'] = $date->format('Y-m-d H:i:s z');
+        $body['date'] = $date->format('Y-m-d H:i:s')." PST";
     }
     if(!empty($post_data['args']['note'])) {
         $body['note'] = $post_data['args']['note'];
@@ -65,6 +65,7 @@ $app->post('/api/PayPal/markInvoiceAsRefunded', function ($request, $response, $
     }
     
     $client = $this->httpClient;
+
 
     try {
 
