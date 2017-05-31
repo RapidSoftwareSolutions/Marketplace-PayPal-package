@@ -209,12 +209,12 @@
                     "required": false
                 }, {
                     "name": "startTime",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "The date and time when the resource was created. Indicates the start of a range of results. Example: start_time=2013-03-06T11:00:00Z Format: date-time.",
                     "required": false
                 }, {
                     "name": "endTime",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "The date and time when the resource was created. Indicates the end of a range of results. Format: date-time.",
                     "required": false
                 }, {
@@ -276,7 +276,8 @@
                     "required": false
                 }, {
                     "name": "refundSource",
-                    "type": "String",
+                    "type": "Select",
+                    "options": ["INSTANT_FUNDING_SOURCE","ECHECK","UNRESTRICTED"],
                     "info": "Type of PayPal funding source (balance or eCheck) that can be used for auto refund. Allowed values: INSTANT_FUNDING_SOURCE, ECHECK, UNRESTRICTED. Default: UNRESTRICTED.",
                     "required": false
                 }, {
@@ -503,7 +504,8 @@
                     "required": false
                 }, {
                     "name": "refundSource",
-                    "type": "String",
+                    "type": "Select",
+                    "options": ["INSTANT_FUNDING_SOURCE","ECHECK","UNRESTRICTED"],
                     "info": "Type of PayPal funding source (balance or eCheck) that can be used for auto refund. Allowed values: INSTANT_FUNDING_SOURCE, ECHECK, UNRESTRICTED. Default: UNRESTRICTED.",
                     "required": false
                 }, {
@@ -683,7 +685,8 @@
                     "required": true
                 }, {
                     "name": "type",
-                    "type": "String",
+                    "type": "Select",
+                    "options":["FIXED","INFINITE"],
                     "info": "The billing plan type. Allowed values: FIXED, INFINITE.",
                     "required": true
                 }, {
@@ -781,7 +784,8 @@
                     "required": false
                 }, {
                     "name": "status",
-                    "type": "String",
+                    "type": "Select",
+                    "options": ["created","active","inactive"],
                     "info": "The state. Default is CREATED. Possible values: created, active, inactive.",
                     "required": false
                 }, {
@@ -827,7 +831,7 @@
                     "required": true
                 }, {
                     "name": "startDate",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "Start date of the agreement. Date format yyyy-MM-dd z, as defined in ISO8601. Format: YYYY-MM-DDTHH:MM:SSTimeZone.",
                     "required": true
                 }, {
@@ -1079,12 +1083,12 @@
                     "required": true
                 }, {
                     "name": "startDate",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "The start date of the range of transactions to list.",
                     "required": true
                 }, {
                     "name": "endDate",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "The end date of the range of transactions to list.",
                     "required": true
                 }, {
@@ -1444,22 +1448,24 @@
                     "required": false
                 }, {
                     "name": "startTime",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "The date and time when the resource was created in ISO8601 date-time format that indicates the start of a range of results. For example, 2013-11-05T13:15:30Z.",
                     "required": false
                 }, {
                     "name": "endTime",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "The date and time when the resource was created in ISO8601 date-time format that indicates the end of a range of results. For example, 2014-11-05T13:15:30Z.",
                     "required": false
                 }, {
                     "name": "sortOrder",
-                    "type": "String",
+                    "type": "Select",
+                    "options": ["asc","desc"],
                     "info": "Sorts the response in ascending or descending order. Value is asc for ascending order or desc for descending order. Default: desc.",
                     "required": false
                 }, {
                     "name": "sortBy",
-                    "type": "String",
+                    "type": "Select",
+                    "options": ["create_time","update_time"],
                     "info": "Sorts the response by create_time or update_time. Default: create_time.",
                     "required": false
                 }, {
@@ -1851,7 +1857,7 @@
                     "required": false
                 }, {
                     "name": "invoiceDate",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "The date when the invoice was enabled. The date format is yyyy-MM-dd z.",
                     "required": false
                 }, {
@@ -2055,7 +2061,8 @@
                     "required": false
                 }, {
                     "name": "status",
-                    "type": "String",
+                    "type": "Select",
+                    "options": ["DRAFT","SENT","PAID","MARKED_AS_PAID","CANCELLED","REFUNDED","PARTIALLY_REFUNDED","MARKED_AS_REFUNDED"],
                     "info": "The invoice status. Allowed values: DRAFT, SENT, PAID, MARKED_AS_PAID, CANCELLED, REFUNDED, PARTIALLY_REFUNDED, MARKED_AS_REFUNDED.",
                     "required": false
                 }, {
@@ -2070,42 +2077,42 @@
                     "required": false
                 }, {
                     "name": "startInvoiceDate",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "The start date for the invoice. Date format is yyyy-MM-dd z.",
                     "required": false
                 }, {
                     "name": "endInvoiceDate",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "The end date for the invoice. Date format is yyyy-MM-dd z.",
                     "required": false
                 }, {
                     "name": "startDueDate",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "The start due date for the invoice. Date format is yyyy-MM-dd z.",
                     "required": false
                 }, {
                     "name": "endDueDate",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "The end due date for the invoice. Date format is yyyy-MM-dd z.",
                     "required": false
                 }, {
                     "name": "startPaymentDate",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "The start payment date for the invoice. Date format is yyyy-MM-dd z.",
                     "required": false
                 }, {
                     "name": "endPaymentDate",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "The end payment date for the invoice. Date format is yyyy-MM-dd z.",
                     "required": false
                 }, {
                     "name": "startCreationDate",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "The start creation date for the invoice. Date format is yyyy-MM-dd z.",
                     "required": false
                 }, {
                     "name": "endCreationDate",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "The end creation date for the invoice. Date format is yyyy-MM-dd z.",
                     "required": false
                 }, {
@@ -2533,7 +2540,8 @@
                     "required": true
                 }, {
                     "name": "anchorType",
-                    "type": "String",
+                    "type": "Select",
+                    "options": ["APPLICATION","ACCOUNT"],
                     "info": "Filters the response by an entity type, anchor_id. Value is APPLICATION or ACCOUNT. Default is APPLICATION.",
                     "required": false
                 }, {
@@ -2647,12 +2655,12 @@
                     "required": false
                 }, {
                     "name": "startTime",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "Filters the webhook event notifications in the response to those created on or after this date and time and on or before the endTime value.",
                     "required": false
                 }, {
                     "name": "endTime",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "Filters the webhook event notifications in the response to those created on or after the startTime and on or before this date and time.",
                     "required": false
                 }, {
@@ -2858,7 +2866,8 @@
                     "required": true
                 }, {
                     "name": "method",
-                    "type": "String",
+                    "type": "Select",
+                    "options": ["BANK_TRANSFER","CASH","CHECK","CREDIT_CARD","DEBIT_CARD","PAYPAL","WIRE_TRANSFER","OTHER"],
                     "info": "The payment mode or method. Required with the EXTERNAL payment type. Value is bank transfer, cash, check, credit card, debit card, PayPal, wire transfer, or other. Allowed values: BANK_TRANSFER, CASH, CHECK, CREDIT_CARD, DEBIT_CARD, PAYPAL, WIRE_TRANSFER, OTHER.",
                     "required": true
                 }, {
@@ -2904,7 +2913,7 @@
                     "required": true
                 }, {
                     "name": "date",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "The date when the invoice was paid. The date format is yyyy-MM-dd z",
                     "required": false
                 }, {
@@ -3022,7 +3031,8 @@
                     "required": true
                 }, {
                     "name": "unitOfMeasure",
-                    "type": "String",
+                    "type": "Select",
+                    "options": ["hours","amount"],
                     "info": "The unit of measure for the template. Value is quantity, hours, or amount.",
                     "required": true
                 }, {
@@ -3155,7 +3165,8 @@
                     "required": true
                 }, {
                     "name": "unitOfMeasure",
-                    "type": "String",
+                    "type": "Select",
+                    "options": ["hours","amount"],
                     "info": "The unit of measure for the template. Value is quantity, hours, or amount.",
                     "required": true
                 }, {

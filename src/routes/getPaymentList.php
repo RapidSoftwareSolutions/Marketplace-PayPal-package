@@ -52,10 +52,12 @@ $app->post('/api/PayPal/getPaymentList', function ($request, $response, $args) {
         $query['start_index'] = $post_data['args']['startIndex'];
     }
     if(!empty($post_data['args']['startTime'])) {
-        $query['start_time'] = $post_data['args']['startTime'];
+        $date = new DateTime($post_data['args']['startTime']);
+        $query['start_time'] = $date->format('Y-m-d\TH:i:s\Z');
     }
     if(!empty($post_data['args']['endTime'])) {
-        $query['end_time'] = $post_data['args']['endTime'];
+        $date =  new DateTime($post_data['args']['endTime']);
+        $query['end_time'] = $date->format('Y-m-d\TH:i:s\Z');
     }
     
     

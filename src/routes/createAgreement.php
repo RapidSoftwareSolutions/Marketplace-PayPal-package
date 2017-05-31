@@ -63,7 +63,8 @@ $app->post('/api/PayPal/createAgreement', function ($request, $response, $args) 
     
     $body['name'] = $post_data['args']['name'];
     $body['description'] = $post_data['args']['description'];
-    $body['start_date'] = $post_data['args']['startDate'];
+    $date =  new DateTime($post_data['args']['startDate']);
+    $body['start_date'] = $date->format('Y-m-d\TH:i:s\Z');
     $body['payer'] = $post_data['args']['payer'];
     $body['plan'] = $post_data['args']['plan'];
     

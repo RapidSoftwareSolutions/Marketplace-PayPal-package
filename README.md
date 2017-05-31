@@ -5,6 +5,16 @@ Accept PayPal and credit card payments online or on mobile.
 * Domain: paypal.com
 * Credentials: clientId, secret
 
+## Custom datatypes:
+ |Datatype|Description|Example
+ |--------|-----------|----------
+ |Datepicker|String which includes date and time|```2016-05-28 00:00:00```
+ |Map|String which includes latitude and longitude coma separated|```50.37, 26.56```
+ |List|Simple array|```["123", "sample"]```
+ |Select|String with predefined values|```sample```
+ |Array|Array of objects|```[{"Second name":"123","Age":"12","Photo":"sdf","Draft":"sdfsdf"},{"name":"adi","Second name":"bla","Age":"4","Photo":"asfserwe","Draft":"sdfsdf"}] ```
+
+
 ## How to get credentials: 
 0. Go to [PayPal Developer Area] (https://developer.paypal.com/)
 1. Log In or Sign up
@@ -171,8 +181,8 @@ Lists payments that were created by the create payment call and are in any state
 | count      | String| Optional: The number of items to list in the response. Default: 10.
 | startId    | String| Optional: The ID of the starting resource in the response. When results are paged, you can use the next_id value as the start_id to continue with the next set of results.
 | startIndex | String| Optional: The start index of the resources to return. Typically used to jump to a specific position in the resource history based on its cart. Example for starting at the second item in a list of results: ?start_index=2
-| startTime  | String| Optional: The date and time when the resource was created. Indicates the start of a range of results. Example: start_time=2013-03-06T11:00:00Z Format: date-time.
-| endTime    | String| Optional: The date and time when the resource was created. Indicates the end of a range of results. Format: date-time.
+| startTime  | Datepicker| Optional: The date and time when the resource was created. Indicates the start of a range of results. Example: start_time=2013-03-06T11:00:00Z Format: date-time.
+| endTime    | Datepicker| Optional: The date and time when the resource was created. Indicates the end of a range of results. Format: date-time.
 
 ## Paypal.getSale
 Shows details for a sale transaction, by ID.
@@ -462,7 +472,7 @@ Creates a billing agreement for the buyer.
 | accessToken                | String| Required: accessToken obtained with clientId and secret.
 | name                       | String| Required: Name of the agreement. Maximum length: 128.
 | description                | String| Required: Description of the agreement. Maximum length: 128.
-| startDate                  | String| Required: Start date of the agreement. Date format yyyy-MM-dd z, as defined in ISO8601. Format: YYYY-MM-DDTHH:MM:SSTimeZone.
+| startDate                  | Datepicker| Required: Start date of the agreement. Date format yyyy-MM-dd z, as defined in ISO8601. Format: YYYY-MM-DDTHH:MM:SSTimeZone.
 | payer                      | JSON  | Required: Json object. A resource representing a Payer that funds a payment.
 | plan                       | JSON  | Required: Json object. Billing plan resource that will be used to create a billing agreement.
 | agreementDetails           | JSON  | Optional: Json object. A resource representing the agreement details.
@@ -635,8 +645,8 @@ Lists transactions for a billing agreement.
 |------------|-------|----------
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | agreementId| String| Required: Identifier of the agreement resource to cancel.
-| startDate  | String| Required: The start date of the range of transactions to list.
-| endDate    | String| Required: The end date of the range of transactions to list.
+| startDate  | Datepicker| Required: The start date of the range of transactions to list.
+| endDate    | Datepicker| Required: The end date of the range of transactions to list.
 
 ## Paypal.setAgreementBalance
 Sets the outstanding amount of an agreement, by ID.
@@ -779,8 +789,8 @@ Lists stored credit cards.
 | accessToken       | String| Required: accessToken obtained with clientId and secret.
 | pageSize          | String| Optional: The number of resources to list, starting with the specified page. Default: 10.
 | page              | String| Optional: The number of pages to get. Default: 1.
-| startTime         | String| Optional: The date and time when the resource was created in ISO8601 date-time format that indicates the start of a range of results. For example, 2013-11-05T13:15:30Z.
-| endTime           | String| Optional: The date and time when the resource was created in ISO8601 date-time format that indicates the end of a range of results. For example, 2014-11-05T13:15:30Z.
+| startTime         | Datepicker| Optional: The date and time when the resource was created in ISO8601 date-time format that indicates the start of a range of results. For example, 2013-11-05T13:15:30Z.
+| endTime           | Datepicker| Optional: The date and time when the resource was created in ISO8601 date-time format that indicates the end of a range of results. For example, 2014-11-05T13:15:30Z.
 | sortOrder         | String| Optional: Sorts the response in ascending or descending order. Value is asc for ascending order or desc for descending order. Default: desc.
 | sortBy            | String| Optional: Sorts the response by create_time or update_time. Default: create_time.
 | merchantId        | String| Optional: A user-provided, optional field that functions as a unique identifier for the merchant holding the card. Note that this has no relation to PayPal merchant ID.
@@ -1017,7 +1027,7 @@ Updates an invoice, by ID.
 | ccInfo                    | JSON  | Optional: Array of json objects. Participant information.
 | shippingInfo              | JSON  | Optional: Json object. Shipping information for the invoice recipient.
 | items                     | JSON  | Optional: Array of json objects. Line item information.
-| invoiceDate               | String| Optional: The date when the invoice was enabled. The date format is yyyy-MM-dd z.
+| invoiceDate               | Datepicker| Optional: The date when the invoice was enabled. The date format is yyyy-MM-dd z.
 | paymentTerm               | JSON  | Optional: Json object. The payment term of the invoice. If you specify term_type, you cannot specify due_date, and vice versa.
 | reference                 | String| Optional: Reference data, such as PO number, to add to the invoice. Maximum length: 60.
 | discount                  | JSON  | Optional: Json object. The cost as a percent or an amount value. For example, to specify 10%, enter 10. Alternatively, to specify an amount of 5, enter 5.
@@ -1192,14 +1202,14 @@ Lists invoices that match search criteria.
 | status               | String| Optional: The invoice status. Allowed values: DRAFT, SENT, PAID, MARKED_AS_PAID, CANCELLED, REFUNDED, PARTIALLY_REFUNDED, MARKED_AS_REFUNDED.
 | lowerTotalAmount     | JSON  | Optional: Json object. Base object for all financial value related fields (balance, payment due, etc.)
 | upperTotalAmount     | JSON  | Optional: Json object. Base object for all financial value related fields (balance, payment due, etc.)
-| startInvoiceDate     | String| Optional: The start date for the invoice. Date format is yyyy-MM-dd z.
-| endInvoiceDate       | String| Optional: The end date for the invoice. Date format is yyyy-MM-dd z.
-| startDueDate         | String| Optional: The start due date for the invoice. Date format is yyyy-MM-dd z.
-| endDueDate           | String| Optional: The end due date for the invoice. Date format is yyyy-MM-dd z.
-| startPaymentDate     | String| Optional: The start payment date for the invoice. Date format is yyyy-MM-dd z.
-| endPaymentDate       | String| Optional: The end payment date for the invoice. Date format is yyyy-MM-dd z.
-| startCreationDate    | String| Optional: The start creation date for the invoice. Date format is yyyy-MM-dd z.
-| endCreationDate      | String| Optional: The end creation date for the invoice. Date format is yyyy-MM-dd z.
+| startInvoiceDate     | Datepicker| Optional: The start date for the invoice. Date format is yyyy-MM-dd z.
+| endInvoiceDate       | Datepicker| Optional: The end date for the invoice. Date format is yyyy-MM-dd z.
+| startDueDate         | Datepicker| Optional: The start due date for the invoice. Date format is yyyy-MM-dd z.
+| endDueDate           | Datepicker| Optional: The end due date for the invoice. Date format is yyyy-MM-dd z.
+| startPaymentDate     | Datepicker| Optional: The start payment date for the invoice. Date format is yyyy-MM-dd z.
+| endPaymentDate       | Datepicker| Optional: The end payment date for the invoice. Date format is yyyy-MM-dd z.
+| startCreationDate    | Datepicker| Optional: The start creation date for the invoice. Date format is yyyy-MM-dd z.
+| endCreationDate      | Datepicker| Optional: The end creation date for the invoice. Date format is yyyy-MM-dd z.
 | page                 | String| Optional: The offset for the search results.
 | pageSize             | String| Optional: The page size for the search results.
 | totalCountRequired   | String| Optional: Indicates whether the total count appears in the response. Default is false.
@@ -1456,8 +1466,8 @@ Lists webhook event notifications. You can specify one or more optional query pa
 |--------------|-------|----------
 | accessToken  | String| Required: accessToken obtained with clientId and secret.
 | pageSize     | String| Optional: The number of webhook event notifications to return in the response. Default: 10.
-| startTime    | String| Optional: Filters the webhook event notifications in the response to those created on or after this date and time and on or before the endTime value.
-| endTime      | String| Optional: Filters the webhook event notifications in the response to those created on or after the startTime and on or before this date and time.
+| startTime    | Datepicker| Optional: Filters the webhook event notifications in the response to those created on or after this date and time and on or before the endTime value.
+| endTime      | Datepicker| Optional: Filters the webhook event notifications in the response to those created on or after the startTime and on or before this date and time.
 | transactionId| String| Optional: Filters the response to a single transaction, by ID.
 | eventType    | String| Optional: Filters the response to a single event.
 
@@ -1542,7 +1552,7 @@ Marks an invoice, by ID, as refunded.
 |------------|-------|----------
 | accessToken| String| Required: accessToken obtained with clientId and secret.
 | invoiceId  | String| Required: The ID of the invoice.
-| date       | String| Optional: The date when the invoice was paid. The date format is yyyy-MM-dd z
+| date       | Datepicker| Optional: The date when the invoice was paid. The date format is yyyy-MM-dd z
 | note       | String| Optional: A note associated with the payment.
 | amount     | JSON  | Optional: Json object. Base object for all financial value related fields (balance, payment due, etc.)
 ### amount format:

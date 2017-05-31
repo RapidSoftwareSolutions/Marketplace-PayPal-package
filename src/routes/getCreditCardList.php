@@ -54,10 +54,12 @@ $app->post('/api/PayPal/getCreditCardList', function ($request, $response, $args
         $query['page'] = $post_data['args']['page'];
     }
     if(!empty($post_data['args']['startTime'])) {
-        $query['start_time'] = $post_data['args']['startTime'];
+        $date =  new DateTime($post_data['args']['startTime']);
+        $query['start_time'] = $date->format('Y-m-d\TH:i:s\Z');
     }
     if(!empty($post_data['args']['endTime'])) {
-        $query['end_time'] = $post_data['args']['endTime'];
+        $date =  new DateTime($post_data['args']['endTime']);
+        $query['end_time'] = $date->format('Y-m-d\TH:i:s\Z');
     }
     if(!empty($post_data['args']['sortOrder'])) {
         $query['sort_order'] = $post_data['args']['sortOrder'];

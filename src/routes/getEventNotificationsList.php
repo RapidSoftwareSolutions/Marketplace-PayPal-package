@@ -51,10 +51,12 @@ $app->post('/api/PayPal/getEventNotificationsList', function ($request, $respons
         $query['page_size'] = $post_data['args']['pageSize'];
     }
     if(!empty($post_data['args']['startTime'])) {
-        $query['start_time'] = $post_data['args']['startTime'];
+        $date =  new DateTime($post_data['args']['startTime']);
+        $query['start_time'] = $date->format('Y-m-d\TH:i:s\Z');
     }
     if(!empty($post_data['args']['endTime'])) {
-        $query['end_time'] = $post_data['args']['endTime'];
+        $date =  new DateTime($post_data['args']['endTime']);
+        $query['end_time'] = $date->format('Y-m-d\TH:i:s\Z');
     }
     if(!empty($post_data['args']['transactionId'])) {
         $query['transaction_id'] = $post_data['args']['transactionId'];

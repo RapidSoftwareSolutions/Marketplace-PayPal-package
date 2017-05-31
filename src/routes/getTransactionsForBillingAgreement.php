@@ -54,10 +54,13 @@ $app->post('/api/PayPal/getTransactionsForBillingAgreement', function ($request,
     } else {
         $query_str = 'https://api.paypal.com/v1/payments/billing-agreements/'.$post_data['args']['agreementId'].'/transactions';
     }
-    
-    $query['start_date'] = $post_data['args']['startDate'];
-    $query['end_date'] = $post_data['args']['endDate'];
-    
+
+    $date =  new DateTime($post_data['args']['startDate']);
+    $query['start_date'] = $date->format('Y-m-d\TH:i:s\Z');
+
+    $date =  new DateTime($post_data['args']['endDate']);
+    $query['end_date'] = $date->format('Y-m-d\TH:i:s\Z');
+
     $client = $this->httpClient;
 
     try {
