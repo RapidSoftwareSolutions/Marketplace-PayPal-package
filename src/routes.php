@@ -82,6 +82,7 @@ $routes = [
     'deleteTemplate',
     'verifyWebhookSignature',
     'updateTemplate',
+    'webhookEvent',
     'metadata'
 ];
 foreach($routes as $file) {

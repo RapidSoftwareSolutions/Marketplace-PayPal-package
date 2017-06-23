@@ -14,6 +14,17 @@ Accept PayPal and credit card payments online or on mobile.
  |Select|String with predefined values|```sample```
  |Array|Array of objects|```[{"Second name":"123","Age":"12","Photo":"sdf","Draft":"sdfsdf"},{"name":"adi","Second name":"bla","Age":"4","Photo":"asfserwe","Draft":"sdfsdf"}] ```
 
+## Webhook credentials
+ Please use SDK to test this feature.
+ 1. Go to [RapidAPI](http://rapidapi.com)
+ 2. Log in or create an account
+ 3. Go to [My apps](https://dashboard.rapidapi.com/projects)
+ 4. Add new project with projectName to get your project Key
+
+ | Field      | Type       | Description
+ |------------|------------|----------
+ | projectName     | credentials| Your RapidAPI project name
+ | projectKey | credentials     | Your RapidAPI project key
 
 ## How to get credentials: 
 0. Go to [PayPal Developer Area] (https://developer.paypal.com/)
