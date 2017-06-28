@@ -12,7 +12,7 @@
     "events": [
         {
             "name": "webhookEvent",
-            "description": " This method is called every time a Paypal webhook event occurs",
+            "description": "This method is called every time a Paypal webhook event occurs",
             "payload": {
                 "id": "8PT597110X687430LKGECATA",
                 "create_time": "2013-06-25T21:41:28Z",
