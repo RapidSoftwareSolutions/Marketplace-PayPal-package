@@ -1,7 +1,10 @@
 <?php
 $app->post('/api/PayPal/webhookEvent', function ($request, $response) {
+
+
     $checkRequest = $this->validation;
     $validateRes = $checkRequest->validate($request, []);
+
     if (!empty($validateRes) && isset($validateRes['callback']) && $validateRes['callback'] == 'error') {
         return $response->withHeader('Content-type', 'application/json')->withStatus(200)->withJson($validateRes);
     } else {

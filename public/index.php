@@ -20,6 +20,7 @@ $app = new \Slim\App($settings);
 // Register models
 require __DIR__ . '/../src/Models/paginationClass.php';
 require __DIR__ . '/../src/Models/normalizeJson.php';
+require __DIR__ . '/../src/Models/checkRequest.php';
 
 // Set up dependencies
 require __DIR__ . '/../src/dependencies.php';
