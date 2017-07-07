@@ -12,7 +12,7 @@
     "events": [
         {
             "name": "webhookEvent",
-            "description": "Vendor POST request call this function.",
+            "description": "This method is called every time a Paypal webhook event occurs",
             "payload": {
                 "id": "8PT597110X687430LKGECATA",
                 "create_time": "2013-06-25T21:41:28Z",
@@ -70,8 +70,9 @@
                 ]
             },
             "steps": [
-                "Navigate to createWebhook block",
-                "Set url to __WEBHOOK_URL__"
+                "Navigate to https://rapidapi.com/package/PayPal/functions/getAccessToken ",
+                "Use the credentials from your REST API app at https://developer.paypal.com/developer/applications/ as the credentials to get your access token",
+                "Go to https://rapidapi.com/package/PayPal/functions/createWebhook and use your access token and the folling URL: __WEBHOOK_URL__"
             ],
             "args": [
                 {
