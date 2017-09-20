@@ -5,14 +5,12 @@ Accept PayPal and credit card payments online or on mobile.
 * Domain: paypal.com
 * Credentials: clientId, secret
 
-## Custom datatypes:
- |Datatype|Description|Example
- |--------|-----------|----------
- |Datepicker|String which includes date and time|```2016-05-28 00:00:00```
- |Map|String which includes latitude and longitude coma separated|```50.37, 26.56```
- |List|Simple array|```["123", "sample"]```
- |Select|String with predefined values|```sample```
- |Array|Array of objects|```[{"Second name":"123","Age":"12","Photo":"sdf","Draft":"sdfsdf"},{"name":"adi","Second name":"bla","Age":"4","Photo":"asfserwe","Draft":"sdfsdf"}] ```
+## How to get credentials: 
+0. Go to [PayPal Developer Area] (https://developer.paypal.com/)
+1. Log In or Sign up
+2. Open your [Dashboard](https://developer.paypal.com/developer/applications/)
+3. Create an app to receive REST API credentials for testing and live transactions.
+4. Retrive your clientId and secret 
 
 ## Webhook credentials
  Please use SDK to test this feature.
@@ -26,12 +24,14 @@ Accept PayPal and credit card payments online or on mobile.
  | projectName     | credentials| Your RapidAPI project name
  | projectKey | credentials     | Your RapidAPI project key
 
-## How to get credentials: 
-0. Go to [PayPal Developer Area] (https://developer.paypal.com/)
-1. Log In or Sign up
-2. Open your [Dashboard](https://developer.paypal.com/developer/applications/)
-3. Create an app to receive REST API credentials for testing and live transactions.
-4. Retrive your clientId and secret 
+## Custom datatypes:
+ |Datatype|Description|Example
+ |--------|-----------|----------
+ |Datepicker|String which includes date and time|```2016-05-28 00:00:00```
+ |Map|String which includes latitude and longitude coma separated|```50.37, 26.56```
+ |List|Simple array|```["123", "sample"]```
+ |Select|String with predefined values|```sample```
+ |Array|Array of objects|```[{"Second name":"123","Age":"12","Photo":"sdf","Draft":"sdfsdf"},{"name":"adi","Second name":"bla","Age":"4","Photo":"asfserwe","Draft":"sdfsdf"}] ```
 
 ## Paypal.getAccessToken
 Use the OAuth request to get an access token for use with your payments calls.
