@@ -6,7 +6,7 @@ Accept PayPal and credit card payments online or on mobile.
 * Credentials: clientId, secret
 
 ## How to get credentials: 
-0. Go to [PayPal Developer Area] (https://developer.paypal.com/)
+0. Go to [PayPal Developer Area](https://developer.paypal.com/)
 1. Log In or Sign up
 2. Open your [Dashboard](https://developer.paypal.com/developer/applications/)
 3. Create an app to receive REST API credentials for testing and live transactions.
