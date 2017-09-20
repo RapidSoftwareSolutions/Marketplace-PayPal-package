@@ -84,6 +84,13 @@
             ]
         }
     ],
+    "steps": [
+        "Go to PayPal Developer Area (https://developer.paypal.com/)",
+        "Log In or Sign up",
+        "Open your Dashboard (https://developer.paypal.com/developer/applications/)",
+        "Create an app to receive REST API credentials for testing and live transactions",
+        "Retrive your clientId and secret"
+    ],
     "blocks": [{
             "name": "getAccessToken",
             "description": "Use the OAuth request to get an access token for use with your payments calls.",
