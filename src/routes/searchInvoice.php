@@ -81,27 +81,27 @@ $app->post('/api/PayPal/searchInvoice', function ($request, $response, $args) {
     }
     if(!empty($post_data['args']['startDueDate'])) {
         $date =  new DateTime($post_data['args']['startDueDate']);
-        $body['start_due_date'] = $date->format('Y-m-d z')." PST";
+        $body['start_due_date'] = $date->format('Y-m-d')." PST";
     }
     if(!empty($post_data['args']['endDueDate'])) {
         $date =  new DateTime($post_data['args']['endDueDate']);
-        $body['end_due_date'] = $date->format('Y-m-d z')." PST";
+        $body['end_due_date'] = $date->format('Y-m-d')." PST";
     }
     if(!empty($post_data['args']['startPaymentDate'])) {
         $date =  new DateTime($post_data['args']['startPaymentDate']);
-        $body['start_payment_date'] = $date->format('Y-m-d z')." PST";
+        $body['start_payment_date'] = $date->format('Y-m-d')." PST";
     }
     if(!empty($post_data['args']['endPaymentDate'])) {
         $date =  new DateTime($post_data['args']['endPaymentDate']);
-        $body['end_payment_date'] = $date->format('Y-m-d z')." PST";
+        $body['end_payment_date'] = $date->format('Y-m-d')." PST";
     }
     if(!empty($post_data['args']['startCreationDate'])) {
         $date =  new DateTime($post_data['args']['startCreationDate']);
-        $body['start_creation_date'] = $date->format('Y-m-d z')." PST";
+        $body['start_creation_date'] = $date->format('Y-m-d')." PST";
     }
     if(!empty($post_data['args']['endCreationDate'])) {
         $date =  new DateTime($post_data['args']['endCreationDate']);
-        $body['end_creation_date'] = $date->format('Y-m-d z')." PST";
+        $body['end_creation_date'] = $date->format('Y-m-d')." PST";
     }
     if(!empty($post_data['args']['page'])) {
         $body['page'] = $post_data['args']['page'];
@@ -117,6 +117,7 @@ $app->post('/api/PayPal/searchInvoice', function ($request, $response, $args) {
     }
     
     $client = $this->httpClient;
+
 
     try {
 

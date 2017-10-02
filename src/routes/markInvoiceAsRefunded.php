@@ -31,9 +31,9 @@ $app->post('/api/PayPal/markInvoiceAsRefunded', function ($request, $response, $
     if(empty($post_data['args']['invoiceId'])) {
         $error[] = 'invoiceId is required';
     }
-    if(empty($post_data['args']['method'])) {
-        $error[] = 'method is required';
-    }
+//    if(empty($post_data['args']['method'])) {
+//        $error[] = 'method is required';
+//    }
     
     if(!empty($error)) {
         $result['callback'] = 'error';
@@ -52,7 +52,7 @@ $app->post('/api/PayPal/markInvoiceAsRefunded', function ($request, $response, $
         $query_str = 'https://api.paypal.com/v1/invoicing/invoices/'.$post_data['args']['invoiceId'].'/record-refund';
     }
     
-    $body['method'] = $post_data['args']['method'];
+   // $body['method'] = $post_data['args']['method'];
     if(!empty($post_data['args']['date'])) {
         $date =  new DateTime($post_data['args']['date']);
         $body['date'] = $date->format('Y-m-d H:i:s')." PST";

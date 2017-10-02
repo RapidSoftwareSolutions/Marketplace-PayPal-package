@@ -64,10 +64,12 @@ $app->post('/api/PayPal/createPayout', function ($request, $response, $args) {
     
     $client = $this->httpClient;
 
+
     try {
 
         $resp = $client->post( $query_str, 
             [
+                'query' => $query,
                 'headers' => $headers,
                 'json' => $body,
                 'verify' => false

@@ -64,6 +64,8 @@ $app->post('/api/PayPal/refundSale', function ($request, $response, $args) {
     } else {
         $query_str = 'https://api.paypal.com/v1/payments/sale/'.$post_data['args']['saleId'].'/refund';
     }
+
+
     
     $client = $this->httpClient;
 

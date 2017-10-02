@@ -62,6 +62,11 @@ $app->post('/api/PayPal/markInvoiceAsPaid', function ($request, $response, $args
     if(!empty($post_data['args']['amount'])) {
         $body['amount'] = $post_data['args']['amount'];
     }
+
+    if(!empty($post_data['args']['date'])) {
+        $date =  new DateTime($post_data['args']['date']);
+        $body['date'] = $date->format('Y-m-d')." PST";
+    }
     
     $client = $this->httpClient;
 

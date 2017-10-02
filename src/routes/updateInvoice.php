@@ -78,7 +78,7 @@ $app->post('/api/PayPal/updateInvoice', function ($request, $response, $args) {
     }
     if(!empty($post_data['args']['invoiceDate'])) {
         $date =  new DateTime($post_data['args']['invoiceDate']);
-        $body['invoice_date'] = $date->format('Y-m-d\TH:i:s\Z');
+        $body['invoice_date'] = $date->format('Y-m-d')." PST";
     }
     if(!empty($post_data['args']['paymentTerm'])) {
         $body['payment_term'] = $post_data['args']['paymentTerm'];

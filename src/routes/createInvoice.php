@@ -69,7 +69,8 @@ $app->post('/api/PayPal/createInvoice', function ($request, $response, $args) {
         $body['items'] = $post_data['args']['items'];
     }
     if(!empty($post_data['args']['invoiceDate'])) {
-        $body['invoice_date'] = $post_data['args']['invoiceDate'];
+        $date =  new DateTime($post_data['args']['invoiceDate']);
+        $body['invoice_date'] = $date->format('Y-m-d')." PST";
     }
     if(!empty($post_data['args']['paymentTerm'])) {
         $body['payment_term'] = $post_data['args']['paymentTerm'];

@@ -132,7 +132,8 @@
                     "required": true
                 }, {
                     "name": "intent",
-                    "type": "String",
+                    "type": "Select",
+                    "options":["sale","authorize","order"],
                     "info": "Payment intent. Must be set to sale for immediate payment, authorize to authorize a payment for capture later, or order to create an order. Allowed values: sale, authorize, order.",
                     "required": true
                 }, {
@@ -159,7 +160,7 @@
                     "name": "redirectUrls",
                     "type": "JSON",
                     "info": "Json object. Set of redirect URLs you provide only for PayPal-based payments. See the parameter notes section for more information. See createPayment README for more details.",
-                    "required": false
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
@@ -355,7 +356,7 @@
                     "name": "amount",
                     "type": "JSON",
                     "info": "Json object. Refund details including both the refunded amount to payer and refunded fee to payee. If you do not provide an amount, you must still provide an empty JSON payload in the body to indicate a full refund. See the parameter notes section for more information. See refundSale README for more details.",
-                    "required": false
+                    "required": true
                 }, {
                     "name": "refundSource",
                     "type": "Select",
@@ -369,7 +370,8 @@
                     "required": false
                 }, {
                     "name": "refundAdvice",
-                    "type": "String",
+                    "type": "Select",
+                    "options":["true","false"],
                     "info": "Flag to indicate that the buyer was already given store credit for a given transaction.",
                     "required": false
                 }, {
@@ -457,7 +459,8 @@
                     "required": false
                 }, {
                     "name": "isFinalCapture",
-                    "type": "String",
+                    "type": "Select",
+                    "options":["true","false"],
                     "info": "Indicates whether to release all remaining funds that the authorization holds in the funding instrument. Default is false. Default: false.",
                     "required": false
                 }, {
@@ -602,7 +605,8 @@
                     "required": false
                 }, {
                     "name": "refundAdvice",
-                    "type": "String",
+                    "type": "Select",
+                    "options":["true","false"],
                     "info": "Flag to indicate that the buyer was already given store credit for a given transaction.",
                     "required": false
                 }, {
@@ -695,7 +699,8 @@
                     "required": false
                 }, {
                     "name": "isFinalCapture",
-                    "type": "String",
+                    "type": "Select",
+                    "options":["true","false"],
                     "info": "Indicates whether to release all remaining funds that the authorization holds in the funding instrument. Default is false. Default: false.",
                     "required": false
                 }, {
@@ -780,7 +785,7 @@
                     "name": "merchantPreferences",
                     "type": "JSON",
                     "info": "Json object. Resource that represents the merchant preferences for a plan, such as max failed attempts, set up fee, and so on. See the parameter notes section for more information. See createPlan README for more details.",
-                    "required": false
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
@@ -877,7 +882,8 @@
                     "required": false
                 }, {
                     "name": "totalRequired",
-                    "type": "String",
+                    "type": "Select",
+                    "options":["yes","no"],
                     "info": "The total number of items and pages to return in the response.",
                     "required": false
                 }, {
@@ -1392,7 +1398,8 @@
                     "required": true
                 }, {
                     "name": "type",
-                    "type": "String",
+                    "type": "Select",
+                    "options":["visa", "mastercard", "amex", "discover", "maestro"],
                     "info": "Credit card type. Allowed values: visa, mastercard, amex, discover, maestro.",
                     "required": true
                 }, {
@@ -1520,12 +1527,12 @@
                     "required": true
                 }, {
                     "name": "pageSize",
-                    "type": "String",
+                    "type": "Number",
                     "info": "The number of resources to list, starting with the specified page. Default: 10.",
                     "required": false
                 }, {
                     "name": "page",
-                    "type": "String",
+                    "type": "Number",
                     "info": "The number of pages to get. Default: 1.",
                     "required": false
                 }, {
@@ -1567,7 +1574,8 @@
                     "required": false
                 }, {
                     "name": "totalRequired",
-                    "type": "String",
+                    "type": "Select",
+                    "options":["true","false"],
                     "info": "Indicates whether the response returns the total_items and total_pages values. Default is true. Set to false to omit these values from the response.",
                     "required": false
                 }, {
@@ -1797,7 +1805,8 @@
                     "required": false
                 }, {
                     "name": "allowPartialPayment",
-                    "type": "String",
+                    "type": "Select",
+                    "options":["true","false"],
                     "info": "Indicates whether the invoice allows a partial payment. If false, invoice must be paid in full. If true, the invoice allows partial payments. Default is false.",
                     "required": false
                 }, {
@@ -1807,7 +1816,8 @@
                     "required": false
                 }, {
                     "name": "taxCalculatedAfterDiscount",
-                    "type": "String",
+                    "type": "Select",
+                    "options":["true","false"],
                     "info": "Indicates whether the tax is calculated before or after a discount. If false, the tax is calculated before a discount. If true, the tax is calculated after a discount. Default is false.",
                     "required": false
                 }, {
@@ -1969,7 +1979,8 @@
                     "required": false
                 }, {
                     "name": "allowPartialPayment",
-                    "type": "String",
+                    "type": "Select",
+                    "options":["true","false"],
                     "info": "Indicates whether the invoice allows a partial payment. If false, invoice must be paid in full. If true, the invoice allows partial payments. Default is false.",
                     "required": false
                 }, {
@@ -1979,12 +1990,14 @@
                     "required": false
                 }, {
                     "name": "taxCalculatedAfterDiscount",
-                    "type": "String",
+                    "type": "Select",
+                    "options":["true","false"],
                     "info": "Indicates whether the tax is calculated before or after a discount. If false, the tax is calculated before a discount. If true, the tax is calculated after a discount. Default is false.",
                     "required": false
                 }, {
                     "name": "taxInclusive",
-                    "type": "String",
+                    "type": "Select",
+                    "options":["true","false"],
                     "info": "Indicates whether the unit price includes tax. Default is false.",
                     "required": false
                 }, {
@@ -2071,7 +2084,8 @@
                     "required": false
                 }, {
                     "name": "totalCountRequired",
-                    "type": "String",
+                    "type": "Select",
+                    "options":["true","false"],
                     "info": "Indicates whether the total count appears in the response. Default is false.",
                     "required": false
                 }, {
@@ -2327,7 +2341,8 @@
                     "required": false
                 }, {
                     "name": "action",
-                    "type": "String",
+                    "type": "Select",
+                    "options":["pay"],
                     "info": "The type of URL for which to generate a QR code. Default is pay and is the only supported value.",
                     "required": false
                 }, {
@@ -2379,7 +2394,8 @@
                     "required": true
                 }, {
                     "name": "fields",
-                    "type": "String",
+                    "type": "Select",
+                    "options":["none","all"],
                     "info": "The fields to return in the response. Value is all or none. Specify none to return only the template name, ID, and default attributes. Default: all.",
                     "required": false
                 }, {
@@ -2954,7 +2970,7 @@
                     "required": true
                 }, {
                     "name": "date",
-                    "type": "String",
+                    "type": "DatePicker",
                     "info": "The date when the invoice was paid. The date format is yyyy-MM-dd z",
                     "required": false
                 }, {
@@ -3098,7 +3114,8 @@
                     "required": true
                 }, {
                     "name": "default",
-                    "type": "String",
+                    "type": "Select",
+                    "options":["true","false"],
                     "info": "Indicates whether this template is the default merchant template. A merchant can have one default template. True or false",
                     "required": true
                 }, {
@@ -3232,7 +3249,8 @@
                     "required": true
                 }, {
                     "name": "default",
-                    "type": "String",
+                    "type": "Select",
+                    "options":["true","false"],
                     "info": "Indicates whether this template is the default merchant template. A merchant can have one default template. True or false",
                     "required": true
                 }, {
