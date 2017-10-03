@@ -55,7 +55,8 @@ $app->post('/api/PayPal/createPayout', function ($request, $response, $args) {
     
     $body['sender_batch_header'] = $post_data['args']['senderBatchHeader'];
     $body['items'] = $post_data['args']['items'];
-    
+
+    $query = '';
     if(!empty($post_data['args']['syncMode'])) {
         $query['sync_mode'] = $post_data['args']['syncMode'];
     } else {

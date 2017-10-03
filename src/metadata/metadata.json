@@ -1284,7 +1284,8 @@
                     "required": true
                 }, {
                     "name": "syncMode",
-                    "type": "String",
+                    "type": "Select",
+                    "options":["true","false"],
                     "info": "Set to true to return an immediate and synchronous response. Default is false, which returns an asynchronous response in the background.",
                     "required": false
                 }, {
@@ -1822,7 +1823,8 @@
                     "required": false
                 }, {
                     "name": "taxInclusive",
-                    "type": "String",
+                    "type": "Select",
+                    "options":["true","false"],
                     "info": "Indicates whether the unit price includes tax. Default is false.",
                     "required": false
                 }, {
@@ -2213,22 +2215,24 @@
                     "required": true
                 }, {
                     "name": "page",
-                    "type": "String",
+                    "type": "Number",
                     "info": "The offset for the search results.",
                     "required": false
                 }, {
                     "name": "pageSize",
-                    "type": "String",
+                    "type": "Number",
                     "info": "The page size for the search results.",
                     "required": false
                 }, {
                     "name": "totalCountRequired",
-                    "type": "String",
+                    "type": "Select",
+                    "options":["true","false"],
                     "info": "Indicates whether the total count appears in the response. Default is false.",
                     "required": false
                 }, {
                     "name": "archived",
-                    "type": "String",
+                    "type": "Select",
+                    "options":["true","false"],
                     "info": "Indicates whether to list merchant-archived invoices in the response. If true, response lists only merchant-archived invoices. If false, response lists only unarchived invoices. If null, response lists all invoices.",
                     "required": false
                 }, {
@@ -3023,7 +3027,7 @@
                     "name": "amount",
                     "type": "JSON",
                     "info": "Json object.Base object for all financial value related fields (balance, payment due, etc.). See the parameter notes section for more information. See markInvoiceAsRefunded README for more details.",
-                    "required": false
+                    "required": true
                 }, {
                     "name": "sandbox",
                     "type": "String",
