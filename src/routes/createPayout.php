@@ -68,13 +68,19 @@ $app->post('/api/PayPal/createPayout', function ($request, $response, $args) {
 
     try {
 
-        $resp = $client->post( $query_str, 
-            [
-                'query' => $query,
-                'headers' => $headers,
-                'json' => $body,
-                'verify' => false
-            ]);
+        $arrRequest = array(
+            'headers' => $headers,
+            'json' => $body,
+            'verify' => false);
+
+        if(!empty($query['sync_mode']))
+        {
+            $arrRequest['query'] = $query;
+        }
+
+
+
+        $resp = $client->post( $query_str, $arrRequest);
         $responseBody = $resp->getBody()->getContents();
         $code = $resp->getStatusCode();
         
