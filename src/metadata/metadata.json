@@ -357,13 +357,8 @@
                     "type": "JSON",
                     "info": "Json object. Refund details including both the refunded amount to payer and refunded fee to payee. If you do not provide an amount, you must still provide an empty JSON payload in the body to indicate a full refund. See the parameter notes section for more information. See refundSale README for more details.",
                     "required": true
-                }, {
-                    "name": "refundSource",
-                    "type": "Select",
-                    "options": ["INSTANT_FUNDING_SOURCE","ECHECK","UNRESTRICTED"],
-                    "info": "Type of PayPal funding source (balance or eCheck) that can be used for auto refund. Allowed values: INSTANT_FUNDING_SOURCE, ECHECK, UNRESTRICTED. Default: UNRESTRICTED.",
-                    "required": false
-                }, {
+                },
+                {
                     "name": "invoiceNumber",
                     "type": "String",
                     "info": "The invoice number that is used to track this payment. Character length and limitations: 127 single-byte alphanumeric characters. Maximum length: 127.",

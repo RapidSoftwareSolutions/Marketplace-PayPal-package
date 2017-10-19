@@ -220,7 +220,6 @@ Refunds a completed payment.
 | accessToken  | String| Required: accessToken obtained with clientId and secret.
 | saleId       | String| Required: The ID of the sale for which to show details.
 | amount       | JSON  | Optional: Json object. Refund details including both the refunded amount to payer and refunded fee to payee. If you do not provide an amount, you must still provide an empty JSON payload in the body to indicate a full refund.
-| refundSource | String| Optional: Type of PayPal funding source (balance or eCheck) that can be used for auto refund. Allowed values: INSTANT_FUNDING_SOURCE, ECHECK, UNRESTRICTED. Default: UNRESTRICTED.
 | invoiceNumber| String| Optional: The invoice number that is used to track this payment. Character length and limitations: 127 single-byte alphanumeric characters. Maximum length: 127.
 | refundAdvice | Bool  | Optional: Flag to indicate that the buyer was already given store credit for a given transaction.
 | sandbox | String     | The PayPal Sandbox is a self-contained, virtual testing environment that mimics the live PayPal production environment. It provides a shielded space where you can initiate and watch your application process the requests you make to the PayPal APIs without touching any live PayPal accounts.
